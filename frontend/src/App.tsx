@@ -1,4 +1,4 @@
-import Button from '@components/ui/Button';
+import { Button } from '@chakra-ui/react';
 
 function App() {
 	return <Button>RQMO TEAM 7</Button>;
