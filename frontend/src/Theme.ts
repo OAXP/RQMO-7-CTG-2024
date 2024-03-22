@@ -2,11 +2,11 @@ import { extendTheme } from '@chakra-ui/react';
 import { baseTheme } from '@saas-ui/react';
 
 export const colors = {
-	background: '#ffffff',
+	background: '#dbebf5',
 	button: '#6246ea',
 	button_hover: '#4833ab',
 	button_clicked: '#382985',
-	button_text: '#fffffe',
+	button_text: '#d66b32',
 };
 
 const theme = extendTheme({ colors }, baseTheme);
