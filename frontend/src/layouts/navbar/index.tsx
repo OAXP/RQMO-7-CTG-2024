@@ -10,6 +10,9 @@ export default function Navbar() {
             h={'10vh'}
             alignItems={"center"}
             backgroundColor={colors.background}
+            position={'fixed'}
+            top={0}
+            left={0}
         >
             <Image
                 borderRadius={'2xl'}
