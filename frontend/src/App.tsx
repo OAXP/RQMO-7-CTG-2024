@@ -1,5 +1,5 @@
 import { Suspense, lazy } from 'react';
-import { BrowserRouter, Route, Routes} from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const Home = lazy(() => import('@src/pages/Home'));
 const Game = lazy(() => import('@src/pages/Game'));
@@ -27,10 +27,9 @@ function App() {
 						<Route key={index} path={route.path} element={route.element} />
 					))}
 				</Routes>
-			</BrowserRouter>	
+			</BrowserRouter>
 		</Suspense>
 	);
-	
 }
 
 export default App;

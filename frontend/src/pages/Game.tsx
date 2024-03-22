@@ -1,8 +1,5 @@
-import {Text} from "@chakra-ui/react";
+import { Text } from '@chakra-ui/react';
 
 export default function Game() {
-    return(
-        <Text>Game page</Text>
-    );
-	
+	return <Text>Game page</Text>;
 }

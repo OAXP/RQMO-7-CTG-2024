@@ -1,8 +1,5 @@
-import {Text} from "@chakra-ui/react";
+import { Text } from '@chakra-ui/react';
 
 export default function Activities() {
-	return(
-        <Text>Activities page</Text>
-    );
-	
+	return <Text>Activities page</Text>;
 }
