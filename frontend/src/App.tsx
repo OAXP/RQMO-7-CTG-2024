@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Search from '@src/pages/Search';
+import {QueryClient, QueryClientProvider} from "react-query";
 
 const Home = lazy(() => import('@src/pages/Home'));
 const Game = lazy(() => import('@src/pages/Game'));
@@ -20,16 +21,20 @@ const routes = [
 	{ path: '/search', element: <Search /> },
 ];
 
+const queryClient = new QueryClient();
+
 function App() {
 	return (
 		<Suspense>
-			<BrowserRouter>
-				<Routes>
-					{routes.map((route, index) => (
-						<Route key={index} path={route.path} element={route.element} />
-					))}
-				</Routes>
-			</BrowserRouter>
+			<QueryClientProvider client={queryClient}>
+				<BrowserRouter>
+					<Routes>
+						{routes.map((route, index) => (
+							<Route key={index} path={route.path} element={route.element} />
+						))}
+					</Routes>
+				</BrowserRouter>
+			</QueryClientProvider>
 		</Suspense>
 	);
 }
