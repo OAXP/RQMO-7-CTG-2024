@@ -1,51 +1,36 @@
-import { useState } from 'react';
-import { Text, Button, VStack, Box, Flex } from '@chakra-ui/react';
+import React, { useState, useEffect } from 'react';
+import { Text, Button, VStack, Box, Flex, Spinner } from '@chakra-ui/react';
+import { colors } from '@src/Theme';
 import Navbar from '@src/layouts/navbar';
 import { useNavigate } from 'react-router-dom';
+import { Question } from "@src/interfaces/Question";
+import QuestionManager from "@services/question_manager";
+
+interface IncorrectAnswer {
+	question: string;
+	userAnswer: string;
+	correctAnswer: string;
+}
 
 export default function Trivia() {
-	// source for the questions: https://rarediseases.org/wp-content/uploads/2022/01/Rare-Disease-Day-Trivia.pdf
+
 	const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+	const [questions, setQuestions] = useState<Question[]>([]);
 	const [score, setScore] = useState(0);
 	const [showScore, setShowScore] = useState(false);
-	const [incorrectAnswers, setIncorrectAnswers] = useState([]);
+	const [incorrectAnswers, setIncorrectAnswers] = useState<IncorrectAnswer[]>([]);
+	const [loading, setLoading] = useState(true);
 	const navigate = useNavigate();
 
-	// TODO: make service to fetch questions from backend
-	const questions = [
-		{
-			question: 'How many rare diseases are there?',
-			answers: ['1000', '4500', '7000+'],
-			correct: 2,
-		},
-		{
-			question: 'What is another term used for a rare disease?',
-			answers: ['Orphan disease', 'Unusual illness', 'All by myself sickness'],
-			correct: 0,
-		},
-		{
-			question: 'When was a rare disease last discovered?',
-			answers: ['New rare diseases are discovered every year.', '2014', '2019'],
-			correct: 0,
-		},
-		{
-			question: 'How long does it take many people living with a rare disease to get a diagnosis?',
-			answers: ['One day', 'One week', 'One month', 'A year to five years'],
-			correct: 3,
-		},
-		{
-			question: 'What is the mascot of rare diseases?',
-			answers: ['Elephant', 'Zebra', 'Tiger'],
-			correct: 1,
-		},
-		{
-			question: 'For many rare diseases, signs may be observed when?',
-			answers: ['At birth or during childhood', 'While watching TV', 'While showering'],
-			correct: 0,
-		},
-	];
+	const questionManager = new QuestionManager();
+	useEffect(() => {
+		questionManager.getAllQuestions().then((questions: Question[]) => {
+			setQuestions(questions);
+			setLoading(false);
+		});
+	}, []);
 
-	const handleAnswerOptionClick = (isCorrect, answerIndex) => {
+	const handleAnswerOptionClick = (isCorrect: boolean, answerIndex: number) => {
 		if (isCorrect) {
 			setScore(score + 1);
 		} else {
@@ -71,8 +56,10 @@ export default function Trivia() {
 	return (
 		<>
 			<Navbar />
-			<VStack spacing={8} align="center" mt={8}>
-				{showScore ? (
+			<VStack spacing={8} align="center" backgroundColor={colors.background} height={'100vh'}>
+				{loading ? (
+					<Spinner size="xl" />
+				) : showScore ? (
 					<Box p={8} borderWidth="1px" borderRadius="lg">
 						<Text fontSize="2xl" fontWeight="bold" mb={4}>
 							Your score: {score} out of {questions.length}
@@ -94,7 +81,7 @@ export default function Trivia() {
 						<Button
 							marginTop={'1vh'}
 							colorScheme="blue"
-							onClick={() => navigate('/game')}
+							onClick={() => navigate('/RQMO-7-CTG-2024/game')}
 							padding={30}
 						>
 							<Flex flexDirection={'column'}>
@@ -107,8 +94,8 @@ export default function Trivia() {
 						</Button>
 					</Box>
 				) : (
-					<>
-						<Text fontSize="2xl" fontWeight="bold">
+					<Box marginTop={8}>
+						<Text fontSize="2xl" fontWeight="bold" marginBottom={3}>
 							{questions[currentQuestionIndex].question}
 						</Text>
 						<VStack spacing={4} align="center">
@@ -127,7 +114,7 @@ export default function Trivia() {
 								</Button>
 							))}
 						</VStack>
-					</>
+					</Box>
 				)}
 			</VStack>
 		</>
