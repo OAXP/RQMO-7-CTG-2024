@@ -13,7 +13,7 @@ export default function Navbar() {
 			alignItems={'center'}
 			backgroundColor={colors.background}
 		>
-			<Image borderRadius={'2xl'} w={'10%'} h={'70%'} src={logo} _hover={{ cursor: 'pointer' }} />
+			<Image borderRadius={'2xl'} w={'10%'} h={'70%'} src={logo} _hover={{ cursor: 'pointer' }} onClick={() => {navigate('/home');}} />				
 			<Flex flexDirection={'column'} w={'100%'} alignItems={'center'}>
 				<Flex flexDirection={'row'} alignItems={'center'} gap={'3vw'}>
 					<Flex
