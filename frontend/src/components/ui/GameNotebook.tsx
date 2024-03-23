@@ -1,8 +1,8 @@
 import React from 'react';
-import { Disease } from '@src/interfaces/Disease';
 import { Box, List, ListItem } from '@chakra-ui/react';
+import IDisease from "@src/types/disease";
 
-function GameNotebook({ diseases }: { diseases: Disease[] }) {
+function GameNotebook({ diseases }: { diseases: IDisease[] }) {
 	return (
 		<Box p={5}>
 			{diseases.map((disease) => (

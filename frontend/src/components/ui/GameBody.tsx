@@ -1,7 +1,7 @@
 import { Button, SimpleGrid } from '@chakra-ui/react';
-import { Disease } from '@src/interfaces/Disease';
+import IDisease from "@src/types/disease";
 
-function GameBody({ disease }: { disease: Disease }) {
+function GameBody({ disease }: { disease: IDisease }) {
 	const getSymptom = (part: string) => {
 		const symptom = disease.symptoms.find((s) => s.part === part);
 		window.alert(symptom ? symptom.description : "I don't feel anything here.");

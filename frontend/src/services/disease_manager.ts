@@ -12,6 +12,11 @@ export default class DiseaseManager {
 		return disease;
 	}
 
+	async getRandomDisease(): Promise<IDisease> {
+		const disease = (await HTTPInterface.GET('disease/random')) as IDisease;
+		return disease;
+	}
+
 	async deleteDisease(id: string) {
 		try {
 			await HTTPInterface.DELETE(`disease/${id}`);
