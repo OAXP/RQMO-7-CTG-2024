@@ -12,11 +12,8 @@ import {
 	Textarea,
 	VStack,
 } from '@chakra-ui/react';
-// eslint-disable-next-line import/default
-import React, { useContext, useRef } from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
+import { useRef } from 'react';
 import { BsPerson, BsFillTelephoneFill, BsTelephone } from 'react-icons/bs';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { MdOutlineEmail } from 'react-icons/md';
 import Navbar from '@src/layouts/navbar';
 import { colors } from '@src/Theme';
@@ -49,14 +46,14 @@ export default function Contact() {
 							shadow={'base'}
 							w={{ base: '100%', lg: '60%' }}
 						>
-							<Heading fontSize={{ base: '4xl', md: '5xl' }} paddingBottom={5}>Nous joindre</Heading>
+							<Heading fontSize={{ base: '4xl', md: '5xl' }} paddingBottom={5}>Contact Us</Heading>
 							<Flex align="center">
 								<BsFillTelephoneFill/>
-								<Text fontSize={{ base: 'lg' }} fontWeight="500" ml={2}>Sans frai: 1-888-822-2854</Text>
+								<Text fontSize={{ base: 'lg' }} fontWeight="500" ml={2}>Toll-free: 1-888-822-2854</Text>
 							</Flex>
 							<Flex align="center">
 								<BsFillTelephoneFill/>
-								<Text fontSize={{ base: 'lg' }} fontWeight="500" ml={2}>Région Sherbrooke, Qc: (819) 943-2854</Text>
+								<Text fontSize={{ base: 'lg' }} fontWeight="500" ml={2}>Sherbrooke Region, Qc: (819) 943-2854</Text>
 							</Flex>
 							<Flex align="center" mb={3}>
 								<MdOutlineEmail/>
@@ -65,7 +62,7 @@ export default function Contact() {
 							<form ref={form}>
 								<VStack spacing={5}>
 									<FormControl isRequired>
-										<FormLabel textColor={'palette.black'}>Nom</FormLabel>
+										<FormLabel textColor={'palette.black'}>Name</FormLabel>
 
 										<Flex alignItems="flex-start" gap={4}>
 											<InputGroup>
@@ -76,7 +73,7 @@ export default function Contact() {
 												<Input
 												type="text"
 												name="first_name"
-												placeholder="Prénom"
+												placeholder="First Name"
 												focusBorderColor={'palette.primary'}
 												textColor={'palette.black'}
 												/>
@@ -90,7 +87,7 @@ export default function Contact() {
 												<Input
 												type="text"
 												name="last_name"
-												placeholder="Nom"
+												placeholder="Last Name"
 												focusBorderColor={'palette.primary'}
 												textColor={'palette.black'}
 												/>
@@ -99,7 +96,7 @@ export default function Contact() {
 									</FormControl>
 
 									<FormControl isRequired>
-										<FormLabel textColor={'palette.black'}>Courriel</FormLabel>
+										<FormLabel textColor={'palette.black'}>Email</FormLabel>
 
 										<InputGroup>
 											<InputLeftElement
@@ -109,7 +106,7 @@ export default function Contact() {
 											<Input
 												type="email"
 												name="user_email"
-												placeholder="Votre courriel"
+												placeholder="Your Email"
 												focusBorderColor={'button'}
 												textColor={'palette.black'}
 											/>
@@ -126,7 +123,7 @@ export default function Contact() {
 											<Input
 												type="email"
 												name="user_email"
-												placeholder="Numéro de téléphone"
+												placeholder="Phone Number"
 												focusBorderColor={'button'}
 												textColor={'palette.black'}
 											/>
@@ -138,7 +135,7 @@ export default function Contact() {
 
 										<Textarea
 											name="message"
-											placeholder="Votre Message"
+											placeholder="Your Message"
 											rows={6}
 											resize="none"
 											focusBorderColor={'button'}
@@ -148,15 +145,11 @@ export default function Contact() {
 
 									<Button
 										colorScheme="blue"
-										bg={'button'}
-										color="white"
-										_hover={{
-											bg: 'button_hover',
-										}}
+										background={'skyblue'}
 										w={'full'}
 										type={'submit'}
 									>
-										Envoyer Message
+										Send Message
 									</Button>
 								</VStack>
 							</form>
