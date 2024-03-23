@@ -8,6 +8,7 @@ import * as swaggerJSDoc from 'swagger-jsdoc';
 import * as swaggerUi from 'swagger-ui-express';
 import { Service } from 'typedi';
 import { DiseaseController } from '@src/controllers/disease.controller';
+import { QuestionController } from '@src/controllers/question.controller';
 
 @Service()
 export class Application {
@@ -17,7 +18,8 @@ export class Application {
 
 	constructor(
 		private readonly exampleController: ExampleController,
-		private readonly diseaseController: DiseaseController
+		private readonly diseaseController: DiseaseController,
+		private readonly questionController: QuestionController
 	) {
 		this.app = express();
 
@@ -45,6 +47,8 @@ export class Application {
 		);
 		this.app.use('/api/example', this.exampleController.router);
 		this.app.use('/api/disease', this.diseaseController.router);
+		this.app.use('/api/question', this.questionController.router);
+
 		this.app.use('/', (req, res) => {
 			res.redirect('/api/docs');
 		});
