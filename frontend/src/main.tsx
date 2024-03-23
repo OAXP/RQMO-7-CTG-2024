@@ -34,7 +34,7 @@ const router = createBrowserRouter([
 				element: <Help />,
 			},
 			{
-				path: '/RQMO-7-CTG-2024/activites',
+				path: '/RQMO-7-CTG-2024/activities',
 				element: <Activities />,
 			},
 			{

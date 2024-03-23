@@ -13,14 +13,23 @@ export default function Navbar() {
 			alignItems={'center'}
 			backgroundColor={colors.background}
 		>
-			<Image borderRadius={'2xl'} w={'10%'} h={'70%'} src={logo} _hover={{ cursor: 'pointer' }} onClick={() => {navigate('/home');}} />				
+			<Image
+				borderRadius={'2xl'}
+				w={'10%'}
+				h={'70%'}
+				src={logo}
+				_hover={{ cursor: 'pointer' }}
+				onClick={() => {
+					navigate('/RQMO-7-CTG-2024/home');
+				}}
+			/>
 			<Flex flexDirection={'column'} w={'100%'} alignItems={'center'}>
 				<Flex flexDirection={'row'} alignItems={'center'} gap={'3vw'}>
 					<Flex
 						textColor={colors.button_text}
 						_hover={{ cursor: 'pointer' }}
 						onClick={() => {
-							navigate('/game');
+							navigate('/RQMO-7-CTG-2024/game');
 						}}
 					>
 						<Text fontWeight={'700'} fontSize={'2xl'}>
@@ -31,7 +40,7 @@ export default function Navbar() {
 						textColor={colors.button_text}
 						_hover={{ cursor: 'pointer' }}
 						onClick={() => {
-							navigate('/services');
+							navigate('/RQMO-7-CTG-2024/services');
 						}}
 					>
 						<Text fontWeight={'700'} fontSize={'2xl'}>
@@ -42,7 +51,7 @@ export default function Navbar() {
 						textColor={colors.button_text}
 						_hover={{ cursor: 'pointer' }}
 						onClick={() => {
-							navigate('/search');
+							navigate('/RQMO-7-CTG-2024/search');
 						}}
 					>
 						<Text fontWeight={'700'} fontSize={'2xl'}>
@@ -53,7 +62,7 @@ export default function Navbar() {
 						textColor={colors.button_text}
 						_hover={{ cursor: 'pointer' }}
 						onClick={() => {
-							navigate('/activities');
+							navigate('/RQMO-7-CTG-2024/activities');
 						}}
 					>
 						<Text fontWeight={'700'} fontSize={'2xl'}>
@@ -64,7 +73,7 @@ export default function Navbar() {
 						textColor={colors.button_text}
 						_hover={{ cursor: 'pointer' }}
 						onClick={() => {
-							navigate('/help');
+							navigate('/RQMO-7-CTG-2024/help');
 						}}
 					>
 						<Text fontWeight={'700'} fontSize={'2xl'}>
@@ -83,7 +92,7 @@ export default function Navbar() {
 					fontWeight={'500'}
 					fontSize={'2xl'}
 					onClick={() => {
-						navigate('/contact');
+						navigate('/RQMO-7-CTG-2024/contact');
 					}}
 				>
 					Contact us

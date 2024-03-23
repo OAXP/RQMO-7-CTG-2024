@@ -3,6 +3,7 @@
   "private": true,
   "homepage": "https://OAXP.github.io/RQMO-7-CTG-2024/",
   "version": "0.0.0",
+  "homepage": "https://OAXP.github.io/RQMO-7-CTG-2024/",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
