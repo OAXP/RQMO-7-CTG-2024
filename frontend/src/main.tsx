@@ -5,7 +5,7 @@ import { SaasProvider } from '@saas-ui/react';
 
 import theme from '@src/Theme';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Activities from '@src/pages/Activities';
+import Trivia from '@src/pages/Trivia';
 import Contact from '@src/pages/Contact';
 import Help from '@src/pages/Help';
 import Home from '@src/pages/Home';
@@ -35,8 +35,8 @@ const router = createBrowserRouter([
 				element: <Help />,
 			},
 			{
-				path: '/RQMO-7-CTG-2024/activities',
-				element: <Activities />,
+				path: '/RQMO-7-CTG-2024/trivia',
+				element: <Trivia />,
 			},
 			{
 				path: '/RQMO-7-CTG-2024/services',

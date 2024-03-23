@@ -70,11 +70,11 @@ export default function Navbar() {
 						textColor={colors.button_text}
 						_hover={{ cursor: 'pointer' }}
 						onClick={() => {
-							navigate('/RQMO-7-CTG-2024/activities');
+							navigate('/RQMO-7-CTG-2024/trivia');
 						}}
 					>
 						<Text fontWeight={'700'} fontSize={'2xl'}>
-							Activities
+							Trivia
 						</Text>
 					</Flex>
 					<Flex
