@@ -27,6 +27,13 @@ export class DiseaseService {
 		return disease as unknown as Disease;
 	}
 
+	async getRandom() {
+		const randomDisease = await this.collection
+			.aggregate([{ $sample: { size: 1 } }, { $project: { _id: 0 } }])
+			.toArray();
+		return randomDisease[0] as unknown as Disease;
+	}
+
 	async add(disease: Disease) {
 		await this.collection.insertOne(disease);
 	}
