@@ -2,7 +2,7 @@ import { Box, Button, Flex, Input } from "@chakra-ui/react";
 import Navbar from "@src/layouts/navbar";
 import GameBody from "@components/ui/GameBody";
 import GameNotebook from "@components/ui/GameNotebook";
-import {useRef, useState} from "react";
+import { useEffect, useRef, useState } from 'react';
 import ThreeGame from "@src/features/ThreeGame";
 import DiseaseManager from "@services/disease_manager";
 import IDisease from "@src/types/disease";
@@ -14,8 +14,10 @@ export default function Game() {
   const [diseases, setDiseases] = useState<IDisease[]>([]);
   const [currentDisease, setCurrentDisease] = useState<IDisease | undefined>(undefined);
 
-  diseaseManager.getAllDiseases().then((diseases) => setDiseases(diseases));
-  diseaseManager.getRandomDisease().then((disease) => setCurrentDisease(disease));
+  useEffect(() => {
+    diseaseManager.getAllDiseases().then((diseases) => setDiseases(diseases));
+    diseaseManager.getRandomDisease().then((disease) => setCurrentDisease(disease));
+  }, [])
 
   const onSubmit = () => {
     const userDiagnosis = inputRef.current?.value ?? "";
