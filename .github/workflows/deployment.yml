@@ -34,8 +34,8 @@ jobs:
           cache-dependency-path: "**/package-lock.json"
       - name: Set Git user name and email
         run: |
-          git config --global user.email "amira.tamakloe@polymtl.ca"
-          git config --global user.name "AmiraTamakloe"
+          git config --global user.email "anas.barbouch@polymtl.ca"
+          git config --global user.name "Anas B."
       - name: Install dependencies
         run: |
           cd ./frontend
