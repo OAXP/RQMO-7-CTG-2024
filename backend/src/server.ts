@@ -5,6 +5,7 @@ import { Service } from 'typedi';
 import 'dotenv/config';
 import { DatabaseService } from '@src/services/database.service';
 import * as process from 'process';
+import Logger from '@src/utils/Logger';
 
 @Service()
 export class Server {
@@ -13,6 +14,7 @@ export class Server {
 	// eslint-disable-next-line @typescript-eslint/no-magic-numbers
 	private static readonly baseDix: number = 10;
 	private server: http.Server;
+	private readonly LOGGER = new Logger('Server');
 
 	constructor(
 		private readonly application: Application,
@@ -32,7 +34,7 @@ export class Server {
 			return false;
 		}
 	}
-	async init(): Promise<void> {
+	init(): void {
 		this.application.app.set('port', Server.appPort);
 
 		this.server = http.createServer(this.application.app);
@@ -42,11 +44,9 @@ export class Server {
 			this.onError(error)
 		);
 		this.server.on('listening', () => this.onListening());
-		try {
-			await this.databaseService.start(process.env.DATABASE_URL);
-		} catch {
-			process.exit(1);
-		}
+		this.databaseService.start(process.env.DATABASE_URL).catch((err) => {
+			this.LOGGER.err(err);
+		});
 	}
 
 	private onError(error: NodeJS.ErrnoException): void {
