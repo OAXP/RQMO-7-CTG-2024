@@ -1,7 +1,8 @@
-import { Flex, Text, Image } from '@chakra-ui/react';
+import { Flex, Text, Image, Menu, MenuButton, MenuList, MenuItem, Icon } from '@chakra-ui/react';
 import { colors } from '@src/Theme';
 import logo from '@assets/images/rqmo_logo.png';
 import { useNavigate } from 'react-router-dom';
+import { FiChevronDown } from 'react-icons/fi';
 
 export default function Navbar() {
 	const navigate = useNavigate();
@@ -36,17 +37,24 @@ export default function Navbar() {
 							Game
 						</Text>
 					</Flex>
-					<Flex
-						textColor={colors.button_text}
-						_hover={{ cursor: 'pointer' }}
-						onClick={() => {
-							navigate('/RQMO-7-CTG-2024/services');
-						}}
-					>
-						<Text fontWeight={'700'} fontSize={'2xl'}>
-							Services
-						</Text>
-					</Flex>
+					<Menu>
+						<MenuButton
+							textColor={colors.button_text}
+							_hover={{ cursor: 'pointer' }}
+							alignItems="center"
+						>
+							<Flex direction={'row'}>
+								<Text fontWeight={'700'} fontSize={'2xl'} mr="2">
+									Services
+								</Text>
+								<Icon as={FiChevronDown} mt="3" />
+							</Flex>
+						</MenuButton>
+						<MenuList>
+							<MenuItem onClick={() => navigate('/services/jumelage')}>Jumelage</MenuItem>
+							<MenuItem onClick={() => navigate('/services/urgence')}>Urgence</MenuItem>
+						</MenuList>
+					</Menu>
 					<Flex
 						textColor={colors.button_text}
 						_hover={{ cursor: 'pointer' }}
