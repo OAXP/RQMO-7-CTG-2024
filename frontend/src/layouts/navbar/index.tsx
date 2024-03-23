@@ -1,7 +1,8 @@
-import { Flex, Text, Image } from '@chakra-ui/react';
+import { Flex, Text, Image, Menu, MenuButton, MenuList, MenuItem, Icon } from '@chakra-ui/react';
 import { colors } from '@src/Theme';
 import logo from '@assets/images/rqmo_logo.png';
 import { useNavigate } from 'react-router-dom';
+import { FiChevronDown } from "react-icons/fi";
 
 export default function Navbar() {
 	const navigate = useNavigate();
