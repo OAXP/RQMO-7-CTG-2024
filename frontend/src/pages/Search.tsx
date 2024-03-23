@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Box, Input, Flex, Text } from '@chakra-ui/react';
+import { Box, Input, Flex, Text, Button } from '@chakra-ui/react';
 import Navbar from '@src/layouts/navbar';
 import { colors } from '@src/Theme';
+import { useNavigate } from 'react-router-dom';
 
 // TODO: Include the fake diseases from the game as well ?
 
@@ -9,6 +10,7 @@ function Search() {
 	const [searchQuery, setSearchQuery] = useState('');
 	const [diseases, setDiseases] = useState([]);
 	const [patientDisease, setPatientDisease] = useState({});
+	const navigate = useNavigate();
 
 	function search() {
 		fetch(`https://api.orphacode.org/EN/ClinicalEntity/ApproximateName/${searchQuery}`, {
@@ -105,6 +107,26 @@ function Search() {
 							<Flex flexDirection={'column'}>
 								<Text as={'b'} fontSize={'large'}>{patientDisease['Preferred term']}  (ORPHA code: {patientDisease['ORPHAcode']})</Text>
 								<Text fontSize={'large'}>{patientDisease['Definition']}</Text>
+								{/* TODO: Include treatments, symptoms, etc if available */}
+							</Flex>
+							<Flex mt={4} justifyContent={'space-between'}>
+								<Button
+									colorScheme='blue'
+									onClick={() => {
+										navigate('/services');
+									}}
+								>
+									Are you a person affected by this disease?
+								</Button>
+								<Button
+									backgroundColor={colors.button_text}
+									textColor={"white"}
+									onClick={() => {
+										navigate('/services');
+									}}
+								>
+									Are you a researcher?
+								</Button>
 							</Flex>
 						</Box>
 					)}
@@ -124,6 +146,10 @@ function Search() {
 							width="50%"
 							textAlign="center"
 							backgroundColor={'gray.100'}
+							transition={'transform 0.3s'}
+							_hover={{
+								transform: 'scale(1.05)',
+							}}
 						>
 							{disease['Preferred term']}
 						</Box>
