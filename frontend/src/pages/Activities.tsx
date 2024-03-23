@@ -1,5 +1,11 @@
 import { Text } from '@chakra-ui/react';
+import Navbar from '@src/layouts/navbar';
 
 export default function Activities() {
-	return <Text>Activities page</Text>;
+	return (
+		<>
+			<Navbar />
+			<Text>Activities page</Text>
+		</>
+	);
 }
