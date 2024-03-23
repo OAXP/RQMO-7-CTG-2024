@@ -6,17 +6,17 @@ import { useRef } from 'react';
 import { BsPerson } from 'react-icons/bs';
 import { MdOutlineEmail } from 'react-icons/md';
 
-export default function Jumelage() {
+export default function Pairing() {
     const form = useRef<HTMLFormElement>(null);
     return (
         <>
             <Navbar />
             <Flex display={'column'} backgroundColor={colors.background} justifyContent="center" alignItems="center">
                 <Text fontSize="7xl" textAlign="center" mb={10} color={'dimgrey'} fontWeight={'600'}>
-                    Matchmaking Service
+                    Pairing Service
                 </Text>
                 <Text fontSize="3xl" textAlign="center" color={colors.button_text} fontWeight={'500'} mb={50}>
-                    Matchmaking for individuals with the same rare disease
+                    Pairing for individuals with the same rare disease
                 </Text>
                 <Flex
                     flexDirection={'row'}
@@ -30,7 +30,7 @@ export default function Jumelage() {
                         or exchange advice?
                         <br/>
                         <br/>
-                        Sign up for our matchmaking service.
+                        Sign up for our pairing service.
                     </Text>
                     <Image src={jumelage} />
                 </Flex>
@@ -45,7 +45,7 @@ export default function Jumelage() {
                 <Flex fontSize={'xl'} justifyContent={'center'} mb={10}>
                     <UnorderedList>
                         <ListItem>Please note that we keep your information confidential and never give out your name or email address without your permission.</ListItem>
-                        <ListItem>If we can match you with another person, we will ask for your permission each time it arises.</ListItem>
+                        <ListItem>If we can pair you with another person, we will ask for your permission each time it arises.</ListItem>
                     </UnorderedList>
                 </Flex>
                 <Text mb={10}>.</Text>
@@ -60,7 +60,7 @@ export default function Jumelage() {
                     w={{ base: '100%', lg: '60%' }}
                 >
                     <Heading mb={10}>
-                        Form to Complete for Matchmaking Service
+                        Form to Complete for Pairing Service
                     </Heading>
                     <form ref={form}>
                         <VStack spacing={5}>
