@@ -155,7 +155,7 @@ function Search() {
 								<Button
 									colorScheme="blue"
 									onClick={() => {
-										navigate('/services');
+										navigate('/RQMO-7-CTG-2024/services');
 									}}
 								>
 									Are you a person affected by this disease?
@@ -164,7 +164,7 @@ function Search() {
 									backgroundColor={colors.button_text}
 									textColor={'white'}
 									onClick={() => {
-										navigate('/services');
+										navigate('/RQMO-7-CTG-2024/services');
 									}}
 								>
 									Are you a researcher?
