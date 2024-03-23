@@ -6,11 +6,25 @@ import zebra from '@assets/images/zebra.jpg';
 export default function Home() {
 	return (
 		<>
-			<Navbar></Navbar>
-			<Flex display={'column'} backgroundColor={colors.background} w={'100%'} h={'100vh'}>
+			<Navbar />
+			<Flex
+				display={'column'}
+				backgroundColor={colors.background}
+				w={'100%'}
+				h={'100vh'}
+			>
 				<Flex direction={'column'} alignItems={'center'}>
-					<Flex marginTop={'15vh'} direction={'row'} justifyContent={'space-between'} w={'60%'}>
-						<Flex direction={'column'} w={'50%'} justifyContent={'space-between'}>
+					<Flex
+						marginTop={'15vh'}
+						direction={'row'}
+						justifyContent={'space-between'}
+						w={'60%'}
+					>
+						<Flex
+							direction={'column'}
+							w={'50%'}
+							justifyContent={'space-between'}
+						>
 							<Text color={colors.Primary} fontWeight={'700'} fontSize={'6xl'}>
 								Welcome to RQMO
 							</Text>
@@ -19,7 +33,8 @@ export default function Home() {
 									Orphan disease ?
 								</Text>
 								<Text fontWeight={'400'} fontSize={'4xl'}>
-									There are more than<span style={{ color: colors.button_text }}> 700 000 </span>
+									There are more than
+									<span style={{ color: colors.button_text }}> 700 000 </span>
 									Quebecers like you
 								</Text>
 							</Flex>
@@ -32,7 +47,11 @@ export default function Home() {
 								borderRadius={'20px'}
 								marginBottom={'20px'}
 							>
-								<Text color={colors.Primary} fontWeight={'400'} fontSize={'3xl'}>
+								<Text
+									color={colors.Primary}
+									fontWeight={'400'}
+									fontSize={'3xl'}
+								>
 									Learn more
 								</Text>
 							</Button>
