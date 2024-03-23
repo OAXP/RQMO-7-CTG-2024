@@ -12,7 +12,7 @@ export default function Navbar() {
 			w={'100%'}
 			h={'10vh'}
 			alignItems={'center'}
-			backgroundColor={colors.background}
+			backgroundColor={'white'}
 		>
 			<Image
 				borderRadius={'2xl'}
