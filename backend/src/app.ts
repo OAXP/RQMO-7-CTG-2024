@@ -7,6 +7,7 @@ import { StatusCodes } from 'http-status-codes';
 import * as swaggerJSDoc from 'swagger-jsdoc';
 import * as swaggerUi from 'swagger-ui-express';
 import { Service } from 'typedi';
+import { DiseaseController } from '@src/controllers/disease.controller';
 
 @Service()
 export class Application {
@@ -16,6 +17,7 @@ export class Application {
 
 	constructor(
 		private readonly exampleController: ExampleController,
+		private readonly diseaseController: DiseaseController
 	) {
 		this.app = express();
 
@@ -42,6 +44,7 @@ export class Application {
 			swaggerUi.setup(swaggerJSDoc(this.swaggerOptions))
 		);
 		this.app.use('/api/example', this.exampleController.router);
+		this.app.use('/api/disease', this.diseaseController.router);
 		this.app.use('/', (req, res) => {
 			res.redirect('/api/docs');
 		});
@@ -49,7 +52,6 @@ export class Application {
 	}
 
 	private config(): void {
-
 		// Middlewares configuration
 		this.app.use(express.json());
 		this.app.use(express.urlencoded({ extended: true }));
