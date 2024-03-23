@@ -23,17 +23,10 @@ export class DiseaseController {
 		 *       name:
 		 *         type: string
 		 *       symptoms:
-		 *         type: array
-		 *         items:
-		 *           type: object
-		 *           properties:
-		 *             part:
-		 *               type: string
-		 *             description:
-		 *               type: string
-		 *     required:
-		 *       - name
-		 *       - symptoms
+		 *         type: object
+		 *         additionalProperties:
+		 *           type: string
+		 */
 
 		/**
 		 * @swagger

@@ -7,24 +7,10 @@ export default function Home() {
 	return (
 		<>
 			<Navbar />
-			<Flex
-				display={'column'}
-				backgroundColor={colors.background}
-				w={'100%'}
-				h={'100vh'}
-			>
+			<Flex display={'column'} backgroundColor={colors.background} w={'100%'} h={'100vh'}>
 				<Flex direction={'column'} alignItems={'center'}>
-					<Flex
-						marginTop={'15vh'}
-						direction={'row'}
-						justifyContent={'space-between'}
-						w={'60%'}
-					>
-						<Flex
-							direction={'column'}
-							w={'50%'}
-							justifyContent={'space-between'}
-						>
+					<Flex marginTop={'15vh'} direction={'row'} justifyContent={'space-between'} w={'60%'}>
+						<Flex direction={'column'} w={'50%'} justifyContent={'space-between'}>
 							<Text color={colors.Primary} fontWeight={'700'} fontSize={'6xl'}>
 								Welcome to RQMO
 							</Text>
@@ -47,11 +33,7 @@ export default function Home() {
 								borderRadius={'20px'}
 								marginBottom={'20px'}
 							>
-								<Text
-									color={colors.Primary}
-									fontWeight={'400'}
-									fontSize={'3xl'}
-								>
+								<Text color={colors.Primary} fontWeight={'400'} fontSize={'3xl'}>
 									Learn more
 								</Text>
 							</Button>

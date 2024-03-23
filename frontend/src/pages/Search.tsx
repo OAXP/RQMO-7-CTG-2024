@@ -105,17 +105,26 @@ function Search() {
 					{Object.keys(patientDisease).length > 0 && (
 						<Box width="50%" textAlign="center" p={4} backgroundColor="gray.100" borderRadius="md">
 							<Flex flexDirection={'column'} textAlign={'left'}>
-								<Text as={'b'} fontSize={'large'}>{patientDisease['Preferred term']}  (ORPHA code: {patientDisease['ORPHAcode']})</Text>
+								<Text as={'b'} fontSize={'large'}>
+									{patientDisease['Preferred term']} (ORPHA code: {patientDisease['ORPHAcode']})
+								</Text>
 								<Text fontSize={'large'}>{patientDisease['Definition']}</Text>
 								{/* TODO: Include treatments, symptoms, etc if available */}
 								<Text marginTop={'2vh'}>
 									Frequent signs and symptoms:
-									<Link color={"blue"} href={'https://www.orpha.net/en/disease/sign/' + patientDisease['ORPHAcode']} isExternal> {`https://www.orpha.net/en/disease/sign/${patientDisease['ORPHAcode']}`}</Link>
+									<Link
+										color={'blue'}
+										href={'https://www.orpha.net/en/disease/sign/' + patientDisease['ORPHAcode']}
+										isExternal
+									>
+										{' '}
+										{`https://www.orpha.net/en/disease/sign/${patientDisease['ORPHAcode']}`}
+									</Link>
 								</Text>
 							</Flex>
 							<Flex mt={4} justifyContent={'space-between'}>
 								<Button
-									colorScheme='blue'
+									colorScheme="blue"
 									onClick={() => {
 										navigate('/services');
 									}}
@@ -124,7 +133,7 @@ function Search() {
 								</Button>
 								<Button
 									backgroundColor={colors.button_text}
-									textColor={"white"}
+									textColor={'white'}
 									onClick={() => {
 										navigate('/services');
 									}}
