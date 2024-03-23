@@ -23,6 +23,10 @@
       "@lib/*": ["./src/lib/*"],
       "@data/*": ["./src/data/*"],
       "@hooks/*": ["./src/hooks/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@context/*": ["./src/context/*"],
+      "@features/*": ["./src/features/*"],
+      "@services/*": ["./src/services/*"]
     }
   },
   "include": ["src"],

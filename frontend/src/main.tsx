@@ -10,5 +10,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 		<SaasProvider theme={theme}>
 			<App />
 		</SaasProvider>
-	</React.StrictMode>
+	</React.StrictMode>,
 );
