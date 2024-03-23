@@ -2,6 +2,7 @@ import React from "react";
 import { Canvas } from "@react-three/fiber";
 import * as THREE from "three";
 import { Desk } from "@src/models/Desk";
+import { Notebook } from "@src/models/Notebook";
 
 const ThreeGame = () => {
   const adjustDeskForScreenSize = () => {
@@ -30,6 +31,10 @@ const ThreeGame = () => {
         />
       </mesh>
       <Desk position={deskPosition} scale={deskScale} rotation={deskRotation} />
+      <Notebook
+        scale={[0.004, 0.004, 0.004]}
+        position={[3.3, 2.5, 3.3]}
+      ></Notebook>
       <gridHelper></gridHelper>
     </Canvas>
   );
