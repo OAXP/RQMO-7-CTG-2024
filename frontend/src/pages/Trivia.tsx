@@ -3,8 +3,8 @@ import { Text, Button, VStack, Box, Flex, Spinner } from '@chakra-ui/react';
 import { colors } from '@src/Theme';
 import Navbar from '@src/layouts/navbar';
 import { useNavigate } from 'react-router-dom';
-import { Question } from "@src/interfaces/Question";
-import QuestionManager from "@services/question_manager";
+import { Question } from '@src/interfaces/Question';
+import QuestionManager from '@services/question_manager';
 
 interface IncorrectAnswer {
 	question: string;
