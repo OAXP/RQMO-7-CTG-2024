@@ -13,39 +13,39 @@ export default function Jumelage() {
             <Navbar />
             <Flex display={'column'} backgroundColor={colors.background} justifyContent="center" alignItems="center">
                 <Text fontSize="7xl" textAlign="center" mb={10} color={'dimgrey'} fontWeight={'600'}>
-                    Service de jumelage
+                    Matchmaking Service
                 </Text>
                 <Text fontSize="3xl" textAlign="center" color={colors.button_text} fontWeight={'500'} mb={50}>
-                    Jumelage de personnes atteintes de la même maladie rare
+                    Matchmaking for individuals with the same rare disease
                 </Text>
                 <Flex
                     flexDirection={'row'}
                     justifyContent={'center'}
                 >
                     <Text fontSize={'xl'} textAlign={'center'} mr={10} mt={10}>
-                        Voulez-vous trouver un individu ou une famille aux prises avec la même 
+                        Do you want to find an individual or family dealing with the same
                         <br/>
-                        maladie rare que vous ou votre enfant dans le but de partager sur votre vécu 
+                        rare disease as you or your child to share experiences
                         <br/>
-                        ou d’échanger des conseils? 
+                        or exchange advice?
                         <br/>
                         <br/>
-                        Inscrivez-vous à notre banque de jumelage.
+                        Sign up for our matchmaking service.
                     </Text>
                     <Image src={jumelage} />
                 </Flex>
                 <Text fontSize={'xl'} textAlign={'center'} mt={10} mb={10}>
-                    Nous avons peut-être déjà quelqu’un avec votre maladie dans notre banque de contact de personnes atteintes au Québec. Remplissez le
+                    We may already have someone with your disease in our contact bank of individuals affected in Quebec. Fill out the
                     <br/>
-                    formulaire ci-dessous et nous consulterons notre banque. Si nous n’avons personne, nous chercherons pour vous via d’autres sources.
+                    form below and we will check our bank. If we don't have anyone, we'll look for you through other sources.
                     <br/>
                     <br/>
-                    Si nous ne trouvons toujours pas dans l’immédiat, nous vous contacterons aussitôt que nous aurons une inscription avec la même maladie rare.
+                    If we still don't find anyone immediately, we'll contact you as soon as we have a registration with the same rare disease.
                 </Text>
                 <Flex fontSize={'xl'} justifyContent={'center'} mb={10}>
                     <UnorderedList>
-                        <ListItem>Notez que nous conservons vos informations de façon confidentielle et que nous ne donnons jamais votre nom ou votre adresse courriel sans votre autorisation.</ListItem>
-                        <ListItem>Si nous pouvons vous jumeler avec une autre personne, nous vous demanderons votre autorisation à chaque fois que cela se présente.</ListItem>
+                        <ListItem>Please note that we keep your information confidential and never give out your name or email address without your permission.</ListItem>
+                        <ListItem>If we can match you with another person, we will ask for your permission each time it arises.</ListItem>
                     </UnorderedList>
                 </Flex>
                 <Text mb={10}>.</Text>
@@ -60,12 +60,12 @@ export default function Jumelage() {
                     w={{ base: '100%', lg: '60%' }}
                 >
                     <Heading mb={10}>
-                        Formulaire à compléter pour le service de jumelage
+                        Form to Complete for Matchmaking Service
                     </Heading>
                     <form ref={form}>
                         <VStack spacing={5}>
                             <FormControl isRequired>
-                                <FormLabel textColor={'palette.black'}>Nom</FormLabel>
+                                <FormLabel textColor={'palette.black'}>Name</FormLabel>
                                 <Flex alignItems="flex-start" gap={4}>
                                     <InputGroup>
                                         <InputLeftElement
@@ -75,7 +75,7 @@ export default function Jumelage() {
                                         <Input
                                         type="text"
                                         name="first_name"
-                                        placeholder="Prénom"
+                                        placeholder="First Name"
                                         focusBorderColor={'palette.primary'}
                                         textColor={'palette.black'}
                                         />
@@ -89,7 +89,7 @@ export default function Jumelage() {
                                         <Input
                                         type="text"
                                         name="last_name"
-                                        placeholder="Nom"
+                                        placeholder="Last Name"
                                         focusBorderColor={'palette.primary'}
                                         textColor={'palette.black'}
                                         />
@@ -98,7 +98,7 @@ export default function Jumelage() {
                             </FormControl>
 
                             <FormControl isRequired>
-                                <FormLabel textColor={'palette.black'}>Courriel</FormLabel>
+                                <FormLabel textColor={'palette.black'}>Email</FormLabel>
 
                                 <InputGroup>
                                     <InputLeftElement
@@ -108,7 +108,7 @@ export default function Jumelage() {
                                     <Input
                                         type="email"
                                         name="user_email"
-                                        placeholder="Votre courriel"
+                                        placeholder="Your Email"
                                         focusBorderColor={'button'}
                                         textColor={'palette.black'}
                                     />
@@ -116,11 +116,11 @@ export default function Jumelage() {
                             </FormControl>
 
                             <FormControl isRequired>
-                                <FormLabel textColor={'palette.black'}>Maladie</FormLabel>
+                                <FormLabel textColor={'palette.black'}>Disease</FormLabel>
 
                                 <InputGroup>
                                     <Input
-                                        placeholder="Votre maladie"
+                                        placeholder="Your Disease"
                                         focusBorderColor={'button'}
                                         textColor={'palette.black'}
                                     />
@@ -128,28 +128,28 @@ export default function Jumelage() {
                             </FormControl>
 
                             <FormControl isRequired>
-                                <FormLabel color={'palette.black'}>Je suis</FormLabel>
+                                <FormLabel color={'palette.black'}>I am</FormLabel>
                                 <Select
                                     focusBorderColor={'button'}
                                     color={'palette.black'}
                                 >
-                                    <option>Adulte</option>
-                                    <option>Adolescent</option>
-                                    <option>Enfant</option>
-                                    <option>Proche aidant</option>
+                                    <option>Adult</option>
+                                    <option>Teenager</option>
+                                    <option>Child</option>
+                                    <option>Caregiver</option>
                                 </Select>
                             </FormControl>
 
                             <FormControl isRequired>
-                                <FormLabel color={'palette.black'}>Langue</FormLabel>
+                                <FormLabel color={'palette.black'}>Language</FormLabel>
                                 <Select
                                     focusBorderColor={'button'}
                                     color={'palette.black'}
                                 >
-                                    <option>Francais</option>
-                                    <option>Anglais</option>
-                                    <option>Francais ou Anglais</option>
-                                    <option>Autre</option>
+                                    <option>French</option>
+                                    <option>English</option>
+                                    <option>French or English</option>
+                                    <option>Other</option>
                                 </Select>
                             </FormControl>
 
@@ -158,7 +158,7 @@ export default function Jumelage() {
 
                                 <Textarea
                                     name="message"
-                                    placeholder="Votre Message"
+                                    placeholder="Your Message"
                                     rows={6}
                                     resize="none"
                                     focusBorderColor={'button'}
@@ -171,7 +171,7 @@ export default function Jumelage() {
                                 w={'full'}
                                 type={'submit'}
                             >
-                                Envoyer Message
+                                Send Message
                             </Button>
                         </VStack>
                     </form>
