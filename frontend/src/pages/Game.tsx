@@ -1,37 +1,36 @@
 import { Box, Button, Flex, Input } from "@chakra-ui/react";
 import Navbar from "@src/layouts/navbar";
 import GameBody from "@components/ui/GameBody";
-import { getAllDisease } from "@services/diseaseService";
-import { useQuery } from "react-query";
 import GameNotebook from "@components/ui/GameNotebook";
-import { useRef } from "react";
+import {useRef, useState} from "react";
 import ThreeGame from "@src/features/ThreeGame";
+import DiseaseManager from "@services/disease_manager";
+import IDisease from "@src/types/disease";
 
 export default function Game() {
+  const diseaseManager = new DiseaseManager();
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const diseaseMock = {
-    name: "The frankhunk disease",
-    symptoms: [
-      { part: "belly", description: "It really hurts, it feels really hot." },
-      { part: "head", description: "I have a big headache." },
-    ],
-  };
-  // const { data: diseases } = useQuery('disease', getAllDisease);
-  const diseases = undefined;
+  const [diseases, setDiseases] = useState<IDisease[]>([]);
+  const [currentDisease, setCurrentDisease] = useState<IDisease | undefined>(undefined);
+
+  diseaseManager.getAllDiseases().then((diseases) => setDiseases(diseases));
+  diseaseManager.getRandomDisease().then((disease) => setCurrentDisease(disease));
 
   const onSubmit = () => {
     const userDiagnosis = inputRef.current?.value ?? "";
-    const isCorrect = diseaseMock.name === userDiagnosis;
+    const isCorrect = currentDisease?.name === userDiagnosis;
     window.alert(
       `You have diagnosed the patient with ${userDiagnosis}. ${
         isCorrect
           ? "Good job!"
           : "Better luck next time! The correct diagnosis is " +
-            diseaseMock.name
+            currentDisease?.name
       }`
     );
-    // TODO: next disease
+    // next disease
+    diseaseManager.getRandomDisease().then((disease) => setCurrentDisease(disease));
+    // TODO: show next person
   };
 
   return (
@@ -40,12 +39,12 @@ export default function Game() {
       <Box h={"full"} w={"full"}>
         <Flex>
           <Box flex={2} p={5}>
-            <GameBody disease={diseaseMock} />
+            <GameBody disease={currentDisease!} />
           </Box>
           <Box flex={1}>
             <Box fontWeight={"bold"}>Notebook</Box>
             <GameNotebook
-              diseases={diseases ?? [diseaseMock, diseaseMock, diseaseMock]}
+              diseases={diseases}
             />
           </Box>
         </Flex>
