@@ -1,8 +1,11 @@
-import { Flex, Text, Image } from '@chakra-ui/react';
+import { Flex, Text, Image, Menu, MenuButton, MenuList, MenuItem, Icon } from '@chakra-ui/react';
 import { colors } from '@src/Theme';
 import logo from '@assets/images/rqmo_logo.png';
+import { useNavigate } from 'react-router-dom';
+import { FiChevronDown } from 'react-icons/fi';
 
 export default function Navbar() {
+	const navigate = useNavigate();
 	return (
 		<Flex
 			flexDirection={'row'}
@@ -11,25 +14,76 @@ export default function Navbar() {
 			alignItems={'center'}
 			backgroundColor={colors.background}
 		>
-			<Image borderRadius={'2xl'} w={'10%'} h={'70%'} src={logo} _hover={{ cursor: 'pointer' }} />
+			<Image
+				borderRadius={'2xl'}
+				w={'10%'}
+				h={'70%'}
+				src={logo}
+				_hover={{ cursor: 'pointer' }}
+				onClick={() => {
+					navigate('/RQMO-7-CTG-2024/home');
+				}}
+			/>
 			<Flex flexDirection={'column'} w={'100%'} alignItems={'center'}>
 				<Flex flexDirection={'row'} alignItems={'center'} gap={'3vw'}>
-					<Flex textColor={colors.button_text} _hover={{ cursor: 'pointer' }}>
+					<Flex
+						textColor={colors.button_text}
+						_hover={{ cursor: 'pointer' }}
+						onClick={() => {
+							navigate('/RQMO-7-CTG-2024/game');
+						}}
+					>
 						<Text fontWeight={'700'} fontSize={'2xl'}>
 							Game
 						</Text>
 					</Flex>
-					<Flex textColor={colors.button_text} _hover={{ cursor: 'pointer' }}>
+					<Menu>
+						<MenuButton
+							textColor={colors.button_text}
+							_hover={{ cursor: 'pointer' }}
+							alignItems="center"
+						>
+							<Flex direction={'row'}>
+								<Text fontWeight={'700'} fontSize={'2xl'} mr="2">
+									Services
+								</Text>
+								<Icon as={FiChevronDown} mt="3" />
+							</Flex>
+						</MenuButton>
+						<MenuList>
+							<MenuItem onClick={() => navigate('/services/jumelage')}>Jumelage</MenuItem>
+							<MenuItem onClick={() => navigate('/services/urgence')}>Urgence</MenuItem>
+						</MenuList>
+					</Menu>
+					<Flex
+						textColor={colors.button_text}
+						_hover={{ cursor: 'pointer' }}
+						onClick={() => {
+							navigate('/RQMO-7-CTG-2024/search');
+						}}
+					>
 						<Text fontWeight={'700'} fontSize={'2xl'}>
-							Services
+							Search
 						</Text>
 					</Flex>
-					<Flex textColor={colors.button_text} _hover={{ cursor: 'pointer' }}>
+					<Flex
+						textColor={colors.button_text}
+						_hover={{ cursor: 'pointer' }}
+						onClick={() => {
+							navigate('/RQMO-7-CTG-2024/activities');
+						}}
+					>
 						<Text fontWeight={'700'} fontSize={'2xl'}>
 							Activities
 						</Text>
 					</Flex>
-					<Flex textColor={colors.button_text} _hover={{ cursor: 'pointer' }}>
+					<Flex
+						textColor={colors.button_text}
+						_hover={{ cursor: 'pointer' }}
+						onClick={() => {
+							navigate('/RQMO-7-CTG-2024/help');
+						}}
+					>
 						<Text fontWeight={'700'} fontSize={'2xl'}>
 							Help
 						</Text>
@@ -42,8 +96,14 @@ export default function Navbar() {
 				textColor={colors.button_text}
 				_hover={{ cursor: 'pointer' }}
 			>
-				<Text fontWeight={'500'} fontSize={'2xl'}>
-					Contact-us
+				<Text
+					fontWeight={'500'}
+					fontSize={'2xl'}
+					onClick={() => {
+						navigate('/RQMO-7-CTG-2024/contact');
+					}}
+				>
+					Contact us
 				</Text>
 			</Flex>
 		</Flex>
