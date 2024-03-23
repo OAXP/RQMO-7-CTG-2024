@@ -4,7 +4,8 @@ import { Disease } from '@src/interfaces/Disease';
 function GameBody({ disease }: { disease: Disease }) {
 	const getSymptom = (part: string) => {
 		const symptom = disease.symptoms.find((s) => s.part === part);
-		return symptom ? symptom.description : '';
+		window.alert(symptom ? symptom.description : "I don't feel anything here.");
+		return symptom ? symptom.description : "I don't feel anything here.";
 	};
 
 	const parts = [
