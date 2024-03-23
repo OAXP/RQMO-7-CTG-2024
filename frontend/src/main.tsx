@@ -52,7 +52,7 @@ const router = createBrowserRouter([
 				element: <Search />,
 			},
 			{
-				path: '/RQMO-7-CTG-2024/services/jumelage',
+				path: '/RQMO-7-CTG-2024/services/matchmaking',
 				element: <Jumelage />,
 			}
 		],
