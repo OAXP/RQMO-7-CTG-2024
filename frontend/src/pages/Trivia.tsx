@@ -19,9 +19,10 @@ export default function Trivia() {
 	const [showScore, setShowScore] = useState(false);
 	const [incorrectAnswers, setIncorrectAnswers] = useState<IncorrectAnswer[]>([]);
 	const [loading, setLoading] = useState(true);
+	const [startedTrivia, setStartedTrivia] = useState(false); // New state variable
 	const navigate = useNavigate();
-
 	const questionManager = new QuestionManager();
+
 	useEffect(() => {
 		questionManager.getAllQuestions().then((questions: Question[]) => {
 			setQuestions(questions);
@@ -38,8 +39,7 @@ export default function Trivia() {
 				{
 					question: questions[currentQuestionIndex].question,
 					userAnswer: questions[currentQuestionIndex].answers[answerIndex],
-					correctAnswer:
-						questions[currentQuestionIndex].answers[questions[currentQuestionIndex].correct],
+					correctAnswer: questions[currentQuestionIndex].answers[questions[currentQuestionIndex].correct],
 				},
 			]);
 		}
@@ -52,11 +52,29 @@ export default function Trivia() {
 		}
 	};
 
+	const startTrivia = () => {
+		setStartedTrivia(true);
+	};
+
 	return (
 		<>
 			<Navbar />
 			<VStack spacing={8} align="center" backgroundColor={colors.background} height={'100vh'}>
-				{loading ? (
+				{!startedTrivia ? (
+					<Box marginTop={8}>
+						<Text fontSize={'xx-large'} as={'b'} color={'darkslategrey'} marginTop={'2vh'} marginBottom={5}>
+							Welcome to the Rare Disease Trivia!
+						</Text>
+						<Flex flexDirection={"column"}>
+							<Text fontSize="lg" marginBottom={3} as={'b'}>
+								The goal of this trivia is to raise awareness and help you better understand rare diseases.
+							</Text>
+							<Button colorScheme="blue" onClick={startTrivia} width={'10vw'}>
+								Start the quiz
+							</Button>
+						</Flex>
+					</Box>
+				) : loading ? (
 					<Spinner size="xl" />
 				) : showScore ? (
 					<Box p={8} borderWidth="1px" borderRadius="lg">
