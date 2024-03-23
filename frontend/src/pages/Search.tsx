@@ -1,15 +1,14 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import { Box, Input, Flex, Text, Button, Link } from '@chakra-ui/react';
 import Navbar from '@src/layouts/navbar';
 import { colors } from '@src/Theme';
 import { useNavigate } from 'react-router-dom';
-
-// TODO: Include the fake diseases from the game as well ?
+import { ORPHAdisease } from '@src/interfaces/ORPHAdisease';
 
 function Search() {
 	const [searchQuery, setSearchQuery] = useState('');
-	const [diseases, setDiseases] = useState([]);
-	const [patientDisease, setPatientDisease] = useState({});
+	const [diseases, setDiseases] = useState<ORPHAdisease[]>([]);
+	const [patientDisease, setPatientDisease] = useState<ORPHAdisease | null>(null);
 	const navigate = useNavigate();
 
 	function search() {
@@ -21,14 +20,25 @@ function Search() {
 		})
 			.then((response) => response.json())
 			.then((data) => {
+				const diseases = data as { ORPHAcode: number; 'Preferred term': string }[];
+				if (data.length === 0) return;
 				if (data.length === 1) {
-					setPatientDisease(data[0]);
+					setPatientDisease({
+						code: diseases[0]['ORPHAcode'],
+						name: diseases[0]['Preferred term'],
+					});
 					setDiseases([]);
 				} else {
-					const filteredDiseases = data.filter(
-						(disease) => !disease['Preferred term'].startsWith('OBSOLETE:'),
-					);
-					setDiseases(filteredDiseases.slice(0, 10));
+					const filteredDiseases = diseases
+						.filter((disease) => !disease['Preferred term'].startsWith('OBSOLETE:'))
+						.slice(0, 10);
+
+					const renamedDiseases = filteredDiseases.map((disease) => ({
+						code: disease['ORPHAcode'],
+						name: disease['Preferred term'],
+					}));
+
+					setDiseases(renamedDiseases);
 				}
 			})
 			.catch((error) => {
@@ -37,9 +47,9 @@ function Search() {
 	}
 
 	useEffect(() => {
-		if (patientDisease.ORPHAcode) {
+		if (patientDisease?.code) {
 			fetch(
-				`https://api.orphacode.org/EN/ClinicalEntity/orphacode/${patientDisease.ORPHAcode}/Definition`,
+				`https://api.orphacode.org/EN/ClinicalEntity/orphacode/${patientDisease?.code}/Definition`,
 				{
 					method: 'GET',
 					headers: {
@@ -49,32 +59,36 @@ function Search() {
 			)
 				.then((response) => response.json())
 				.then((data) => {
+					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+					// @ts-ignore
 					setPatientDisease((prevState) => ({
 						...prevState,
-						Definition: data['Definition'],
+						definition: data['Definition'],
 					}));
 				})
 				.catch((error) => {
 					console.error('Error fetching disease description:', error);
 				});
 		}
-	}, [patientDisease['ORPHAcode']]);
+	}, [patientDisease?.code]);
 
-	function handleInputChange(event) {
+	function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
 		setSearchQuery(event.target.value);
 	}
 
-	function handleSubmit(event) {
+	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
-		search(event.target.value);
-		setPatientDisease({});
+		search();
+		setPatientDisease(null);
 	}
 
-	function handleBoxClick(disease) {
+	function handleBoxClick(disease: ORPHAdisease) {
 		setPatientDisease(disease);
 		setDiseases([]);
 	}
 
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
 	return (
 		<>
 			<Navbar />
@@ -85,15 +99,31 @@ function Search() {
 				h={'100vh'}
 				justifyContent={'center'}
 				alignItems={'center'}
+				position="relative"
+				zIndex={1}
 			>
+				<Box
+					position="absolute"
+					top="30%"
+					left="55%"
+					transform="translate(-50%, -50%)"
+					background={'#e9ded9'}
+					borderRadius="50%"
+					width="60vh"
+					height="60vh"
+					zIndex="-1"
+				/>
 				<form onSubmit={handleSubmit}>
-					<Flex justifyContent={'center'} alignItems={'center'}>
+					<Flex justifyContent={'center'} alignItems={'center'} flexDirection={'column'}>
+						<Text fontSize={'xxx-large'} as={'b'} color={'darkslategrey'} marginTop={'2vh'}>
+							Rare Disease from A to Z
+						</Text>
 						<Input
-							placeholder="Enter the name of the rare disease"
+							placeholder="Enter the name of the disease to search"
 							value={searchQuery}
 							onChange={handleInputChange}
 							w={'20vw'}
-							marginTop={'5vh'}
+							marginTop={'1vh'}
 							marginBottom={'2vh'}
 							backgroundColor={'white'}
 							textAlign={'center'}
@@ -102,23 +132,22 @@ function Search() {
 				</form>
 
 				<Flex justifyContent={'center'}>
-					{Object.keys(patientDisease).length > 0 && (
+					{patientDisease && (
 						<Box width="50%" textAlign="center" p={4} backgroundColor="gray.100" borderRadius="md">
-							<Flex flexDirection={'column'} textAlign={'left'}>
+							<Flex flexDirection={'column'}>
 								<Text as={'b'} fontSize={'large'}>
-									{patientDisease['Preferred term']} (ORPHA code: {patientDisease['ORPHAcode']})
+									{patientDisease?.name} (ORPHA code: {patientDisease?.code})
 								</Text>
-								<Text fontSize={'large'}>{patientDisease['Definition']}</Text>
-								{/* TODO: Include treatments, symptoms, etc if available */}
+								<Text fontSize={'large'}>{patientDisease?.definition}</Text>
 								<Text marginTop={'2vh'}>
 									Frequent signs and symptoms:
 									<Link
 										color={'blue'}
-										href={'https://www.orpha.net/en/disease/sign/' + patientDisease['ORPHAcode']}
+										href={'https://www.orpha.net/en/disease/sign/' + patientDisease?.code}
 										isExternal
 									>
 										{' '}
-										{`https://www.orpha.net/en/disease/sign/${patientDisease['ORPHAcode']}`}
+										{`https://www.orpha.net/en/disease/sign/${patientDisease?.code}`}
 									</Link>
 								</Text>
 							</Flex>
@@ -126,7 +155,7 @@ function Search() {
 								<Button
 									colorScheme="blue"
 									onClick={() => {
-										navigate('/services');
+										navigate('/RQMO-7-CTG-2024/services');
 									}}
 								>
 									Are you a person affected by this disease?
@@ -135,7 +164,7 @@ function Search() {
 									backgroundColor={colors.button_text}
 									textColor={'white'}
 									onClick={() => {
-										navigate('/services');
+										navigate('/RQMO-7-CTG-2024/services');
 									}}
 								>
 									Are you a researcher?
@@ -148,7 +177,7 @@ function Search() {
 				<Flex justifyContent={'center'} alignItems={'center'} flexDirection={'column'}>
 					{diseases.map((disease) => (
 						<Box
-							key={disease['ORPHAcode']}
+							key={disease.code}
 							onClick={() => handleBoxClick(disease)}
 							cursor="pointer"
 							border="1px solid"
@@ -164,7 +193,7 @@ function Search() {
 								transform: 'scale(1.05)',
 							}}
 						>
-							{disease['Preferred term']}
+							{disease.name}
 						</Box>
 					))}
 				</Flex>

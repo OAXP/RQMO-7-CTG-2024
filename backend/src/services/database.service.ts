@@ -2,6 +2,9 @@ import { Db, MongoClient } from 'mongodb';
 import { Service } from 'typedi';
 import { mockDiseases } from '@src/utils/mock-data';
 import * as process from 'process';
+import { mockQuestions } from '@src/mock-data/questions';
+import { Disease } from '@src/interfaces/disease.interface';
+import { Question } from '@src/interfaces/Question';
 
 @Service()
 export class DatabaseService {
@@ -25,7 +28,20 @@ export class DatabaseService {
 				.collection(process.env.DATABASE_COLLECTION_DISEASES)
 				.countDocuments()) === 0
 		) {
-			await this.populateDB(process.env.DATABASE_COLLECTION_DISEASES);
+			await this.populateDB(
+				process.env.DATABASE_COLLECTION_DISEASES,
+				mockDiseases
+			);
+		}
+		if (
+			(await this.db
+				.collection(process.env.DATABASE_COLLECTION_QUESTIONS)
+				.countDocuments()) === 0
+		) {
+			await this.populateDB(
+				process.env.DATABASE_COLLECTION_QUESTIONS,
+				mockQuestions
+			);
 		}
 	}
 
@@ -33,9 +49,12 @@ export class DatabaseService {
 		return this.client.close();
 	}
 
-	async populateDB(collection: string): Promise<void> {
-		for (const disease of mockDiseases) {
-			await this.db.collection(collection).insertOne(disease);
+	async populateDB(
+		collection: string,
+		mockData: Disease[] | Question[]
+	): Promise<void> {
+		for (const data of mockData) {
+			await this.db.collection(collection).insertOne(data);
 		}
 	}
 }
