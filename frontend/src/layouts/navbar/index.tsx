@@ -51,8 +51,8 @@ export default function Navbar() {
 							</Flex>
 						</MenuButton>
 						<MenuList>
-							<MenuItem onClick={() => navigate('/services/jumelage')}>Jumelage</MenuItem>
-							<MenuItem onClick={() => navigate('/services/urgence')}>Urgence</MenuItem>
+							<MenuItem onClick={() => navigate('/RQMO-7-CTG-2024/services/pairing')}>Pairing</MenuItem>
+							<MenuItem onClick={() => navigate('/RQMO-7-CTG-2024/services/urgence')}>Emergency</MenuItem>
 						</MenuList>
 					</Menu>
 					<Flex
