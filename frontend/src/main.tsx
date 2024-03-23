@@ -11,7 +11,8 @@ import Help from '@src/pages/Help';
 import Home from '@src/pages/Home';
 import Services from '@src/pages/Services';
 import Game from '@src/pages/Game';
-import Search from "@pages/Search";
+import Search from '@pages/Search';
+import Pairing from '@src/pages/Pairing';
 
 const router = createBrowserRouter([
 	{
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
 			{
 				path: '/RQMO-7-CTG-2024/search',
 				element: <Search />,
+			},
+			{
+				path: '/RQMO-7-CTG-2024/services/pairing',
+				element: <Pairing />,
 			},
 		],
 	},

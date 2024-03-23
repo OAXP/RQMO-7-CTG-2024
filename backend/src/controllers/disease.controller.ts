@@ -64,6 +64,29 @@ export class DiseaseController {
 
 		/**
 		 * @swagger
+		 * /api/disease/random:
+		 *   get:
+		 *     summary: Get a random disease
+		 *     tags: [Disease]
+		 *     parameters: []
+		 *     responses:
+		 *       200:
+		 *         description: Successful response. Returns the random disease.
+		 *         schema:
+		 *           $ref: '#/definitions/Disease'
+		 *       500:
+		 *         description: Internal server error.
+		 */
+		this.router.get('/random', async (req: Request, res: Response) => {
+			try {
+				res.status(StatusCodes.OK).json(await this.diseaseService.getRandom());
+			} catch (e) {
+				res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(e);
+			}
+		});
+
+		/**
+		 * @swagger
 		 * /api/disease/{name}:
 		 *   get:
 		 *     summary: Get a disease by its name
