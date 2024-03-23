@@ -5,7 +5,7 @@ export default function Game() {
 	return (
 		<>
 			<Navbar />
-			<Text>Activities page</Text>
+			<Text>Game page</Text>
 		</>
 	);
 }
