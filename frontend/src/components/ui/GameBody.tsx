@@ -1,5 +1,6 @@
 import { Button, SimpleGrid } from "@chakra-ui/react";
 import IDisease from "@src/types/disease";
+import { colors } from "@src/Theme";
 
 function GameBody({ disease }: { disease: IDisease }) {
   const getSymptom = (part: string) => {
@@ -22,9 +23,15 @@ function GameBody({ disease }: { disease: IDisease }) {
   ];
 
   return (
-    <SimpleGrid columns={2} spacing={10}>
+    <SimpleGrid columns={2} spacing={10} w={"400px"}>
       {parts.map((part) => (
-        <Button key={part} onClick={() => getSymptom(part)}>
+        <Button
+          key={part}
+          onClick={() => getSymptom(part)}
+          borderColor={colors.Primary}
+          borderWidth={"2px"}
+          borderRadius={"20px"}
+        >
           {part.charAt(0).toUpperCase() + part.slice(1)}
         </Button>
       ))}

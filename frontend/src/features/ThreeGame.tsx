@@ -165,7 +165,7 @@ const ThreeGame = () => {
       )}
 
       {!isInquiring ? null : (
-        <Html position={[0, 4, 2]}>
+        <Html position={[0, 4, 3]}>
           <GameBody disease={currentDisease!} />
         </Html>
       )}

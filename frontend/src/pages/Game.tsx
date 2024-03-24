@@ -46,9 +46,9 @@ export default function Game() {
       <Navbar />
       <Box h={"full"} w={"full"}>
         <Flex>
-          <Box flex={2} p={5}>
+          {/* <Box flex={2} p={5}>
             <GameBody disease={currentDisease!} />
-          </Box>
+          </Box> */}
           <Box flex={1}>
             <Box fontWeight={"bold"}>Notebook</Box>
             <GameNotebook diseases={diseases} />
