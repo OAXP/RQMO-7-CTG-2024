@@ -1,6 +1,7 @@
 import { Flex, Text } from '@chakra-ui/react';
 import { colors } from '@src/Theme';
 import Navbar from '@src/layouts/navbar';
+import Footer from '@src/layouts/footer';
 
 export default function Emergency() {
 	return (
@@ -31,6 +32,7 @@ export default function Emergency() {
 					></iframe>
 				</Flex>
 			</Flex>
+			<Footer/>
 		</>
 	);
 }
