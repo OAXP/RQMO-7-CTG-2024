@@ -1,8 +1,6 @@
 import { Box, Button, Flex, Input } from '@chakra-ui/react';
 import Navbar from '@src/layouts/navbar';
 import GameBody from '@components/ui/GameBody';
-import { getAllDisease } from '@services/diseaseService';
-import { useQuery } from 'react-query';
 import GameNotebook from '@components/ui/GameNotebook';
 import { useRef } from 'react';
 

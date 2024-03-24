@@ -13,7 +13,16 @@ export default function Navbar() {
 			alignItems={'center'}
 			backgroundColor={colors.background}
 		>
-			<Image borderRadius={'2xl'} w={'10%'} h={'70%'} src={logo} _hover={{ cursor: 'pointer' }} onClick={() => {navigate('/home');}} />				
+			<Image
+				borderRadius={'2xl'}
+				w={'10%'}
+				h={'70%'}
+				src={logo}
+				_hover={{ cursor: 'pointer' }}
+				onClick={() => {
+					navigate('/home');
+				}}
+			/>
 			<Flex flexDirection={'column'} w={'100%'} alignItems={'center'}>
 				<Flex flexDirection={'row'} alignItems={'center'} gap={'3vw'}>
 					<Flex
@@ -69,6 +78,17 @@ export default function Navbar() {
 					>
 						<Text fontWeight={'700'} fontSize={'2xl'}>
 							Help
+						</Text>
+					</Flex>
+					<Flex
+						textColor={colors.button_text}
+						_hover={{ cursor: 'pointer' }}
+						onClick={() => {
+							navigate('/management');
+						}}
+					>
+						<Text fontWeight={'700'} fontSize={'2xl'}>
+							Admin panel
 						</Text>
 					</Flex>
 				</Flex>
