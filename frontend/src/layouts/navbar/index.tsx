@@ -54,7 +54,7 @@ export default function Navbar() {
 							<MenuItem onClick={() => navigate('/RQMO-7-CTG-2024/services/pairing')}>
 								Pairing
 							</MenuItem>
-							<MenuItem onClick={() => navigate('/RQMO-7-CTG-2024/services/urgence')}>
+							<MenuItem onClick={() => navigate('/RQMO-7-CTG-2024/services/emergency')}>
 								Emergency
 							</MenuItem>
 						</MenuList>
