@@ -22,7 +22,7 @@ export default function Contact() {
 	const form = useRef<HTMLFormElement>(null);
 	return (
 		<>
-			<Navbar/>
+			<Navbar />
 			<Flex
 				direction={'column'}
 				id={'contact'}
@@ -46,18 +46,26 @@ export default function Contact() {
 							shadow={'base'}
 							w={{ base: '100%', lg: '60%' }}
 						>
-							<Heading fontSize={{ base: '4xl', md: '5xl' }} paddingBottom={5}>Contact Us</Heading>
+							<Heading fontSize={{ base: '4xl', md: '5xl' }} paddingBottom={5}>
+								Contact Us
+							</Heading>
 							<Flex align="center">
-								<BsFillTelephoneFill/>
-								<Text fontSize={{ base: 'lg' }} fontWeight="500" ml={2}>Toll-free: 1-888-822-2854</Text>
+								<BsFillTelephoneFill />
+								<Text fontSize={{ base: 'lg' }} fontWeight="500" ml={2}>
+									Toll-free: 1-888-822-2854
+								</Text>
 							</Flex>
 							<Flex align="center">
-								<BsFillTelephoneFill/>
-								<Text fontSize={{ base: 'lg' }} fontWeight="500" ml={2}>Sherbrooke Region, Qc: (819) 943-2854</Text>
+								<BsFillTelephoneFill />
+								<Text fontSize={{ base: 'lg' }} fontWeight="500" ml={2}>
+									Sherbrooke Region, Qc: (819) 943-2854
+								</Text>
 							</Flex>
 							<Flex align="center" mb={3}>
-								<MdOutlineEmail/>
-								<Text fontSize={{ base: 'lg' }} fontWeight="500" ml={2}>info@rqmo.org</Text>
+								<MdOutlineEmail />
+								<Text fontSize={{ base: 'lg' }} fontWeight="500" ml={2}>
+									info@rqmo.org
+								</Text>
 							</Flex>
 							<form ref={form}>
 								<VStack spacing={5}>
@@ -66,30 +74,24 @@ export default function Contact() {
 
 										<Flex alignItems="flex-start" gap={4}>
 											<InputGroup>
-												<InputLeftElement
-												color={'palette.primary'}
-												children={<BsPerson />}
-												/>
+												<InputLeftElement color={'palette.primary'} children={<BsPerson />} />
 												<Input
-												type="text"
-												name="first_name"
-												placeholder="First Name"
-												focusBorderColor={'palette.primary'}
-												textColor={'palette.black'}
+													type="text"
+													name="first_name"
+													placeholder="First Name"
+													focusBorderColor={'palette.primary'}
+													textColor={'palette.black'}
 												/>
 											</InputGroup>
 
 											<InputGroup>
-												<InputLeftElement
-												color={'palette.primary'}
-												children={<BsPerson />}
-												/>
+												<InputLeftElement color={'palette.primary'} children={<BsPerson />} />
 												<Input
-												type="text"
-												name="last_name"
-												placeholder="Last Name"
-												focusBorderColor={'palette.primary'}
-												textColor={'palette.black'}
+													type="text"
+													name="last_name"
+													placeholder="Last Name"
+													focusBorderColor={'palette.primary'}
+													textColor={'palette.black'}
 												/>
 											</InputGroup>
 										</Flex>
@@ -99,10 +101,7 @@ export default function Contact() {
 										<FormLabel textColor={'palette.black'}>Email</FormLabel>
 
 										<InputGroup>
-											<InputLeftElement
-												color={'palette.primary'}
-												children={<MdOutlineEmail />}
-											/>
+											<InputLeftElement color={'palette.primary'} children={<MdOutlineEmail />} />
 											<Input
 												type="email"
 												name="user_email"
@@ -116,10 +115,7 @@ export default function Contact() {
 									<FormControl isRequired>
 										<FormLabel textColor={'palette.black'}>Telephone</FormLabel>
 										<InputGroup>
-											<InputLeftElement
-												color={'palette.primary'}
-												children={<BsTelephone />}
-											/>
+											<InputLeftElement color={'palette.primary'} children={<BsTelephone />} />
 											<Input
 												type="email"
 												name="user_email"
@@ -143,12 +139,7 @@ export default function Contact() {
 										/>
 									</FormControl>
 
-									<Button
-										colorScheme="blue"
-										background={'skyblue'}
-										w={'full'}
-										type={'submit'}
-									>
+									<Button colorScheme="blue" background={'skyblue'} w={'full'} type={'submit'}>
 										Send Message
 									</Button>
 								</VStack>
