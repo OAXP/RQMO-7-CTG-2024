@@ -3,6 +3,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { Desk } from "@src/models/Desk";
 import { Notebook } from "@src/models/Notebook";
+import { Medic } from "@src/models/Medic";
 import { Person } from "@src/models/Person";
 import { Html, PerspectiveCamera, OrbitControls } from "@react-three/drei";
 
@@ -11,59 +12,62 @@ import { colors } from "@src/Theme";
 import DiseaseManager from "@services/disease_manager";
 import IDisease from "@src/types/disease";
 import { Box, Button, Flex, Input } from "@chakra-ui/react";
+import { Computer } from "@src/models/computer";
 
-const approachValue = (value: any, target: any, step: any) => {
-  if (value < target) {
-    return Math.min(value + step, target);
-  } else {
-    return Math.max(value - step, target);
-  }
+// Utility function to smoothly transition numbers
+const approachValue = (
+  current: number,
+  target: number,
+  delta: number
+): number => {
+  const difference = target - current;
+  if (Math.abs(difference) < delta) return target;
+  return current + difference * delta;
 };
 
-const MyCamera = ({ isInquiring, ...props }: any) => {
-  const interactPersonView = {
-    x: 3,
-    y: 3,
-    z: 4,
-    lookAt: { x: -8, y: 3, z: 0 },
-  };
+// Utility function to smoothly transition Vector3 values
+const approachVector3 = (
+  current: THREE.Vector3,
+  target: THREE.Vector3,
+  delta: number
+) => {
+  current.x = approachValue(current.x, target.x, delta);
+  current.y = approachValue(current.y, target.y, delta);
+  current.z = approachValue(current.z, target.z, delta);
+};
 
-  let camPosition = { x: 6.5, y: 3.5, z: 6.5 };
+interface MyCameraProps {
+  isInquiring: boolean;
+}
+
+const MyCamera: React.FC<MyCameraProps> = ({ isInquiring }) => {
   const ref = useRef<THREE.PerspectiveCamera>(null);
+  const [lookAtTarget, setLookAtTarget] = useState(new THREE.Vector3(0, 0, 0));
+  const interactPersonView = {
+    position: new THREE.Vector3(3, 3, 4),
+    lookAt: new THREE.Vector3(-8, 3, 0),
+  };
+  const defaultPosition = new THREE.Vector3(6.5, 3.5, 6.5);
+  const defaultLookAt = new THREE.Vector3(0, 0, 0);
 
-  useFrame((state, delta) => {
+  useFrame(() => {
     if (!ref.current) return;
+    const camera = ref.current;
     if (isInquiring) {
-      ref.current.position.x = approachValue(
-        ref.current.position.x,
-        interactPersonView.x,
-        0.03
-      );
-      ref.current.position.y = approachValue(
-        ref.current.position.y,
-        interactPersonView.y,
-        0.03
-      );
-      ref.current.position.z = approachValue(
-        ref.current.position.z,
-        interactPersonView.z,
-        0.03
-      );
-
-      ref.current.lookAt(-11, 3, 0);
+      approachVector3(camera.position, interactPersonView.position, 0.03);
+      approachVector3(lookAtTarget, interactPersonView.lookAt, 0.05);
     } else {
-      ref.current.position.x = approachValue(ref.current.position.x, 6.7, 0.05);
-      ref.current.position.y = approachValue(ref.current.position.y, 3.5, 0.05);
-      ref.current.position.z = approachValue(ref.current.position.z, 6.7, 0.05);
-      ref.current.lookAt(0, 0, 0);
+      approachVector3(camera.position, defaultPosition, 0.05);
+      approachVector3(lookAtTarget, defaultLookAt, 0.05);
     }
+    camera.lookAt(lookAtTarget);
   });
 
   return (
     <PerspectiveCamera
       ref={ref}
       makeDefault
-      position={[camPosition.x, camPosition.y, camPosition.z]}
+      position={defaultPosition.toArray()}
       fov={60}
     />
   );
@@ -231,6 +235,8 @@ const ThreeGame = () => {
       </mesh>
       <Desk position={deskPosition} scale={deskScale} rotation={deskRotation} />
       <Notebook scale={[0.004, 0.004, 0.004]} position={[3, 1.6, 3]}></Notebook>
+      <Medic position={[6, 1.6, 3]} scale={0.001}></Medic>
+      <Computer position={[5, 1.6, 2]} scale={0.015}></Computer>
 
       <Person personNumber={personNumber}></Person>
       <gridHelper></gridHelper>
