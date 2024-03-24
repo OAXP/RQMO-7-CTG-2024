@@ -71,6 +71,7 @@ const MyCamera = ({ isInquiring, ...props }: any) => {
 const ThreeGame = () => {
   const [personNumber, setPersonNumber] = useState(76);
   const [isInquiring, setIsInquiring] = useState(false);
+  const [talkBox, setTalkBox] = useState("");
   const [camPosition, setCamPosition] = useState({
     x: 6.5,
     y: 3.5,
@@ -91,6 +92,13 @@ const ThreeGame = () => {
       .getRandomDisease()
       .then((disease) => setCurrentDisease(disease));
   }, []);
+
+  const talk = (text: string) => {
+    setTalkBox(text);
+    // setTimeout(() => {
+    //   setTalkBox("");
+    // }, 3000);
+  };
 
   const onSubmit = () => {
     const userDiagnosis = inputRef.current?.value ?? "";
@@ -117,6 +125,13 @@ const ThreeGame = () => {
       setPersonNumber(76);
     }
   }
+
+  const handleInquiring = () => {
+    setIsInquiring(!isInquiring);
+    if (talkBox !== "") {
+      setTalkBox("");
+    }
+  };
 
   const adjustDeskForScreenSize = () => {
     let screenScale = null;
@@ -164,9 +179,25 @@ const ThreeGame = () => {
         </Html>
       )}
 
+      {talkBox === "" ? null : (
+        <Html position={[0, 4, 5.5]}>
+          <div>
+            <Box
+              backgroundColor={colors.Primary}
+              color={"white"}
+              borderRadius={"20px"}
+              padding={"10px"}
+              w={"400px"}
+            >
+              {talkBox}
+            </Box>
+          </div>
+        </Html>
+      )}
+
       {!isInquiring ? null : (
         <Html position={[0, 4, 3]}>
-          <GameBody disease={currentDisease!} />
+          <GameBody disease={currentDisease!} talk={talk} />
         </Html>
       )}
 
@@ -179,7 +210,7 @@ const ThreeGame = () => {
           borderWidth={"2px"}
           borderRadius={"20px"}
           margin={"20px"}
-          onClick={() => setIsInquiring(!isInquiring)}
+          onClick={handleInquiring}
         >
           {isInquiring ? "Stop Inquiring" : "Start Inquiring"}
         </Button>

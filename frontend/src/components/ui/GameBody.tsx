@@ -2,10 +2,14 @@ import { Button, SimpleGrid } from "@chakra-ui/react";
 import IDisease from "@src/types/disease";
 import { colors } from "@src/Theme";
 
-function GameBody({ disease }: { disease: IDisease }) {
+function GameBody({ talk, ...props }: any) {
   const getSymptom = (part: string) => {
-    const symptom = disease.symptoms.find((s) => s.part === part);
-    window.alert(symptom ? symptom.description : "I don't feel anything here.");
+    const symptom = props.disease.symptoms.find((s) => s.part === part);
+    talk(
+      symptom
+        ? `My ${part}... ${symptom.description}.`
+        : `My ${part}... I don't feel anything here.`
+    );
     return symptom ? symptom.description : "I don't feel anything here.";
   };
 
