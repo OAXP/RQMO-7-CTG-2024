@@ -19,6 +19,7 @@ To use this project, follow these steps:
 2. Set up GitHub Pages with the build and deployment source set to GitHub Actions.
 3. Go to Actions > General and grant the workflow permissions to read repository contents and packages.
 4. Update the step called "Set Git user name and email" in the `.github/workflows/deployment.yml` file with the correct credentials associated with your GitHub account to trigger the deployment
+5. Modify the homepage attribute in the `frontend/package.json`with the url provided by Github on pages
 
 ## Project Structure
 
