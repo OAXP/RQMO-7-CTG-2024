@@ -1,6 +1,7 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import { Box, Input, Flex, Text, Button, Link, useToast } from '@chakra-ui/react';
 import Navbar from '@src/layouts/navbar';
+import Footer from '@src/layouts/footer';
 import { colors } from '@src/Theme';
 import { useNavigate } from 'react-router-dom';
 import { ORPHAdisease } from '@src/interfaces/ORPHAdisease';
@@ -208,6 +209,7 @@ function Search() {
 					))}
 				</Flex>
 			</Flex>
+			<Footer />
 		</>
 	);
 }

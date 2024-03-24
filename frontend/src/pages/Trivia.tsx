@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, Button, VStack, Box, Flex, Spinner } from '@chakra-ui/react';
 import { colors } from '@src/Theme';
 import Navbar from '@src/layouts/navbar';
+import Footer from '@src/layouts/footer';
 import { useNavigate } from 'react-router-dom';
 import { Question } from '@src/interfaces/Question';
 import QuestionManager from '@services/question_manager';
@@ -151,6 +152,7 @@ export default function Trivia() {
 					</Box>
 				)}
 			</VStack>
+			<Footer />
 		</>
 	);
 }

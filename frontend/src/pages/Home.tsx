@@ -1,5 +1,6 @@
 import { Flex, Text, Image, Button, List, ListItem } from '@chakra-ui/react';
 import Navbar from '@src/layouts/navbar';
+import Footer from '@src/layouts/footer';
 import { colors } from '@src/Theme';
 import zebra from '@assets/images/zebra.jpg';
 import aboutus from '@assets/images/aboutus.png';
@@ -10,8 +11,12 @@ import joseph from '@assets/images/joseph.png';
 import ouellette from '@assets/images/ouellette.png';
 import younes from '@assets/images/younes.png';
 import yergeau from '@assets/images/yergeau.png';
+import donation from '@assets/images/donation.jpg';
+import gameHome from '@assets/images/game-homepage.jpg';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
+	const navigate = useNavigate();
 	return (
 		<>
 			<Navbar />
@@ -46,6 +51,9 @@ export default function Home() {
 								borderWidth={'2px'}
 								borderRadius={'20px'}
 								marginBottom={'20px'}
+								onClick={() => {
+									navigate('/RQMO-7-CTG-2024/search');
+								}}
 							>
 								<Text color={colors.Primary} fontWeight={'400'} fontSize={'3xl'}>
 									Learn more
@@ -66,7 +74,7 @@ export default function Home() {
 					>
 						<Flex direction={'column'} w={'50%'} gap={'5vh'}>
 							<Text color={colors.Primary} fontWeight={'700'} fontSize={'6xl'}>
-								About us
+								About Us
 							</Text>
 							<Flex direction={'column'}>
 								<Text fontWeight={'400'} fontSize={'3xl'}>
@@ -108,7 +116,7 @@ export default function Home() {
 						<Image borderRadius={'2xl'} w={'40%'} h={'100%'} src={target} />
 						<Flex direction={'column'} w={'50%'} gap={'5vh'}>
 							<Text color={colors.Primary} fontWeight={'700'} fontSize={'6xl'}>
-								Our mission
+								Our Mission
 							</Text>
 							<Flex direction={'column'}>
 								<List styleType="disc" fontWeight={'400'} fontSize={'3xl'}>
@@ -125,7 +133,7 @@ export default function Home() {
 						</Flex>
 					</Flex>
 				</Flex>
-				<Flex direction={'column'} alignItems={'center'}>
+				<Flex marginTop={'10vh'} marginBottom={'10vh'} direction={'column'} alignItems={'center'}>
 					<Flex direction={'column'} w={'100%'} gap={'5vh'} alignItems={'center'}>
 						<Text color={colors.Primary} fontWeight={'700'} fontSize={'6xl'}>
 							Our Team
@@ -188,7 +196,87 @@ export default function Home() {
 						</Flex>
 					</Flex>
 				</Flex>
+				<Flex direction={'column'} alignItems={'center'}>
+					<Flex
+						marginTop={'10vh'}
+						marginBottom={'10vh'}
+						direction={'row'}
+						justifyContent={'space-between'}
+						w={'80%'}
+					>
+						<Flex direction={'column'} w={'50%'} gap={'5vh'}>
+							<Text color={colors.Primary} fontWeight={'700'} fontSize={'6xl'}>
+								Donations
+							</Text>
+							<Flex direction={'column'}>
+								<Text fontWeight={'400'} fontSize={'3xl'}>
+									Help us make a difference to people with a rare disease ! Donating to the RQMO
+									helps us pursue our mission which is to support and inform all people affected by
+									rare diseases in Quebec
+								</Text>
+							</Flex>
+							<Button
+								_hover={{ backgroundColor: 'transparent' }}
+								backgroundColor={'white'}
+								width={'35%'}
+								borderColor={colors.Primary}
+								borderWidth={'2px'}
+								borderRadius={'20px'}
+								marginBottom={'20px'}
+								onClick={() => {
+									navigate('/RQMO-7-CTG-2024/help');
+								}}
+							>
+								<Text color={colors.Primary} fontWeight={'400'} fontSize={'3xl'}>
+									Make a Donation
+								</Text>
+							</Button>
+						</Flex>
+
+						<Image borderRadius={'2xl'} w={'40%'} h={'100%'} src={donation} />
+					</Flex>
+				</Flex>
+				<Flex direction={'column'} alignItems={'center'}>
+					<Flex
+						marginTop={'10vh'}
+						marginBottom={'15vh'}
+						direction={'row'}
+						justifyContent={'space-between'}
+						w={'80%'}
+					>
+						<Image borderRadius={'2xl'} w={'40%'} h={'100%'} src={gameHome} />
+						<Flex direction={'column'} w={'50%'} gap={'5vh'}>
+							<Text color={colors.Primary} fontWeight={'700'} fontSize={'6xl'}>
+								Game
+							</Text>
+							<Flex direction={'column'}>
+								<Text fontWeight={'400'} fontSize={'3xl'}>
+									Do you want to know what does the reality of a rare disease diagnosis looks like ?{' '}
+									<br />
+									Try our interactive game !
+								</Text>
+							</Flex>
+							<Button
+								_hover={{ backgroundColor: 'transparent' }}
+								backgroundColor={'white'}
+								width={'35%'}
+								borderColor={colors.Primary}
+								borderWidth={'2px'}
+								borderRadius={'20px'}
+								marginBottom={'20px'}
+								onClick={() => {
+									navigate('/RQMO-7-CTG-2024/game');
+								}}
+							>
+								<Text color={colors.Primary} fontWeight={'400'} fontSize={'3xl'}>
+									Play here
+								</Text>
+							</Button>
+						</Flex>
+					</Flex>
+				</Flex>
 			</Flex>
+			<Footer />
 		</>
 	);
 }
