@@ -92,17 +92,6 @@ export default function Navbar() {
 							Help
 						</Text>
 					</Flex>
-					<Flex
-						textColor={colors.button_text}
-						_hover={{ cursor: 'pointer' }}
-						onClick={() => {
-							navigate('/management');
-						}}
-					>
-						<Text fontWeight={'700'} fontSize={'2xl'}>
-							Admin panel
-						</Text>
-					</Flex>
 				</Flex>
 			</Flex>
 			<Flex

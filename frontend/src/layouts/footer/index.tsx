@@ -60,6 +60,17 @@ export default function Footer() {
 							Youtube
 						</Text>
 					</Flex>
+					<Flex
+						textColor={colors.button_text}
+						_hover={{ cursor: 'pointer' }}
+						onClick={() => {
+							navigate('/RQMO-7-CTG-2024/management');
+						}}
+					>
+						<Text fontWeight={'700'} fontSize={'2xl'}>
+							Admin panel
+						</Text>
+					</Flex>
 				</Flex>
 			</Flex>
 			<Flex
@@ -68,15 +79,7 @@ export default function Footer() {
 				textColor={colors.button_text}
 				_hover={{ cursor: 'pointer' }}
 			>
-				<Text
-					fontWeight={'500'}
-					fontSize={'2xl'}
-					onClick={() => {
-						navigate('/RQMO-7-CTG-2024/contact');
-					}}
-				>
-					Contact us
-				</Text>
+				<Text fontWeight={'500'} fontSize={'2xl'}></Text>
 			</Flex>
 		</Flex>
 	);

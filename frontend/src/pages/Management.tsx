@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
-import { deleteDisease, getAllDisease } from '@services/diseaseService';
+import DiseaseManager from '@services/disease_manager';
 import { Disease } from '@src/interfaces/Disease';
 import Navbar from '@src/layouts/navbar';
 import { colors } from '@src/Theme';
 
 export default function DiseasesList() {
 	const [diseases, setDiseases] = useState<Disease[]>([]);
-
+	const diseaseManager = new DiseaseManager();
 	useEffect(() => {
-		getAllDisease().then((diseases) => {
+		diseaseManager.getAllDiseases().then((diseases) => {
 			setDiseases(diseases);
 		});
 	}, []);
 
 	const handleDelete = (name: string) => {
-		deleteDisease(name).then(() => {
+		diseaseManager.deleteDisease(name).then(() => {
 			setDiseases(diseases.filter((disease) => disease.name !== name));
 		});
 	};

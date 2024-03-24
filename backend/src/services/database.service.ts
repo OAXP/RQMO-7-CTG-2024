@@ -1,10 +1,10 @@
 import { Db, MongoClient } from 'mongodb';
 import { Service } from 'typedi';
-import { mockDiseases } from '@src/utils/mock-data';
 import * as process from 'process';
 import { mockQuestions } from '@src/mock-data/questions';
 import { Disease } from '@src/interfaces/Disease';
 import { Question } from '@src/interfaces/Question';
+import { mockDiseases } from '@src/mock-data/diseases';
 
 @Service()
 export class DatabaseService {

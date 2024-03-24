@@ -1,17 +1,18 @@
-import { Dispatch, ReactNode, SetStateAction } from 'react';
+import { ReactNode, useContext } from 'react';
 import PasswordPage from '@pages/Password-prompt';
+import RootContext from '@hooks/RootContext';
+import { RootContextType } from '@src/interfaces/RootContextType';
 
 interface Props {
 	children: ReactNode;
-	isPasswordValid: boolean;
-	setIsPasswordValid: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function ProtectedRoute(props: Props) {
-	const { children, isPasswordValid, setIsPasswordValid } = props;
+	const { children } = props;
+	const { isPasswordValid } = useContext<RootContextType>(RootContext);
 
 	if (!isPasswordValid) {
-		return <PasswordPage setIsPasswordValid={setIsPasswordValid} />;
+		return <PasswordPage />;
 	}
 	return <>{children}</>;
 }

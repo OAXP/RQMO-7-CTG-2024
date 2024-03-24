@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
 	Box,
 	Button,
@@ -8,23 +8,24 @@ import {
 	Text,
 	useToast,
 } from '@chakra-ui/react';
-import { validateAdminPassword } from '@services/authenticationService';
+import AuthenticationManager from '@services/authenticationService';
 import Navbar from '@src/layouts/navbar';
 import { colors } from '@src/Theme';
 import { ViewIcon, ViewOffIcon } from '@saas-ui/react';
+import RootContext from '@hooks/RootContext';
+import { RootContextType } from '@src/interfaces/RootContextType';
 
-interface Props {
-	setIsPasswordValid: Dispatch<SetStateAction<boolean>>;
-}
-
-export default function PasswordPage(props: Props) {
-	const { setIsPasswordValid } = props;
+export default function PasswordPage() {
+	const { setIsPasswordValid } = useContext<RootContextType>(RootContext);
 	const [passwordInput, setPasswordInput] = useState('');
 	const [showPassword, setShowPassword] = useState(false);
 	const toast = useToast();
+	const authenticationManager = new AuthenticationManager();
 
 	const handleSubmit = async () => {
-		const res = await validateAdminPassword(passwordInput);
+		console.log('submit');
+		const res = await authenticationManager.validateAdminPassword(passwordInput);
+		console.log('submit end');
 		const isValid = res === 'Authentication successful';
 		setIsPasswordValid(isValid);
 		if (!isValid) {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Box, Button, Flex, FormLabel, Input, Select, useToast } from '@chakra-ui/react';
-import { addDisease, getDiseaseByName, updateDisease } from '@services/diseaseService';
+import DiseaseManager from '@services/disease_manager';
 import Navbar from '@src/layouts/navbar';
 
 const bodyParts = ['Head', 'Neck', 'Chest', 'Abdomen', 'Back', 'Arms', 'Leg', 'Belly'];
@@ -28,6 +28,7 @@ export default function DiseaseCreation() {
 	const { name } = useParams<{ name: string }>();
 	const toast = useToast();
 	const navigate = useNavigate();
+	const diseaseManager = new DiseaseManager();
 	const [disease, setDisease] = useState<Disease>({
 		type: 'rare',
 		gene_sequences: [],
@@ -39,7 +40,7 @@ export default function DiseaseCreation() {
 
 	useEffect(() => {
 		if (name) {
-			(getDiseaseByName(name) as Promise<Disease>).then((disease) => {
+			(diseaseManager.getDiseaseByName(name) as Promise<Disease>).then((disease) => {
 				setDisease(disease);
 				fillSymptoms(disease);
 			});
@@ -100,9 +101,9 @@ export default function DiseaseCreation() {
 			return;
 		}
 		if (name) {
-			await updateDisease(updatedDisease, name);
+			await diseaseManager.updateDisease(updatedDisease, name);
 		} else {
-			await addDisease(updatedDisease);
+			await diseaseManager.addDisease(updatedDisease);
 		}
 		navigate('/');
 	};

@@ -20,7 +20,7 @@ export class Application {
 	constructor(
 		private readonly exampleController: ExampleController,
 		private readonly diseaseController: DiseaseController,
-		private readonly authenticationController: AuthenticationController
+		private readonly authenticationController: AuthenticationController,
 		private readonly questionController: QuestionController
 	) {
 		this.app = express();
