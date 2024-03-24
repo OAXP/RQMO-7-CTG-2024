@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, Button, VStack, Box, Flex, Spinner } from '@chakra-ui/react';
 import { colors } from '@src/Theme';
 import Navbar from '@src/layouts/navbar';
+import Footer from '@src/layouts/footer';
 import { useNavigate } from 'react-router-dom';
 import { Question } from '@src/interfaces/Question';
 import QuestionManager from '@services/question_manager';
@@ -39,7 +40,8 @@ export default function Trivia() {
 				{
 					question: questions[currentQuestionIndex].question,
 					userAnswer: questions[currentQuestionIndex].answers[answerIndex],
-					correctAnswer: questions[currentQuestionIndex].answers[questions[currentQuestionIndex].correct],
+					correctAnswer:
+						questions[currentQuestionIndex].answers[questions[currentQuestionIndex].correct],
 				},
 			]);
 		}
@@ -59,15 +61,22 @@ export default function Trivia() {
 	return (
 		<>
 			<Navbar />
-			<VStack spacing={8} align="center" backgroundColor={colors.background} height={'100vh'}>
+			<VStack spacing={8} align="center" backgroundColor={colors.background} minH={'90vh'}>
 				{!startedTrivia ? (
 					<Box marginTop={8}>
-						<Text fontSize={'xx-large'} as={'b'} color={'darkslategrey'} marginTop={'2vh'} marginBottom={5}>
+						<Text
+							fontSize={'xx-large'}
+							as={'b'}
+							color={'darkslategrey'}
+							marginTop={'2vh'}
+							marginBottom={5}
+						>
 							Welcome to the Rare Disease Trivia!
 						</Text>
-						<Flex flexDirection={"column"}>
+						<Flex flexDirection={'column'}>
 							<Text fontSize="lg" marginBottom={3} as={'b'}>
-								The goal of this trivia is to raise awareness and help you better understand rare diseases.
+								The goal of this trivia is to raise awareness and help you better understand rare
+								diseases.
 							</Text>
 							<Button colorScheme="blue" onClick={startTrivia} width={'10vw'}>
 								Start the quiz
@@ -75,7 +84,7 @@ export default function Trivia() {
 						</Flex>
 					</Box>
 				) : loading ? (
-					<Spinner size="xl" />
+					<Spinner size="xl" marginTop={'32vh'} />
 				) : showScore ? (
 					<Box p={8} borderWidth="1px" borderRadius="lg">
 						<Text fontSize="2xl" fontWeight="bold" mb={4}>
@@ -87,10 +96,19 @@ export default function Trivia() {
 									Incorrect Answers:
 								</Text>
 								{incorrectAnswers.map((incorrectAnswer, index) => (
-									<Box key={index} p={4} borderWidth="1px" borderRadius="lg">
-										<Text fontSize="lg">Question: {incorrectAnswer.question}</Text>
-										<Text fontSize="lg">Your Answer: {incorrectAnswer.userAnswer}</Text>
-										<Text fontSize="lg">Correct Answer: {incorrectAnswer.correctAnswer}</Text>
+									<Box
+										borderRadius="lg"
+										key={index}
+										p={2}
+										backgroundColor={'gray.100'}
+										width={'100%'}
+									>
+										<Text as={'b'}>Question: </Text>
+										<Text>{incorrectAnswer.question}</Text>
+										<Text as={'b'}>Your Answer: </Text>
+										<Text>{incorrectAnswer.userAnswer}</Text>
+										<Text as={'b'}>Correct Answer: </Text>
+										<Text>{incorrectAnswer.correctAnswer}</Text>
 									</Box>
 								))}
 							</VStack>
@@ -134,6 +152,7 @@ export default function Trivia() {
 					</Box>
 				)}
 			</VStack>
+			<Footer />
 		</>
 	);
 }

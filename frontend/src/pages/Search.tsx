@@ -1,6 +1,7 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import { Box, Input, Flex, Text, Button, Link, useToast } from '@chakra-ui/react';
 import Navbar from '@src/layouts/navbar';
+import Footer from '@src/layouts/footer';
 import { colors } from '@src/Theme';
 import { useNavigate } from 'react-router-dom';
 import { ORPHAdisease } from '@src/interfaces/ORPHAdisease';
@@ -10,7 +11,7 @@ function Search() {
 	const [diseases, setDiseases] = useState<ORPHAdisease[]>([]);
 	const [patientDisease, setPatientDisease] = useState<ORPHAdisease | null>(null);
 	const navigate = useNavigate();
-	const toast = useToast()
+	const toast = useToast();
 
 	function search() {
 		fetch(`https://api.orphacode.org/EN/ClinicalEntity/ApproximateName/${searchQuery}`, {
@@ -29,7 +30,7 @@ function Search() {
 						status: 'error',
 						duration: 8000,
 						isClosable: true,
-					})
+					});
 					return;
 				}
 				if (data.length === 1) {
@@ -114,7 +115,7 @@ function Search() {
 			>
 				<Box
 					position="absolute"
-					top="30%"
+					top="35%"
 					left="55%"
 					transform="translate(-50%, -50%)"
 					background={'#e9ded9'}
@@ -125,7 +126,7 @@ function Search() {
 				/>
 				<form onSubmit={handleSubmit}>
 					<Flex justifyContent={'center'} alignItems={'center'} flexDirection={'column'}>
-						<Text fontSize={'xxx-large'} as={'b'} color={'darkslategrey'} marginTop={'2vh'}>
+						<Text fontSize={'xxx-large'} as={'b'} color={'darkslategrey'} marginTop={'6vh'}>
 							Rare Disease from A to Z
 						</Text>
 						<Input
@@ -136,16 +137,15 @@ function Search() {
 							marginTop={'1vh'}
 							marginBottom={'2vh'}
 							backgroundColor={'white'}
-							textAlign={'center'}
 						/>
 					</Flex>
 				</form>
 
 				<Flex justifyContent={'center'}>
 					{patientDisease && (
-						<Box width="50%" textAlign="center" p={4} backgroundColor="gray.100" borderRadius="md">
+						<Box width="50%" p={4} backgroundColor="gray.100" borderRadius="md">
 							<Flex flexDirection={'column'}>
-								<Text as={'b'} fontSize={'large'}>
+								<Text as={'b'} fontSize={'large'} textAlign={'center'}>
 									{patientDisease?.name} (ORPHA code: {patientDisease?.code})
 								</Text>
 								<Text fontSize={'large'}>{patientDisease?.definition}</Text>
@@ -176,6 +176,7 @@ function Search() {
 									onClick={() => {
 										navigate('/RQMO-7-CTG-2024/services');
 									}}
+									_hover={{ backgroundColor: 'red' }}
 								>
 									Are you a researcher?
 								</Button>
@@ -208,6 +209,7 @@ function Search() {
 					))}
 				</Flex>
 			</Flex>
+			<Footer />
 		</>
 	);
 }

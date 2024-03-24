@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import { SERVER_URL, dataInterface } from './constant';
+import { dataInterface } from './constant';
 
+const SERVER_URL = process.env.NODE_ENV === 'production' ? 'https://api.rakotoarivony.ca' : 'http://localhost:3000';
 export const HTTPInterface = {
 	SERVER_URL: `${SERVER_URL}/api`,
 
