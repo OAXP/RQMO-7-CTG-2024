@@ -36,7 +36,7 @@ export function Person({ personNumber, ...props }: any) {
             material={materials.Material}
             position={[-200, 0, -100]}
             rotation={[-Math.PI / 2, 0, 0]}
-            scale={181.711}
+            scale={100}
           />
           <mesh
             castShadow

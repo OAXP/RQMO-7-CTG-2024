@@ -163,7 +163,7 @@ const ThreeGame = () => {
               borderRadius={"20px"}
             />
             <Button
-              _hover={{ backgroundColor: colors.button_hover }}
+              _hover={{ backgroundColor: colors.Primary, color: "white" }}
               backgroundColor={"white"}
               borderColor={colors.Primary}
               borderWidth={"2px"}
@@ -205,16 +205,20 @@ const ThreeGame = () => {
 
       <Html position={[0, 4.5, 4]}>
         <Button
-          _hover={{ backgroundColor: colors.button_hover }}
+          _hover={{
+            backgroundColor: isInquiring ? "red" : colors.Primary,
+            color: "white",
+          }}
           backgroundColor={"white"}
           width={"100%"}
-          borderColor={colors.Primary}
+          borderColor={isInquiring ? "red" : colors.Primary}
           borderWidth={"2px"}
           borderRadius={"10px"}
           margin={"20px"}
+          color={isInquiring ? "red" : ""}
           onClick={handleInquiring}
         >
-          {isInquiring ? "Stop Inquiring" : "Start Inquiring"}
+          {isInquiring ? "X" : "Talk to Patient"}
         </Button>
       </Html>
 

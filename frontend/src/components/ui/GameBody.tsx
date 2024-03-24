@@ -32,9 +32,10 @@ function GameBody({ talk, ...props }: any) {
     <SimpleGrid columns={2} spacing={10} w={"400px"}>
       {parts.map((part) => (
         <Button
+          _hover={{ backgroundColor: colors.background }}
           key={part}
           onClick={() => getSymptom(part)}
-          borderColor={colors.Primary}
+          borderColor={colors.background}
           borderWidth={"2px"}
           borderRadius={"20px"}
         >
