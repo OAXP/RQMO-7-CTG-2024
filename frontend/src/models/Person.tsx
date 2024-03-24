@@ -22,7 +22,7 @@ export function Person({ personNumber, ...props }: any) {
     new THREE.Color("skyblue"),
   ];
 
-  let color = colors[Math.floor(Math.random() * colors.length)];
+  let color = colors[personNumber % colors.length];
 
   const { nodes, materials } = useGLTF(peopleScene);
   return (
