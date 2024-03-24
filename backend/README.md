@@ -1,2 +1,17 @@
 # RQMO TEAM 7
-This is Team 7's project for RQMO. Code to Give 2024 Hackathon - Morgan Stanley.
+
+## Prerequisites  
+
+- Docker ([how to install Docker]())
+**OR**
+- node
+- npm
+
+## How to use Docker for the development env
+
+1) Rename `.env.dist` as `.env`.  
+2) Run 
+```sh
+docker compose up
+```
+3) Voila

@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+    rqmo7:
+        build:
+            context: .
+            target: development
+        ports:
+            - 3000:3000
+        volumes:
+            - .:/app
+        env_file:
+            - .env
+        depends_on:
+            - db
+        entrypoint: ['npm', 'run', 'start']
+    db:
+        container_name: db
+        image: mongo
+        ports:
+        - '27017:27017'
+        volumes: 
+        - ./data:/data/db
+    mongo-express:
+        container_name: mongo-express
+        image: mongo-express
+        depends_on:
+            - db
+        links:
+          - db
+        environment:
+            - ME_CONFIG_MONGODB_URL=${DATABASE_URL}
+            - ME_CONFIG_BASICAUTH_USERNAME=admin
+            - ME_CONFIG_BASICAUTH_PASSWORD=test
+        ports:
+            - '8081:8081'

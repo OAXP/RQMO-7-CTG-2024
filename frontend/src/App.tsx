@@ -24,6 +24,7 @@ const routes = [
 ];
 
 const queryClient = new QueryClient();
+import { Outlet } from 'react-router-dom';
 
 function App() {
 	const [isPasswordValid, setIsPasswordValid] = useState<boolean>(false);
@@ -72,6 +73,7 @@ function App() {
 					</Routes>
 				</BrowserRouter>
 			</QueryClientProvider>
+			<Outlet />
 		</Suspense>
 	);
 }
