@@ -50,9 +50,13 @@ export default function Navbar() {
 								<Icon as={FiChevronDown} mt="3" />
 							</Flex>
 						</MenuButton>
-						<MenuList>
-							<MenuItem onClick={() => navigate('/services/jumelage')}>Jumelage</MenuItem>
-							<MenuItem onClick={() => navigate('/services/urgence')}>Urgence</MenuItem>
+						<MenuList zIndex={2}>
+							<MenuItem onClick={() => navigate('/RQMO-7-CTG-2024/services/pairing')}>
+								Pairing
+							</MenuItem>
+							<MenuItem onClick={() => navigate('/RQMO-7-CTG-2024/services/emergency')}>
+								Emergency
+							</MenuItem>
 						</MenuList>
 					</Menu>
 					<Flex
