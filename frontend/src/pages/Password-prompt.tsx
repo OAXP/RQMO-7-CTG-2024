@@ -23,9 +23,7 @@ export default function PasswordPage() {
 	const authenticationManager = new AuthenticationManager();
 
 	const handleSubmit = async () => {
-		console.log('submit');
 		const res = await authenticationManager.validateAdminPassword(passwordInput);
-		console.log('submit end');
 		const isValid = res === 'Authentication successful';
 		setIsPasswordValid(isValid);
 		if (!isValid) {
