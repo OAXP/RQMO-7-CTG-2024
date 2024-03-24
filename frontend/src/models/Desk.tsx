@@ -5,6 +5,7 @@ License: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 Source: https://sketchfab.com/3d-models/desk-c3ac11f22b6542c7a9205d93f38cf683
 Title: Desk
 */
+import * as THREE from "three";
 
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
@@ -19,7 +20,7 @@ export function Desk(props: any) {
           <mesh
             castShadow
             receiveShadow
-            geometry={nodes.defaultMaterial.geometry}
+            geometry={(nodes.defaultMaterial as THREE.Mesh).geometry}
             material={materials["1001"]}
             position={[-11.475, -1.808, 6.633]}
             rotation={[-Math.PI, 0, -Math.PI]}

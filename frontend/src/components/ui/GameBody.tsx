@@ -4,7 +4,9 @@ import { colors } from "@src/Theme";
 
 function GameBody({ talk, ...props }: any) {
   const getSymptom = (part: string) => {
-    const symptom = props.disease.symptoms.find((s) => s.part === part);
+    const symptom = props.disease.symptoms.find(
+      (s: IDisease & { part: string }) => s.part === part
+    );
     talk(
       symptom
         ? `My ${part}... ${symptom.description}.`

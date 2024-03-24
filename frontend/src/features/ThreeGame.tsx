@@ -29,9 +29,10 @@ const MyCamera = ({ isInquiring, ...props }: any) => {
   };
 
   let camPosition = { x: 6.5, y: 3.5, z: 6.5 };
-  const ref = useRef();
+  const ref = useRef<THREE.PerspectiveCamera>(null);
 
   useFrame((state, delta) => {
+    if (!ref.current) return;
     if (isInquiring) {
       ref.current.position.x = approachValue(
         ref.current.position.x,
@@ -49,7 +50,7 @@ const MyCamera = ({ isInquiring, ...props }: any) => {
         0.03
       );
 
-      ref.current.lookAt(-8, 3, 0);
+      ref.current.lookAt(-11, 3, 0);
     } else {
       ref.current.position.x = approachValue(ref.current.position.x, 6.7, 0.05);
       ref.current.position.y = approachValue(ref.current.position.y, 3.5, 0.05);
@@ -95,9 +96,6 @@ const ThreeGame = () => {
 
   const talk = (text: string) => {
     setTalkBox(text);
-    // setTimeout(() => {
-    //   setTalkBox("");
-    // }, 3000);
   };
 
   const onSubmit = () => {
@@ -169,7 +167,7 @@ const ThreeGame = () => {
               backgroundColor={"white"}
               borderColor={colors.Primary}
               borderWidth={"2px"}
-              borderRadius={"20px"}
+              borderRadius={"10px"}
               margin={"10px"}
               p={5}
               onClick={() => {
@@ -177,7 +175,7 @@ const ThreeGame = () => {
                 handlePersonNumberChange();
               }}
             >
-              Submit and call the next client
+              Diagnose
             </Button>
           </Flex>
         </Html>
@@ -212,7 +210,7 @@ const ThreeGame = () => {
           width={"100%"}
           borderColor={colors.Primary}
           borderWidth={"2px"}
-          borderRadius={"20px"}
+          borderRadius={"10px"}
           margin={"20px"}
           onClick={handleInquiring}
         >

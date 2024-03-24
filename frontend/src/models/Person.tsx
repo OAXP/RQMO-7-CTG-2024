@@ -32,7 +32,7 @@ export function Person({ personNumber, ...props }: any) {
           <mesh
             castShadow
             receiveShadow
-            geometry={nodes.Plane_Material_0.geometry}
+            geometry={(nodes.Plane_Material_0 as THREE.Mesh).geometry}
             material={materials.Material}
             position={[-200, 0, -100]}
             rotation={[-Math.PI / 2, 0, 0]}
@@ -41,7 +41,9 @@ export function Person({ personNumber, ...props }: any) {
           <mesh
             castShadow
             receiveShadow
-            geometry={nodes[`${personNumber}_person__0`].geometry}
+            geometry={
+              (nodes[`${personNumber}_person__0`] as THREE.Mesh).geometry
+            }
             material={materials["273_person__0"]}
             position={[0, 0, 70]}
             rotation={[-Math.PI / 2, 0, 2 * Math.PI]}
