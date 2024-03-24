@@ -84,7 +84,7 @@ export default function Trivia() {
 						</Flex>
 					</Box>
 				) : loading ? (
-					<Spinner size="xl" />
+					<Spinner size="xl" marginTop={'32vh'} />
 				) : showScore ? (
 					<Box p={8} borderWidth="1px" borderRadius="lg">
 						<Text fontSize="2xl" fontWeight="bold" mb={4}>

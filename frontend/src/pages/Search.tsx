@@ -115,7 +115,7 @@ function Search() {
 			>
 				<Box
 					position="absolute"
-					top="30%"
+					top="35%"
 					left="55%"
 					transform="translate(-50%, -50%)"
 					background={'#e9ded9'}
@@ -126,7 +126,7 @@ function Search() {
 				/>
 				<form onSubmit={handleSubmit}>
 					<Flex justifyContent={'center'} alignItems={'center'} flexDirection={'column'}>
-						<Text fontSize={'xxx-large'} as={'b'} color={'darkslategrey'} marginTop={'2vh'}>
+						<Text fontSize={'xxx-large'} as={'b'} color={'darkslategrey'} marginTop={'6vh'}>
 							Rare Disease from A to Z
 						</Text>
 						<Input
