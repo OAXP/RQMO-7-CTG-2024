@@ -1,4 +1,4 @@
-import { Disease } from '@src/interfaces/disease.interface';
+import { Disease } from '@src/interfaces/Disease';
 
 export const mockDiseases: Disease[] = [
 	{
