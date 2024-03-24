@@ -13,6 +13,16 @@ import DiseaseManager from "@services/disease_manager";
 import IDisease from "@src/types/disease";
 import { Box, Button, Flex, Input } from "@chakra-ui/react";
 import { Computer } from "@src/models/computer";
+import GameButton from "@src/components/ui/GameButton";
+import Game from "@src/pages/Game";
+
+enum CameraState {
+  DEFAULT,
+  INQUIRING,
+  COMPUTER,
+  MEDICAL,
+  NOTEBOOK,
+}
 
 // Utility function to smoothly transition numbers
 const approachValue = (
@@ -37,10 +47,10 @@ const approachVector3 = (
 };
 
 interface MyCameraProps {
-  isInquiring: boolean;
+  cameraState: CameraState;
 }
 
-const MyCamera: React.FC<MyCameraProps> = ({ isInquiring }) => {
+const MyCamera: React.FC<MyCameraProps> = ({ cameraState }) => {
   const ref = useRef<THREE.PerspectiveCamera>(null);
   const [lookAtTarget, setLookAtTarget] = useState(new THREE.Vector3(0, 0, 0));
   const interactPersonView = {
@@ -50,16 +60,47 @@ const MyCamera: React.FC<MyCameraProps> = ({ isInquiring }) => {
   const defaultPosition = new THREE.Vector3(6.5, 3.5, 6.5);
   const defaultLookAt = new THREE.Vector3(0, 0, 0);
 
+  const computerView = {
+    position: new THREE.Vector3(4.8, 2.3, 3),
+    lookAt: new THREE.Vector3(4.5, 1, 0),
+  };
+
+  const medicalView = {
+    position: new THREE.Vector3(6, 3, 4),
+    lookAt: new THREE.Vector3(6, -4, 0),
+  };
+
+  const notebookView = {
+    position: new THREE.Vector3(2.7, 3.9, 3),
+    lookAt: new THREE.Vector3(4, -4, 0),
+  };
+
   useFrame(() => {
     if (!ref.current) return;
     const camera = ref.current;
-    if (isInquiring) {
-      approachVector3(camera.position, interactPersonView.position, 0.03);
-      approachVector3(lookAtTarget, interactPersonView.lookAt, 0.05);
-    } else {
-      approachVector3(camera.position, defaultPosition, 0.05);
-      approachVector3(lookAtTarget, defaultLookAt, 0.05);
+    switch (cameraState) {
+      case CameraState.INQUIRING:
+        approachVector3(camera.position, interactPersonView.position, 0.03);
+        approachVector3(lookAtTarget, interactPersonView.lookAt, 0.05);
+        break;
+      case CameraState.COMPUTER:
+        approachVector3(camera.position, computerView.position, 0.03);
+        approachVector3(lookAtTarget, computerView.lookAt, 0.05);
+        break;
+      case CameraState.MEDICAL:
+        approachVector3(camera.position, medicalView.position, 0.03);
+        approachVector3(lookAtTarget, medicalView.lookAt, 0.05);
+        break;
+      case CameraState.NOTEBOOK:
+        approachVector3(camera.position, notebookView.position, 0.03);
+        approachVector3(lookAtTarget, notebookView.lookAt, 0.05);
+        break;
+      default:
+        approachVector3(camera.position, defaultPosition, 0.03);
+        approachVector3(lookAtTarget, defaultLookAt, 0.05);
+        break;
     }
+
     camera.lookAt(lookAtTarget);
   });
 
@@ -74,8 +115,10 @@ const MyCamera: React.FC<MyCameraProps> = ({ isInquiring }) => {
 };
 
 const ThreeGame = () => {
+  const [cameraState, setCameraState] = useState<CameraState>(
+    CameraState.DEFAULT
+  );
   const [personNumber, setPersonNumber] = useState(76);
-  const [isInquiring, setIsInquiring] = useState(false);
   const [talkBox, setTalkBox] = useState("");
   const [camPosition, setCamPosition] = useState({
     x: 6.5,
@@ -129,14 +172,36 @@ const ThreeGame = () => {
   }
 
   const handleInquiring = () => {
-    setIsInquiring(!isInquiring);
-    if (talkBox !== "") {
+    if (cameraState === CameraState.INQUIRING) {
+      setCameraState(CameraState.DEFAULT);
       setTalkBox("");
+    } else {
+      setCameraState(CameraState.INQUIRING);
+    }
+  };
+
+  const handleComputerClick = () => {
+    if (cameraState === CameraState.COMPUTER) {
+      setCameraState(CameraState.DEFAULT);
+    } else {
+      setCameraState(CameraState.COMPUTER);
+    }
+  };
+
+  const handleMedicClick = () => {
+    if (cameraState === CameraState.MEDICAL) {
+      setCameraState(CameraState.DEFAULT);
+    } else {
+      setCameraState(CameraState.MEDICAL);
     }
   };
 
   const handleNotebookClick = () => {
-    console.log("Notebook clicked");
+    if (cameraState === CameraState.NOTEBOOK) {
+      setCameraState(CameraState.DEFAULT);
+    } else {
+      setCameraState(CameraState.NOTEBOOK);
+    }
   };
 
   const adjustDeskForScreenSize = () => {
@@ -155,8 +220,9 @@ const ThreeGame = () => {
 
   return (
     <Canvas>
-      <MyCamera isInquiring={isInquiring} />
-      {isInquiring ? null : (
+      <MyCamera cameraState={cameraState} />
+
+      {cameraState === CameraState.INQUIRING ? null : (
         <Html position={[0, 5, 0]}>
           <Flex gap={5} p={10}>
             <Input
@@ -201,29 +267,39 @@ const ThreeGame = () => {
         </Html>
       )}
 
-      {!isInquiring ? null : (
+      {cameraState !== CameraState.INQUIRING ? null : (
         <Html position={[0, 4, 3]}>
           <GameBody disease={currentDisease!} talk={talk} />
         </Html>
       )}
 
       <Html position={[0, 4.5, 4]}>
-        <Button
-          _hover={{
-            backgroundColor: isInquiring ? "red" : colors.Primary,
-            color: "white",
-          }}
-          backgroundColor={"white"}
-          width={"100%"}
-          borderColor={isInquiring ? "red" : colors.Primary}
-          borderWidth={"2px"}
-          borderRadius={"10px"}
-          margin={"20px"}
-          color={isInquiring ? "red" : ""}
-          onClick={handleInquiring}
-        >
-          {isInquiring ? "X" : "Talk to Patient"}
-        </Button>
+        <GameButton
+          text={"Talk to Patient"}
+          condition={cameraState === CameraState.INQUIRING}
+          handleClick={handleInquiring}
+        ></GameButton>
+      </Html>
+      <Html position={[4, 2.4, 2]}>
+        <GameButton
+          text={"Test DNA"}
+          condition={cameraState === CameraState.COMPUTER}
+          handleClick={handleComputerClick}
+        />
+      </Html>
+      <Html position={[2.5, 2, 2.5]}>
+        <GameButton
+          text={"Diseases"}
+          condition={cameraState === CameraState.NOTEBOOK}
+          handleClick={handleNotebookClick}
+        />
+      </Html>
+      <Html position={[6, 2, 3]}>
+        <GameButton
+          text={"Blood Test"}
+          condition={cameraState === CameraState.MEDICAL}
+          handleClick={handleMedicClick}
+        />
       </Html>
 
       <ambientLight intensity={0.5} />
