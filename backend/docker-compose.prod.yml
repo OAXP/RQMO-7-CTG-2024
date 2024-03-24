@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+    rqmo7:
+        image: ghcr.io/oaxp/rqmo-7-ctg-2024:latest
+        ports:
+            - 3000:3000
+        env_file:
+            - .env
+        depends_on:
+            - db
+        labels:
+            - traefik.enable=true
+            - traefik.http.routers.rqmo.rule=Host(`api.rakotoarivony.ca`)
+            - traefik.http.routers.rqmo.tls=true
+            - traefik.http.routers.rqmo.tls.certresolver=direct-resolver
+        networks:
+            - traefik
+            - db
+    db:
+        container_name: db
+        image: mongo
+        ports:
+        - '27017:27017'
+        volumes: 
+        - ./data:/data/db
+        networks:
+            - db 
+
+networks:
+    traefik:
+        external: true
+    db:
+

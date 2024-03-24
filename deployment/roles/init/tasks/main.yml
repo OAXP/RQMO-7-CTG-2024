@@ -1,0 +1,9 @@
+- name: Include apt
+  include_tasks: apt.yml
+  tags:
+    - apt
+
+- name: Include docker
+  include_tasks: docker.yml
+  tags:
+    - docker
