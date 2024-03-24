@@ -133,6 +133,10 @@ const ThreeGame = () => {
     }
   };
 
+  const handleNotebookClick = () => {
+    console.log("Notebook clicked");
+  };
+
   const adjustDeskForScreenSize = () => {
     let screenScale = null;
     let screenPosition = [4, 1.5, 2];
@@ -226,7 +230,7 @@ const ThreeGame = () => {
       <Desk position={deskPosition} scale={deskScale} rotation={deskRotation} />
       <Notebook scale={[0.004, 0.004, 0.004]} position={[3, 1.6, 3]}></Notebook>
 
-      <Person personNumber={personNumber} onClick={"movecam function"}></Person>
+      <Person personNumber={personNumber}></Person>
       <gridHelper></gridHelper>
       <OrbitControls
         enableZoom={false}

@@ -7,6 +7,7 @@ Title: Lowpoly People + Waldo
 */
 
 import React, { useRef } from "react";
+import * as THREE from "three";
 import { useGLTF } from "@react-three/drei";
 import peopleScene from "@assets/3d/people.glb";
 
@@ -14,6 +15,15 @@ import peopleScene from "@assets/3d/people.glb";
 // node : 282_person__0 to 282_person__0
 
 export function Person({ personNumber, ...props }: any) {
+  const colors = [
+    new THREE.Color("pink"),
+    new THREE.Color("lightgreen"),
+    new THREE.Color("yellow"),
+    new THREE.Color("skyblue"),
+  ];
+
+  let color = colors[Math.floor(Math.random() * colors.length)];
+
   const { nodes, materials } = useGLTF(peopleScene);
   return (
     <group {...props} dispose={null}>
@@ -36,7 +46,9 @@ export function Person({ personNumber, ...props }: any) {
             position={[0, 0, 70]}
             rotation={[-Math.PI / 2, 0, 2 * Math.PI]}
             scale={80}
-          />
+          >
+            <meshStandardMaterial color={color} />
+          </mesh>
         </group>
       </group>
     </group>
