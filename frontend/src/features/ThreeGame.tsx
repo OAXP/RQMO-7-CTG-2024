@@ -1,18 +1,19 @@
-import React from "react";
-import { Canvas } from "@react-three/fiber";
+import React, { useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { Desk } from "@src/models/Desk";
 import { Notebook } from "@src/models/Notebook";
 import { Person } from "@src/models/Person";
-import { Html } from "@react-three/drei";
+import { Html, PerspectiveCamera, OrbitControls } from "@react-three/drei";
 import { Button } from "@chakra-ui/react";
 import { colors } from "@src/Theme";
+import { m } from "framer-motion";
 
 const ThreeGame = () => {
   const [personNumber, setPersonNumber] = React.useState(76);
 
   function handlePersonNumberChange() {
-    if (personNumber <= 85) {
+    if (personNumber >= 76 && personNumber <= 85) {
       setPersonNumber(personNumber + 1);
     } else {
       setPersonNumber(76);
@@ -21,7 +22,7 @@ const ThreeGame = () => {
 
   const adjustDeskForScreenSize = () => {
     let screenScale = null;
-    let screenPosition = [4, 2, 2];
+    let screenPosition = [4, 1.5, 2];
     let rotation = [0, 2, 0];
     if (window.innerWidth < 768) {
       screenScale = [0.1, 0.1, 0.1];
@@ -31,17 +32,10 @@ const ThreeGame = () => {
     return [screenScale, screenPosition, rotation];
   };
 
-  const adjustPerson = () => {
-    let personNumber = Math.random() * 282;
-    personNumber = 12;
-    let rotation = 1;
-    return [Math.floor(personNumber), rotation];
-  };
-
   const [deskScale, deskPosition, deskRotation] = adjustDeskForScreenSize();
 
   return (
-    <Canvas camera={{ position: [5, 4, 5] }}>
+    <Canvas camera={{ position: [5.5, 3.5, 5.5] }}>
       <Html position={[0, 4, 0]}>
         <Button
           _hover={{ backgroundColor: colors.button_hover }}
@@ -64,12 +58,17 @@ const ThreeGame = () => {
         <meshStandardMaterial color={new THREE.Color("lightblue")} />
       </mesh>
       <Desk position={deskPosition} scale={deskScale} rotation={deskRotation} />
-      <Notebook
-        scale={[0.004, 0.004, 0.004]}
-        position={[3.3, 2.5, 3.3]}
-      ></Notebook>
-      <Person personNumber={personNumber}></Person>
+      <Notebook scale={[0.004, 0.004, 0.004]} position={[3, 1.6, 3]}></Notebook>
+
+      <Person personNumber={personNumber} onClick={"movecam function"}></Person>
       <gridHelper></gridHelper>
+      <OrbitControls
+        enableZoom={false}
+        minPolarAngle={Math.PI / 3}
+        maxPolarAngle={Math.PI / 2.2}
+        minAzimuthAngle={2 * Math.PI}
+        maxAzimuthAngle={Math.PI / 2}
+      />
     </Canvas>
   );
 };
