@@ -15,7 +15,6 @@ import donation from '@assets/images/donation.jpg';
 import gameHome from '@assets/images/game-homepage.jpg';
 import { useNavigate } from 'react-router-dom';
 
-
 export default function Home() {
 	const navigate = useNavigate();
 	return (
@@ -107,66 +106,95 @@ export default function Home() {
 					</Flex>
 				</Flex>
 				<Flex direction={'column'} alignItems={'center'}>
-				<Flex marginTop={'10vh'} marginBottom={'10vh'} direction={'row'} justifyContent={'space-between'} w={'80%'}>
+					<Flex
+						marginTop={'10vh'}
+						marginBottom={'10vh'}
+						direction={'row'}
+						justifyContent={'space-between'}
+						w={'80%'}
+					>
 						<Image borderRadius={'2xl'} w={'40%'} h={'100%'} src={target} />
-						<Flex direction={'column'} w={'50%'} gap={'5vh'} >
+						<Flex direction={'column'} w={'50%'} gap={'5vh'}>
 							<Text color={colors.Primary} fontWeight={'700'} fontSize={'6xl'}>
 								Our Mission
 							</Text>
 							<Flex direction={'column'}>
-								
 								<List styleType="disc" fontWeight={'400'} fontSize={'3xl'}>
-									<ListItem>IRARE information and assistance center </ListItem> 
+									<ListItem>IRARE information and assistance center </ListItem>
 									<ListItem>Share information on rare diseases and their challenges </ListItem>
-									<ListItem>Raise awareness among the general population and within the medical system </ListItem>
-									<ListItem>Promote research and contact between patients and researchers </ListItem>
+									<ListItem>
+										Raise awareness among the general population and within the medical system{' '}
+									</ListItem>
+									<ListItem>
+										Promote research and contact between patients and researchers{' '}
+									</ListItem>
 								</List>
 							</Flex>
-							
 						</Flex>
-
-						
 					</Flex>
 				</Flex>
 				<Flex marginTop={'10vh'} marginBottom={'10vh'} direction={'column'} alignItems={'center'}>
-						<Flex direction={'column'} w={'100%'} gap={'5vh'} alignItems={'center'} >
-							<Text color={colors.Primary} fontWeight={'700'} fontSize={'6xl'}>
-								Our Team
-							</Text>
-							<Flex direction={'row'} gap={'3vw'} >
-								<Flex direction= {'column'} alignItems={'center'} gap={'10px'}>
-									<Text fontWeight={'500'} fontSize={'3xl'}>Jonathan Pratt</Text>
-									<Image borderRadius={'2xl'}  src={pratt} />
-									<Text fontWeight={'400'} fontSize={'2xl'}>Executive Director</Text>
-								</Flex>
-								<Flex direction= {'column'} alignItems={'center'} gap={'10px'}>
-									<Text fontWeight={'500'} fontSize={'3xl'}>Christine Yergeau</Text>
-									<Image borderRadius={'2xl'}  src={yergeau} />
-									<Text fontWeight={'400'} fontSize={'2xl'}>Research and Partnerships</Text>
-								</Flex>
-								<Flex direction= {'column'} alignItems={'center'} gap={'10px'}>
-									<Text fontWeight={'500'} fontSize={'3xl'}>Marie-Ève Fleury</Text>
-									<Image borderRadius={'2xl'}  src={fleury} />
-									<Text fontWeight={'400'} fontSize={'2xl'}>Research and Partnerships</Text>
-								</Flex>
-								<Flex direction= {'column'} alignItems={'center'} gap={'10px'}>
-									<Text fontWeight={'500'} fontSize={'3xl'}>Ingrid Younes</Text>
-									<Image borderRadius={'2xl'}  src={younes} />
-									<Text fontWeight={'400'} fontSize={'2xl'}>Patient Engagement</Text>
-								</Flex>
-								<Flex direction= {'column'} alignItems={'center'} gap={'10px'}>
-									<Text fontWeight={'500'} fontSize={'3xl'}>Caroline Joseph</Text>
-									<Image borderRadius={'2xl'}  src={joseph} />
-									<Text fontWeight={'400'} fontSize={'2xl'}>Administrative Assistant </Text>
-								</Flex>
-								<Flex direction= {'column'} alignItems={'center'} gap={'10px'}>
-									<Text fontWeight={'500'} fontSize={'3xl'}>Gail Ouellette</Text>
-									<Image borderRadius={'2xl'}  src={ouellette} />
-									<Text fontWeight={'400'} fontSize={'2xl'}>Special Projects</Text>
-								</Flex>													
+					<Flex direction={'column'} w={'100%'} gap={'5vh'} alignItems={'center'}>
+						<Text color={colors.Primary} fontWeight={'700'} fontSize={'6xl'}>
+							Our Team
+						</Text>
+						<Flex direction={'row'} gap={'3vw'}>
+							<Flex direction={'column'} alignItems={'center'} gap={'10px'}>
+								<Text fontWeight={'500'} fontSize={'3xl'}>
+									Jonathan Pratt
+								</Text>
+								<Image borderRadius={'2xl'} src={pratt} />
+								<Text fontWeight={'400'} fontSize={'2xl'}>
+									Executive Director
+								</Text>
 							</Flex>
-							
+							<Flex direction={'column'} alignItems={'center'} gap={'10px'}>
+								<Text fontWeight={'500'} fontSize={'3xl'}>
+									Christine Yergeau
+								</Text>
+								<Image borderRadius={'2xl'} src={yergeau} />
+								<Text fontWeight={'400'} fontSize={'2xl'}>
+									Research and Partnerships
+								</Text>
+							</Flex>
+							<Flex direction={'column'} alignItems={'center'} gap={'10px'}>
+								<Text fontWeight={'500'} fontSize={'3xl'}>
+									Marie-Ève Fleury
+								</Text>
+								<Image borderRadius={'2xl'} src={fleury} />
+								<Text fontWeight={'400'} fontSize={'2xl'}>
+									Research and Partnerships
+								</Text>
+							</Flex>
+							<Flex direction={'column'} alignItems={'center'} gap={'10px'}>
+								<Text fontWeight={'500'} fontSize={'3xl'}>
+									Ingrid Younes
+								</Text>
+								<Image borderRadius={'2xl'} src={younes} />
+								<Text fontWeight={'400'} fontSize={'2xl'}>
+									Patient Engagement
+								</Text>
+							</Flex>
+							<Flex direction={'column'} alignItems={'center'} gap={'10px'}>
+								<Text fontWeight={'500'} fontSize={'3xl'}>
+									Caroline Joseph
+								</Text>
+								<Image borderRadius={'2xl'} src={joseph} />
+								<Text fontWeight={'400'} fontSize={'2xl'}>
+									Administrative Assistant{' '}
+								</Text>
+							</Flex>
+							<Flex direction={'column'} alignItems={'center'} gap={'10px'}>
+								<Text fontWeight={'500'} fontSize={'3xl'}>
+									Gail Ouellette
+								</Text>
+								<Image borderRadius={'2xl'} src={ouellette} />
+								<Text fontWeight={'400'} fontSize={'2xl'}>
+									Special Projects
+								</Text>
+							</Flex>
 						</Flex>
+					</Flex>
 				</Flex>
 				<Flex direction={'column'} alignItems={'center'}>
 					<Flex
@@ -182,9 +210,9 @@ export default function Home() {
 							</Text>
 							<Flex direction={'column'}>
 								<Text fontWeight={'400'} fontSize={'3xl'}>
-									Help us make a difference to people with a rare disease !
-									Donating to the RQMO helps us pursue our mission which is 
-									to support and inform all people affected by rare diseases in Quebec
+									Help us make a difference to people with a rare disease ! Donating to the RQMO
+									helps us pursue our mission which is to support and inform all people affected by
+									rare diseases in Quebec
 								</Text>
 							</Flex>
 							<Button
@@ -209,17 +237,23 @@ export default function Home() {
 					</Flex>
 				</Flex>
 				<Flex direction={'column'} alignItems={'center'}>
-				<Flex marginTop={'10vh'} marginBottom={'15vh'} direction={'row'} justifyContent={'space-between'} w={'80%'}>
+					<Flex
+						marginTop={'10vh'}
+						marginBottom={'15vh'}
+						direction={'row'}
+						justifyContent={'space-between'}
+						w={'80%'}
+					>
 						<Image borderRadius={'2xl'} w={'40%'} h={'100%'} src={gameHome} />
-						<Flex direction={'column'} w={'50%'} gap={'5vh'} >
+						<Flex direction={'column'} w={'50%'} gap={'5vh'}>
 							<Text color={colors.Primary} fontWeight={'700'} fontSize={'6xl'}>
 								Game
 							</Text>
 							<Flex direction={'column'}>
 								<Text fontWeight={'400'} fontSize={'3xl'}>
-									Do you want to know what does the reality of a rare disease diagnosis looks like ? <br/>
+									Do you want to know what does the reality of a rare disease diagnosis looks like ?{' '}
+									<br />
 									Try our interactive game !
-
 								</Text>
 							</Flex>
 							<Button
@@ -239,13 +273,10 @@ export default function Home() {
 								</Text>
 							</Button>
 						</Flex>
-
-						
 					</Flex>
 				</Flex>
-				
 			</Flex>
-			<Footer/>
+			<Footer />
 		</>
 	);
 }

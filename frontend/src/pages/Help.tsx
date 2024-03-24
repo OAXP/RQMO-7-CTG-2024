@@ -1,4 +1,4 @@
-import { Flex, Text, UnorderedList, Link, Button, ListItem, Box } from '@chakra-ui/react';
+import { Flex, Text, UnorderedList, Link, Button, ListItem } from '@chakra-ui/react';
 import { colors } from '@src/Theme';
 import Navbar from '@src/layouts/navbar';
 import Footer from '@src/layouts/footer';
@@ -7,7 +7,12 @@ import { useNavigate } from 'react-router-dom';
 export default function Help() {
 	const navigate = useNavigate();
 	return (
-		<Flex direction={'column'} justifyContent={'space-between'} backgroundColor={colors.background} minHeight="100vh" >
+		<Flex
+			direction={'column'}
+			justifyContent={'space-between'}
+			backgroundColor={colors.background}
+			minHeight="100vh"
+		>
 			<Navbar />
 			<Flex
 				flexDirection="column"
@@ -60,7 +65,7 @@ export default function Help() {
 					</Button>
 				</Flex>
 			</Flex>
-			<Footer/>
+			<Footer />
 		</Flex>
 	);
 }

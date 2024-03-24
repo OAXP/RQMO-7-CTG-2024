@@ -32,7 +32,7 @@ export default function Emergency() {
 					></iframe>
 				</Flex>
 			</Flex>
-			<Footer/>
+			<Footer />
 		</>
 	);
 }

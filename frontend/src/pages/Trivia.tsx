@@ -152,7 +152,7 @@ export default function Trivia() {
 					</Box>
 				)}
 			</VStack>
-			<Footer/>
+			<Footer />
 		</>
 	);
 }

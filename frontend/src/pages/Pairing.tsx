@@ -62,11 +62,11 @@ export default function Pairing() {
 						<Image src={jumelage} />
 					</Flex>
 					<Text fontSize={'xl'} textAlign={'center'} mt={10} mb={10}>
-						We may already have someone with your disease in our contact bank of individuals affected
-						in Quebec. Fill out the
+						We may already have someone with your disease in our contact bank of individuals
+						affected in Quebec. Fill out the
 						<br />
-						form below and we will check our bank. If we don't have anyone, we'll look for you through
-						other sources.
+						form below and we will check our bank. If we don't have anyone, we'll look for you
+						through other sources.
 						<br />
 						<br />
 						If we still don't find anyone immediately, we'll contact you as soon as we have a
@@ -75,8 +75,8 @@ export default function Pairing() {
 					<Flex fontSize={'xl'} justifyContent={'center'} mb={10}>
 						<UnorderedList>
 							<ListItem>
-								Please note that we keep your information confidential and never give out your name or
-								email address without your permission.
+								Please note that we keep your information confidential and never give out your name
+								or email address without your permission.
 							</ListItem>
 							<ListItem>
 								If we can pair you with another person, we will ask for your permission each time it
@@ -86,7 +86,7 @@ export default function Pairing() {
 					</Flex>
 					<Text mb={10}>.</Text>
 				</Flex>
-				<Flex justifyContent="center" alignItems="center" marginBottom={'10vh'} >
+				<Flex justifyContent="center" alignItems="center" marginBottom={'10vh'}>
 					<Box
 						bg={'primary'}
 						borderRadius={'20px'}
@@ -94,7 +94,6 @@ export default function Pairing() {
 						backgroundColor={'white'}
 						shadow={'base'}
 						w={{ base: '100%', lg: '60%' }}
-						
 					>
 						<Heading mb={10}>Form to Complete for Pairing Service</Heading>
 						<form ref={form}>
@@ -193,7 +192,7 @@ export default function Pairing() {
 						</form>
 					</Box>
 				</Flex>
-				<Footer/>
+				<Footer />
 			</Flex>
 		</>
 	);

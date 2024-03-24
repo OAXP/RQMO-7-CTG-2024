@@ -209,7 +209,7 @@ function Search() {
 					))}
 				</Flex>
 			</Flex>
-			<Footer/>
+			<Footer />
 		</>
 	);
 }
