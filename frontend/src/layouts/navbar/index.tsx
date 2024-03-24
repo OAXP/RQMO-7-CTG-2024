@@ -50,7 +50,7 @@ export default function Navbar() {
 								<Icon as={FiChevronDown} mt="3" />
 							</Flex>
 						</MenuButton>
-						<MenuList>
+						<MenuList zIndex={2}>
 							<MenuItem onClick={() => navigate('/RQMO-7-CTG-2024/services/pairing')}>
 								Pairing
 							</MenuItem>
