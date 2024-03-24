@@ -37,6 +37,15 @@ export const addDisease = async (disease: Disease) => {
 	}
 };
 
+export const updateDisease = async (disease: Disease, name: string) => {
+	try {
+		return await http.put('/disease', { disease, name });
+	} catch (e) {
+		console.error(e);
+		return undefined;
+	}
+};
+
 export const deleteDisease = async (name: string) => {
 	try {
 		return await http.del(`/disease/${name}`);
