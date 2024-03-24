@@ -107,31 +107,25 @@ export default function Home() {
 					</Flex>
 				</Flex>
 				<Flex direction={'column'} alignItems={'center'}>
-					<Flex
-						marginTop={'10vh'}
-						marginBottom={'10vh'}
-						direction={'row'}
-						justifyContent={'space-between'}
-						w={'80%'}
-					>
+				<Flex marginTop={'10vh'} marginBottom={'10vh'} direction={'row'} justifyContent={'space-between'} w={'80%'}>
 						<Image borderRadius={'2xl'} w={'40%'} h={'100%'} src={target} />
-						<Flex direction={'column'} w={'50%'} gap={'5vh'}>
+						<Flex direction={'column'} w={'50%'} gap={'5vh'} >
 							<Text color={colors.Primary} fontWeight={'700'} fontSize={'6xl'}>
 								Our Mission
 							</Text>
 							<Flex direction={'column'}>
+								
 								<List styleType="disc" fontWeight={'400'} fontSize={'3xl'}>
-									<ListItem>IRARE information and assistance center </ListItem>
+									<ListItem>IRARE information and assistance center </ListItem> 
 									<ListItem>Share information on rare diseases and their challenges </ListItem>
-									<ListItem>
-										Raise awareness among the general population and within the medical system{' '}
-									</ListItem>
-									<ListItem>
-										Promote research and contact between patients and researchers{' '}
-									</ListItem>
+									<ListItem>Raise awareness among the general population and within the medical system </ListItem>
+									<ListItem>Promote research and contact between patients and researchers </ListItem>
 								</List>
 							</Flex>
+							
 						</Flex>
+
+						
 					</Flex>
 				</Flex>
 				<Flex marginTop={'10vh'} marginBottom={'10vh'} direction={'column'} alignItems={'center'}>
@@ -171,8 +165,8 @@ export default function Home() {
 									<Text fontWeight={'400'} fontSize={'2xl'}>Special Projects</Text>
 								</Flex>													
 							</Flex>
+							
 						</Flex>
-					</Flex>
 				</Flex>
 				<Flex direction={'column'} alignItems={'center'}>
 					<Flex
