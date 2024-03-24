@@ -1,5 +1,6 @@
 import { Flex, Text, Image, Button, List, ListItem } from '@chakra-ui/react';
 import Navbar from '@src/layouts/navbar';
+import Footer from '@src/layouts/footer';
 import { colors } from '@src/Theme';
 import zebra from '@assets/images/zebra.jpg';
 import aboutus from '@assets/images/aboutus.png';
@@ -208,7 +209,7 @@ export default function Home() {
 					</Flex>
 				</Flex>
 				<Flex direction={'column'} alignItems={'center'}>
-				<Flex marginTop={'10vh'} marginBottom={'10vh'} direction={'row'} justifyContent={'space-between'} w={'80%'}>
+				<Flex marginTop={'10vh'} marginBottom={'15vh'} direction={'row'} justifyContent={'space-between'} w={'80%'}>
 						<Image borderRadius={'2xl'} w={'40%'} h={'100%'} src={gameHome} />
 						<Flex direction={'column'} w={'50%'} gap={'5vh'} >
 							<Text color={colors.Primary} fontWeight={'700'} fontSize={'6xl'}>
@@ -244,6 +245,7 @@ export default function Home() {
 				</Flex>
 				
 			</Flex>
+			<Footer/>
 		</>
 	);
 }
