@@ -1,13 +1,16 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { Desk } from "@src/models/Desk";
 import { Notebook } from "@src/models/Notebook";
 import { Person } from "@src/models/Person";
 import { Html, PerspectiveCamera, OrbitControls } from "@react-three/drei";
-import { Button } from "@chakra-ui/react";
+
+import GameBody from "@components/ui/GameBody";
 import { colors } from "@src/Theme";
-import { del } from "@src/lib/http";
+import DiseaseManager from "@services/disease_manager";
+import IDisease from "@src/types/disease";
+import { Box, Button, Flex, Input } from "@chakra-ui/react";
 
 const approachValue = (value: any, target: any, step: any) => {
   if (value < target) {
@@ -48,9 +51,9 @@ const MyCamera = ({ isInquiring, ...props }: any) => {
 
       ref.current.lookAt(-8, 3, 0);
     } else {
-      ref.current.position.x = approachValue(ref.current.position.x, 6.5, 0.05);
+      ref.current.position.x = approachValue(ref.current.position.x, 6.7, 0.05);
       ref.current.position.y = approachValue(ref.current.position.y, 3.5, 0.05);
-      ref.current.position.z = approachValue(ref.current.position.z, 6.5, 0.05);
+      ref.current.position.z = approachValue(ref.current.position.z, 6.7, 0.05);
       ref.current.lookAt(0, 0, 0);
     }
   });
@@ -66,13 +69,46 @@ const MyCamera = ({ isInquiring, ...props }: any) => {
 };
 
 const ThreeGame = () => {
-  const [personNumber, setPersonNumber] = React.useState(76);
-  const [isInquiring, setIsInquiring] = React.useState(false);
-  const [camPosition, setCamPosition] = React.useState({
+  const [personNumber, setPersonNumber] = useState(76);
+  const [isInquiring, setIsInquiring] = useState(false);
+  const [camPosition, setCamPosition] = useState({
     x: 6.5,
     y: 3.5,
     z: 6.5,
   });
+
+  const diseaseManager = new DiseaseManager();
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const [diseases, setDiseases] = useState<IDisease[]>([]);
+  const [currentDisease, setCurrentDisease] = useState<IDisease | undefined>(
+    undefined
+  );
+
+  useEffect(() => {
+    diseaseManager.getAllDiseases().then((diseases) => setDiseases(diseases));
+    diseaseManager
+      .getRandomDisease()
+      .then((disease) => setCurrentDisease(disease));
+  }, []);
+
+  const onSubmit = () => {
+    const userDiagnosis = inputRef.current?.value ?? "";
+    const isCorrect = currentDisease?.name === userDiagnosis;
+    window.alert(
+      `You have diagnosed the patient with ${userDiagnosis}. ${
+        isCorrect
+          ? "Good job!"
+          : "Better luck next time! The correct diagnosis is " +
+            currentDisease?.name
+      }`
+    );
+    // next disease
+    diseaseManager
+      .getRandomDisease()
+      .then((disease) => setCurrentDisease(disease));
+    // TODO: show next person
+  };
 
   function handlePersonNumberChange() {
     if (personNumber >= 76 && personNumber <= 85) {
@@ -98,26 +134,41 @@ const ThreeGame = () => {
 
   return (
     <Canvas>
-      {/* <PerspectiveCamera
-        makeDefault
-        position={[camPosition.x, camPosition.y, camPosition.z]}
-        fov={60}
-      /> */}
       <MyCamera isInquiring={isInquiring} />
-      <Html position={[0, 4, 0]}>
-        <Button
-          _hover={{ backgroundColor: colors.button_hover }}
-          backgroundColor={"white"}
-          width={"100%"}
-          borderColor={colors.Primary}
-          borderWidth={"2px"}
-          borderRadius={"20px"}
-          margin={"20px"}
-          onClick={handlePersonNumberChange}
-        >
-          increment character : {personNumber}
-        </Button>
-      </Html>
+      {isInquiring ? null : (
+        <Html position={[0, 5, 0]}>
+          <Flex gap={5} p={10}>
+            <Input
+              w={"600px"}
+              ref={inputRef}
+              placeholder="Type your diagnosis here"
+              borderWidth={"2px"}
+              borderRadius={"20px"}
+            />
+            <Button
+              _hover={{ backgroundColor: colors.button_hover }}
+              backgroundColor={"white"}
+              borderColor={colors.Primary}
+              borderWidth={"2px"}
+              borderRadius={"20px"}
+              margin={"10px"}
+              p={5}
+              onClick={() => {
+                onSubmit();
+                handlePersonNumberChange();
+              }}
+            >
+              Submit and call the next client
+            </Button>
+          </Flex>
+        </Html>
+      )}
+
+      {!isInquiring ? null : (
+        <Html position={[0, 4, 2]}>
+          <GameBody disease={currentDisease!} />
+        </Html>
+      )}
 
       <Html position={[0, 4.5, 4]}>
         <Button
