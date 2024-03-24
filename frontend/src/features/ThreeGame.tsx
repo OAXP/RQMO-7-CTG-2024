@@ -12,7 +12,7 @@ import { colors } from "@src/Theme";
 import DiseaseManager from "@services/disease_manager";
 import IDisease from "@src/types/disease";
 import { Box, Button, Flex, Input } from "@chakra-ui/react";
-import { Computer } from "@src/models/computer";
+import { Computer } from "@src/models/Computer";
 import GameButton from "@src/components/ui/GameButton";
 import Game from "@src/pages/Game";
 
