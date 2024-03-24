@@ -12,10 +12,11 @@ services:
         labels:
             - traefik.enable=true
             - traefik.http.routers.rqmo.rule=Host(`api.rakotoarivony.ca`)
-            - traefik.http.routers.rqmo.entrypoints=web
             - traefik.http.routers.rqmo.tls=true
-            - traefik.http.routers.rqmo.tls.certresolver=letsencrypt
-            # - traefik.http.routers.rqmo.middlewares=rqmo_stripprefix
+            - traefik.http.routers.rqmo.tls.certresolver=direct-resolver
+        networks:
+            - traefik
+            - db
     db:
         container_name: db
         image: mongo
@@ -23,4 +24,11 @@ services:
         - '27017:27017'
         volumes: 
         - ./data:/data/db
+        networks:
+            - db 
+
+networks:
+    traefik:
+        external: true
+    db:
 
