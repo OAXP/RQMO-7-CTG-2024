@@ -19,7 +19,7 @@
         "ecmaVersion": "latest",
         "sourceType": "module",
         "tsconfigRootDir": ".",
-        "project": ["./frontend/tsconfig.json", "./tsconfig.node.json"]
+        "project": ["./tsconfig.json", "./tsconfig.node.json"]
     },
     // Configuring third-party plugins
     "plugins": [
@@ -29,7 +29,7 @@
     "settings": {
         "import/resolver": {
             "typescript": {
-                "project": ["./frontend/tsconfig.json", "./tsconfig.node.json"]
+                "project": ["./tsconfig.json", "./tsconfig.node.json"]
             }
         }
     },
