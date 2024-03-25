@@ -161,7 +161,7 @@ const ThreeGame = () => {
 
   const onSubmit = () => {
     const userDiagnosis = inputRef.current?.value ?? "";
-    const isCorrect = currentDisease?.name === userDiagnosis;
+    const isCorrect = currentDisease?.name.toLowerCase() === userDiagnosis.toLowerCase();
     window.alert(
       `You have diagnosed the patient with ${userDiagnosis}. ${
         isCorrect
