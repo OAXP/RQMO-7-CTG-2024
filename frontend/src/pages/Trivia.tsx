@@ -26,7 +26,7 @@ export default function Trivia() {
 
 	useEffect(() => {
 		questionManager.getAllQuestions().then((questions: Question[]) => {
-			if (questions.length === 0) {
+			if (questions.length > 0) {
 				setQuestions(questions);
 				setLoading(false);
 			}
