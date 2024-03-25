@@ -10,11 +10,12 @@ import { Html, PerspectiveCamera, OrbitControls } from "@react-three/drei";
 import GameBody from "@components/ui/GameBody";
 import { colors } from "@src/Theme";
 import DiseaseManager from "@services/disease_manager";
-import IDisease from "@src/types/disease";
 import { Box, Button, Flex, Input } from "@chakra-ui/react";
 import { Computer } from "@src/models/Computer";
 import GameButton from "@src/components/ui/GameButton";
 import Game from "@src/pages/Game";
+import { Disease } from "@src/interfaces/Disease";
+import BloodTestSlip from "@src/components/ui/BloodTestSlip";
 
 enum CameraState {
   DEFAULT,
@@ -129,8 +130,8 @@ const ThreeGame = () => {
   const diseaseManager = new DiseaseManager();
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const [diseases, setDiseases] = useState<IDisease[]>([]);
-  const [currentDisease, setCurrentDisease] = useState<IDisease | undefined>(
+  const [diseases, setDiseases] = useState<Disease[]>([]);
+  const [currentDisease, setCurrentDisease] = useState<Disease | undefined>(
     undefined
   );
 
@@ -219,112 +220,156 @@ const ThreeGame = () => {
   const [deskScale, deskPosition, deskRotation] = adjustDeskForScreenSize();
 
   return (
-    <Canvas>
-      <MyCamera cameraState={cameraState} />
+    <>
+      <div>{currentDisease?.name}</div>
+      {/* <BloodTestSlip bloodType={currentDisease?.blood_types[0] ?? ""} /> */}
 
-      {cameraState === CameraState.INQUIRING ? null : (
-        <Html position={[0, 5, 0]}>
-          <Flex gap={5} p={10}>
-            <Input
-              w={"600px"}
-              ref={inputRef}
-              placeholder="Type your diagnosis here"
-              borderWidth={"2px"}
-              borderRadius={"20px"}
-            />
-            <Button
-              _hover={{ backgroundColor: colors.Primary, color: "white" }}
-              backgroundColor={"white"}
-              borderColor={colors.Primary}
-              borderWidth={"2px"}
-              borderRadius={"10px"}
-              margin={"10px"}
-              p={5}
-              onClick={() => {
-                onSubmit();
-                handlePersonNumberChange();
-              }}
-            >
-              Diagnose
-            </Button>
-          </Flex>
+      <Canvas>
+        <MyCamera cameraState={cameraState} />
+
+        {cameraState === CameraState.INQUIRING ? null : (
+          <Html position={[0, 5, 0]}>
+            <Flex gap={5} p={10}>
+              <Input
+                w={"600px"}
+                ref={inputRef}
+                placeholder="Type your diagnosis here"
+                borderWidth={"2px"}
+                borderRadius={"20px"}
+              />
+              <Button
+                _hover={{ backgroundColor: colors.Primary, color: "white" }}
+                backgroundColor={"white"}
+                borderColor={colors.Primary}
+                borderWidth={"2px"}
+                borderRadius={"10px"}
+                margin={"10px"}
+                p={5}
+                onClick={() => {
+                  onSubmit();
+                  handlePersonNumberChange();
+                }}
+              >
+                Diagnose
+              </Button>
+            </Flex>
+          </Html>
+        )}
+
+        {talkBox === "" ? null : (
+          <Html position={[0, 4, 5.5]}>
+            <div>
+              <Box
+                backgroundColor={colors.Primary}
+                color={"white"}
+                borderRadius={"20px"}
+                padding={"10px"}
+                w={"400px"}
+              >
+                {talkBox}
+              </Box>
+            </div>
+          </Html>
+        )}
+
+        {cameraState !== CameraState.INQUIRING ? null : (
+          <Html position={[0, 4, 3]}>
+            <GameBody disease={currentDisease!} talk={talk} />
+          </Html>
+        )}
+
+        <Html position={[0, 4.5, 4]}>
+          <GameButton
+            text={"Talk to Patient"}
+            condition={cameraState === CameraState.INQUIRING}
+            handleClick={handleInquiring}
+          ></GameButton>
         </Html>
-      )}
+        <Html position={[4, 2.4, 2]}>
+          <GameButton
+            text={"Test DNA"}
+            condition={cameraState === CameraState.COMPUTER}
+            handleClick={handleComputerClick}
+          />
+        </Html>
+        <Html position={[2.5, 2, 2.5]}>
+          <GameButton
+            text={"Diseases"}
+            condition={cameraState === CameraState.NOTEBOOK}
+            handleClick={handleNotebookClick}
+          />
+        </Html>
+        <Html position={[6, 2, 3]}>
+          <GameButton
+            text={"Blood Test"}
+            condition={cameraState === CameraState.MEDICAL}
+            handleClick={handleMedicClick}
+          />
+        </Html>
 
-      {talkBox === "" ? null : (
-        <Html position={[0, 4, 5.5]}>
-          <div>
-            <Box
-              backgroundColor={colors.Primary}
-              color={"white"}
-              borderRadius={"20px"}
-              padding={"10px"}
-              w={"400px"}
-            >
-              {talkBox}
+        {cameraState === CameraState.MEDICAL ? (
+          <Html position={[5.3, 2, 3.2]}>
+            <Box w={"300px"}>
+              <BloodTestSlip
+                bloodType={
+                  currentDisease?.blood_types[
+                    Math.floor(
+                      Math.random() * currentDisease.blood_types.length
+                    )
+                  ] ?? ""
+                }
+              />
             </Box>
-          </div>
-        </Html>
-      )}
+          </Html>
+        ) : null}
 
-      {cameraState !== CameraState.INQUIRING ? null : (
-        <Html position={[0, 4, 3]}>
-          <GameBody disease={currentDisease!} talk={talk} />
-        </Html>
-      )}
-
-      <Html position={[0, 4.5, 4]}>
-        <GameButton
-          text={"Talk to Patient"}
-          condition={cameraState === CameraState.INQUIRING}
-          handleClick={handleInquiring}
-        ></GameButton>
-      </Html>
-      <Html position={[4, 2.4, 2]}>
-        <GameButton
-          text={"Test DNA"}
-          condition={cameraState === CameraState.COMPUTER}
-          handleClick={handleComputerClick}
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[0, 2.5, 2.5]} intensity={0.7} />
+        {/* floor */}
+        <mesh position={[0, 0, 0]} rotation={[0, 0, 0]} receiveShadow>
+          <boxGeometry args={[15, 0, 15]} />
+          <meshStandardMaterial color={new THREE.Color("lightblue")} />
+        </mesh>
+        <Desk
+          position={deskPosition}
+          scale={deskScale}
+          rotation={deskRotation}
         />
-      </Html>
-      <Html position={[2.5, 2, 2.5]}>
-        <GameButton
-          text={"Diseases"}
-          condition={cameraState === CameraState.NOTEBOOK}
-          handleClick={handleNotebookClick}
-        />
-      </Html>
-      <Html position={[6, 2, 3]}>
-        <GameButton
-          text={"Blood Test"}
-          condition={cameraState === CameraState.MEDICAL}
-          handleClick={handleMedicClick}
-        />
-      </Html>
+        <Notebook
+          scale={[0.004, 0.004, 0.004]}
+          position={[3, 1.6, 3]}
+        ></Notebook>
+        <Medic position={[6, 1.6, 3]} scale={0.001}></Medic>
+        <Computer position={[5, 1.6, 2]} scale={0.015}></Computer>
+        {cameraState === CameraState.COMPUTER ? (
+          <Html position={[4.5, 2.2, 2]}>
+            <Box
+              w={"300px"}
+              color="lightgreen"
+              fontSize={"20px"}
+              fontStyle={"italic"}
+              fontFamily={"'Courier New', monospace"}
+              fontWeight={"bold"}
+            >{`DNA sequence : ${
+              currentDisease?.gene_sequences[
+                Math.floor(Math.random() * currentDisease.gene_sequences.length)
+              ]
+            }`}</Box>
+          </Html>
+        ) : null}
 
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[0, 2.5, 2.5]} intensity={0.7} />
-      {/* floor */}
-      <mesh position={[0, 0, 0]} rotation={[0, 0, 0]} receiveShadow>
-        <boxGeometry args={[15, 0, 15]} />
-        <meshStandardMaterial color={new THREE.Color("lightblue")} />
-      </mesh>
-      <Desk position={deskPosition} scale={deskScale} rotation={deskRotation} />
-      <Notebook scale={[0.004, 0.004, 0.004]} position={[3, 1.6, 3]}></Notebook>
-      <Medic position={[6, 1.6, 3]} scale={0.001}></Medic>
-      <Computer position={[5, 1.6, 2]} scale={0.015}></Computer>
-
-      <Person personNumber={personNumber}></Person>
-      <gridHelper></gridHelper>
-      <OrbitControls
-        enableZoom={false}
-        // enableRotate={false}
-        minPolarAngle={Math.PI / 3}
-        maxPolarAngle={Math.PI / 2.2}
-        minAzimuthAngle={2 * Math.PI}
-        maxAzimuthAngle={Math.PI / 2}
-      />
-    </Canvas>
+        <Person personNumber={personNumber}></Person>
+        <gridHelper></gridHelper>
+        <OrbitControls
+          enableZoom={false}
+          // enableRotate={false}
+          minPolarAngle={Math.PI / 3}
+          maxPolarAngle={Math.PI / 2.2}
+          minAzimuthAngle={2 * Math.PI}
+          maxAzimuthAngle={Math.PI / 2}
+        />
+      </Canvas>
+    </>
   );
 };
 
