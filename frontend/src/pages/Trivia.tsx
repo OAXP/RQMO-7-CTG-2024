@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, Button, VStack, Box, Flex, Spinner } from '@chakra-ui/react';
 import { colors } from '@src/Theme';
 import Navbar from '@src/layouts/navbar';
+import Footer from '@src/layouts/footer';
 import { useNavigate } from 'react-router-dom';
 import { Question } from '@src/interfaces/Question';
 import QuestionManager from '@services/question_manager';
@@ -19,14 +20,16 @@ export default function Trivia() {
 	const [showScore, setShowScore] = useState(false);
 	const [incorrectAnswers, setIncorrectAnswers] = useState<IncorrectAnswer[]>([]);
 	const [loading, setLoading] = useState(true);
-	const [startedTrivia, setStartedTrivia] = useState(false); // New state variable
+	const [startedTrivia, setStartedTrivia] = useState(false);
 	const navigate = useNavigate();
 	const questionManager = new QuestionManager();
 
 	useEffect(() => {
 		questionManager.getAllQuestions().then((questions: Question[]) => {
-			setQuestions(questions);
-			setLoading(false);
+			if (questions.length > 0) {
+				setQuestions(questions);
+				setLoading(false);
+			}
 		});
 	}, []);
 
@@ -83,7 +86,7 @@ export default function Trivia() {
 						</Flex>
 					</Box>
 				) : loading ? (
-					<Spinner size="xl" />
+					<Spinner size="xl" marginTop={'32vh'} />
 				) : showScore ? (
 					<Box p={8} borderWidth="1px" borderRadius="lg">
 						<Text fontSize="2xl" fontWeight="bold" mb={4}>
@@ -151,6 +154,7 @@ export default function Trivia() {
 					</Box>
 				)}
 			</VStack>
+			<Footer />
 		</>
 	);
 }

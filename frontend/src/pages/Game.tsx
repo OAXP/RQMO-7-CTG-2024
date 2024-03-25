@@ -1,6 +1,7 @@
 import React from 'react';
-import { Text } from '@chakra-ui/react';
-import Navbar from '@src/layouts/navbar';
+import { Box, Button, Flex, Input } from "@chakra-ui/react";
+import Navbar from "@src/layouts/navbar";
+import ThreeGame from "@src/features/ThreeGame";
 import Notebook from '@src/components/notebook';
 
 export default function Game() {
@@ -10,12 +11,17 @@ export default function Game() {
 		setIsOpened((isOpened) => !isOpened);
 	};
 
-	return (
-		<>
-			<Navbar />
-			<Text>Game page</Text>
+  return (
+    <>
+      <Navbar />
+      <Box h={"full"} w={"full"}>
+        <Flex>
+          <Box height={window.innerWidth < 768 ? 600 : 1000} flex={1}>
+            <ThreeGame handleOpen={handleOpen}></ThreeGame>
+          </Box>
+        </Flex>
+      </Box>
 			<Notebook isOpened={isOpened} handleOpen={handleOpen} />
-			<button onClick={handleOpen}>Open Notebook</button>
-		</>
-	);
+    </>
+  );
 }

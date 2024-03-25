@@ -1,6 +1,6 @@
 import IDisease from '@src/types/disease';
 import Symptom from '@src/types/symptom';
 import { Question } from '@src/interfaces/Question';
+import { Disease } from '@src/interfaces/Disease';
 
-export const SERVER_URL = 'http://localhost:3000';
-export type dataInterface = IDisease | Symptom | Question;
+export type dataInterface = IDisease | Symptom | Question | Disease | { password: string };

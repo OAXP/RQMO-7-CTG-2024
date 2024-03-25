@@ -1,0 +1,11 @@
+- name: Deploy rqmo
+  hosts: toDeploy
+  become: true
+  roles:
+    - init
+    - traefik
+    - watchtower
+  vars_files:
+    - vars.yaml
+  vars:
+    ansible_ssh_timeout: 120

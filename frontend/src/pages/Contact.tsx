@@ -16,6 +16,7 @@ import { useRef } from 'react';
 import { BsPerson, BsFillTelephoneFill, BsTelephone } from 'react-icons/bs';
 import { MdOutlineEmail } from 'react-icons/md';
 import Navbar from '@src/layouts/navbar';
+import Footer from '@src/layouts/footer';
 import { colors } from '@src/Theme';
 
 export default function Contact() {
@@ -117,8 +118,8 @@ export default function Contact() {
 										<InputGroup>
 											<InputLeftElement color={'palette.primary'} children={<BsTelephone />} />
 											<Input
-												type="email"
-												name="user_email"
+												type="tel"
+												name="user_tel"
 												placeholder="Phone Number"
 												focusBorderColor={'button'}
 												textColor={'palette.black'}
@@ -148,6 +149,7 @@ export default function Contact() {
 					</Flex>
 				</VStack>
 			</Flex>
+			<Footer />
 		</>
 	);
 }

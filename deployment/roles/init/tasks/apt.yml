@@ -1,0 +1,19 @@
+- name: apt-update and apt-upgrade 
+  apt: 
+    update-cache: yes
+    upgrade: dist 
+  tags: 
+    - apt 
+
+- name: check if reboot is needed  
+  register: reboot_required 
+  stat: 
+    path: /var/run/reboot-required
+  tags: 
+    - apt 
+  
+- name: reboot if needed
+  reboot: 
+  when: reboot_required.stat.exists == true 
+  tags: 
+    - apt 

@@ -144,6 +144,33 @@ export class DiseaseController {
 
 		/**
 		 * @swagger
+		 * /api/disease/:name:
+		 *   put:
+		 *     summary: Modify an existing disease
+		 *     tags: [Disease]
+		 *     requestBody:
+		 *       required: true
+		 *       content:
+		 *         application/json:
+		 *           schema:
+		 *             type: object
+		 *     responses:
+		 *       201:
+		 *         description: The modified disease
+		 *       500:
+		 *         description: Internal server error
+		 */
+		this.router.put('/:name', async (req: Request, res: Response) => {
+			try {
+				await this.diseaseService.update(req.body, req.params.name);
+				res.status(StatusCodes.OK).json(req.body);
+			} catch (e) {
+				res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(e);
+			}
+		});
+
+		/**
+		 * @swagger
 		 * /api/disease/{name}:
 		 *   delete:
 		 *     summary: Delete a disease by name

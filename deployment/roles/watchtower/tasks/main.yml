@@ -1,0 +1,9 @@
+- name: Install watchtower
+  docker_container:
+    name: watchtower
+    image: containrrr/watchtower
+    restart_policy: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 300
+ 

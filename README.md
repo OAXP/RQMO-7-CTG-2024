@@ -9,7 +9,6 @@ Before running this code, please make sure you have the following dependencies i
 - Node.js (version 18.0 or above)
 - MongoDB
 - Docker
-- Redis
 
 ## Usage
 
@@ -25,7 +24,7 @@ To use this project, follow these steps:
 
 This project is structured as follows:
 
-- `frontend` folder: contains the static website built with the Angular framework.
+- `frontend` folder: contains the static website built with the React framework.
 - `backend` folder: contains the dynamic server built with Express.
 - `.github` folder: contains the workflows to automatically deploy the web app using GitHub Actions.
 
@@ -46,4 +45,4 @@ This project is structured as follows:
 - Anh Pham
 - Faneva Rakotoarivony
 - Louis Xu
-- Ryan Ait Abdesselam
+- Rayan Ait Abdesselam

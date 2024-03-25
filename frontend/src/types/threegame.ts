@@ -1,0 +1,3 @@
+interface ThreeGameProps {
+    handleOpen: () => void;
+  }

@@ -1,15 +1,25 @@
-import IDisease from '@src/types/disease';
 import { HTTPInterface } from '@src/utils/http-common';
+import { Disease } from '@src/interfaces/Disease';
 
 export default class DiseaseManager {
-	async getAllDiseases(): Promise<IDisease[]> {
-		const diseases = (await HTTPInterface.GET('disease')) as IDisease[];
-		return diseases;
+	async getAllDiseases(): Promise<Disease[]> {
+		return (await HTTPInterface.GET('disease')) as Disease[];
 	}
 
-	async getDiseaseById(id: string): Promise<IDisease> {
-		const disease = (await HTTPInterface.GET(`disease/${id}`)) as IDisease;
-		return disease;
+	async getDiseaseByName(id: string): Promise<Disease> {
+		return (await HTTPInterface.GET(`disease/${id}`)) as Disease;
+	}
+
+	async getRandomDisease(): Promise<Disease> {
+		return (await HTTPInterface.GET('disease/random')) as Disease;
+	}
+
+	async updateDisease(disease: Disease, name: string) {
+		try {
+			await HTTPInterface.PUT(`disease/${name}`, disease);
+		} catch (err) {
+			console.error('An error has occurred while deleting a playlist', err);
+		}
 	}
 
 	async deleteDisease(id: string) {
@@ -20,7 +30,7 @@ export default class DiseaseManager {
 		}
 	}
 
-	async postDisease(disease: IDisease): Promise<IDisease[]> {
-		return (await HTTPInterface.POST('disease', disease)) as IDisease[];
+	async addDisease(disease: Disease): Promise<Disease[]> {
+		return (await HTTPInterface.POST('disease', disease)) as Disease[];
 	}
 }

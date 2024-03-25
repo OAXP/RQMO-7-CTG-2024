@@ -14,6 +14,10 @@ import Game from '@src/pages/Game';
 import Search from '@pages/Search';
 import Pairing from '@src/pages/Pairing';
 import Emergency from '@src/pages/Emergency';
+import ProtectedRoute from '@features/Access-Rights/Components/Protected-route';
+import Management from '@pages/Management';
+import DiseaseCreation from '@pages/Disease-creation';
+import RootProvider from '@hooks/RootProvider';
 
 const router = createBrowserRouter([
 	{
@@ -60,6 +64,30 @@ const router = createBrowserRouter([
 				path: '/RQMO-7-CTG-2024/services/emergency',
 				element: <Emergency />,
 			},
+			{
+				path: '/RQMO-7-CTG-2024/management',
+				element: (
+					<ProtectedRoute>
+						<Management />
+					</ProtectedRoute>
+				),
+			},
+			{
+				path: '/RQMO-7-CTG-2024/disease-creation',
+				element: (
+					<ProtectedRoute>
+						<DiseaseCreation />
+					</ProtectedRoute>
+				),
+			},
+			{
+				path: '/RQMO-7-CTG-2024/disease-creation/:name',
+				element: (
+					<ProtectedRoute>
+						<DiseaseCreation />
+					</ProtectedRoute>
+				),
+			},
 		],
 	},
 ]);
@@ -67,7 +95,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>
 		<SaasProvider theme={theme}>
-			<RouterProvider router={router} />
+			<RootProvider>
+				<RouterProvider router={router} />
+			</RootProvider>
 		</SaasProvider>
 	</React.StrictMode>,
 );

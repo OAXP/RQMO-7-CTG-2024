@@ -34,31 +34,36 @@
     border: none;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    align-items: start;
+    gap: 10px;
 }
 
 .button{
     cursor: url(http://www.rw-designer.com/cursor-extern.php?id=23450), auto;
-    width: 100%;
+    width: max-content;
     font-size: 24px;
-    padding: 5px 5px 5px 10px;
+    padding: 5px 10px 5px 10px;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     outline: none;
     border: none;
-    margin-top: auto;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+}
+
+.notebook-tabs .button.active {
+  background-color: #007bff;
+  color: white;
+  border: 1px solid #0056b3;
 }
 
 .button:hover{
     filter: opacity(0.9);
     transform: translate(5px, 0);
-}
-
-.close-button{
-    color: rgb(255, 255, 255);
-    background-color: rgb(141, 0, 0);
 }
 
 .notebook .page {
@@ -67,7 +72,7 @@
     align-items: center;
     height: 100%;
     user-select: none;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     border: 1px solid lightgray;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     padding: 20px;
@@ -102,6 +107,10 @@
     overflow-x: hidden;
     overflow-y: auto;
     padding: 35px !important;
+  }
+
+  .page:has(.notebook-cover){
+    background-color: #000;
   }
 
   .notebook-header {

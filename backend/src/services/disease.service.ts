@@ -1,6 +1,6 @@
 import * as process from 'process';
 import { Service } from 'typedi';
-import { Disease } from '@src/interfaces/disease.interface';
+import { Disease } from '@src/interfaces/Disease';
 import { DatabaseService } from '@src/services/database.service';
 
 @Service()
@@ -36,6 +36,10 @@ export class DiseaseService {
 
 	async add(disease: Disease) {
 		await this.collection.insertOne(disease);
+	}
+
+	async update(disease: Disease, name: string) {
+		await this.collection.updateOne({ name }, { $set: disease });
 	}
 
 	async delete(name: string) {

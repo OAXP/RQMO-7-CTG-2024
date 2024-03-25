@@ -1,58 +1,81 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import HTMLFlipBook from "react-pageflip";
 import "./notebook.css";
 import useDiseases from "@src/hooks/useDisease";
 import IDisease from "@src/types/disease";
 
 const Notebook: React.FC<NotebookProps> = ({ isOpened, handleOpen }) => {
-  const diseases: IDisease[] = useDiseases();
-  // Add an empty page to make the number of pages even
-  diseases.length + 1 % 2 === 0 && diseases.push({ name: "", symptoms: [] });
+  const allDiseases = useDiseases();
+  const [filteredDiseases, setFilteredDiseases] = useState<IDisease[]>([]);
+  const [selectedType, setSelectedType] = useState<string>("All");
+  const [types, setTypes] = useState<string[]>(["All"]);
+
+  // This effect will create a list of unique types of diseases
+  useEffect(() => {
+    const uniqueTypes = Array.from(
+      new Set(allDiseases.map((disease) => disease.type))
+    );
+    setTypes(["All", ...uniqueTypes]);
+  }, [allDiseases]);
+
+  // This effect will filter the diseases based on the selected type
+  // It will reload the list of diseases if the selected type changes
+  useEffect(() => {
+    const filtered =
+      selectedType === "All"
+        ? allDiseases
+        : allDiseases.filter((disease) => disease.type === selectedType);
+    // Here's where you check if the number of pages is even or not
+    const evenFilteredDiseases =
+      filtered.length % 2 !== 0
+        ? [...filtered, { name: "", symptoms: [], type: "" }]
+        : filtered;
+    setFilteredDiseases(evenFilteredDiseases);
+  }, [selectedType, allDiseases]);
+
+  const handleTypeChange = (type: string) => setSelectedType(type);
 
   const mouseOverContainerRef = useRef<HTMLDivElement>(null);
   const ex1LayerRef = useRef<HTMLDivElement>(null);
 
+  // This effect will handle the mouse move event to tilt the notebook
+  // It will only work if the notebook is opened and the device is not a mobile device
   useEffect(() => {
-    if (isOpened) {
-      if (
-        !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|ios/i.test(
-          navigator.userAgent
-        )
-      ) {
-        const mouseOverContainer = mouseOverContainerRef.current;
-        const ex1Layer = ex1LayerRef.current!;
-
-        const mouseMoveHandler = (e: MouseEvent) => {
-          let position = [e.clientX, e.clientY, ex1Layer];
-          window.requestAnimationFrame(() => {
-            transformElement(ex1Layer, position);
-          });
-        };
-
-        mouseOverContainer?.addEventListener("mousemove", mouseMoveHandler);
-
-        return () => {
-          mouseOverContainer?.removeEventListener(
-            "mousemove",
-            mouseMoveHandler
-          );
-        };
-      }
+    if (
+      !isOpened ||
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|ios/i.test(
+        navigator.userAgent
+      )
+    ) {
+      return;
     }
+
+    const mouseOverContainer = mouseOverContainerRef.current;
+    const ex1Layer = ex1LayerRef.current;
+
+    const mouseMoveHandler = (e: MouseEvent) => {
+      window.requestAnimationFrame(() =>
+        transformElement(ex1Layer, e.clientX, e.clientY)
+      );
+    };
+
+    mouseOverContainer?.addEventListener("mousemove", mouseMoveHandler);
+    return () =>
+      mouseOverContainer?.removeEventListener("mousemove", mouseMoveHandler);
   }, [isOpened]);
 
-  const constrain = 50;
-
-  const transforms = (x: number, y: number, el: HTMLElement) => {
-    let box = el.getBoundingClientRect();
-    let calcX = -(y - box.y - box.height / 2) / constrain;
-    let calcY = (x - box.x - box.width / 2) / constrain;
-
-    return `perspective(1000px) rotateX(${calcX}deg) rotateY(${calcY}deg)`;
-  };
-
-  const transformElement = (el: HTMLDivElement, xyEl: any) => {
-    el.style.transform = transforms.apply(null, xyEl);
+  // This function will tilt the notebook based on the mouse position
+  const transformElement = (
+    el: HTMLDivElement | null,
+    x: number,
+    y: number
+  ) => {
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const calcX = -(y - rect.y - rect.height / 2) / 50;
+    const calcY = (x - rect.x - rect.width / 2) / 50;
+    const transform = `perspective(1000px) rotateX(${calcX}deg) rotateY(${calcY}deg)`;
+    el.style.transform = transform;
   };
 
   return (
@@ -60,17 +83,15 @@ const Notebook: React.FC<NotebookProps> = ({ isOpened, handleOpen }) => {
       <div className="modal-container" ref={mouseOverContainerRef} id="outside">
         <div className="content-container" ref={ex1LayerRef} id="tilting-layer">
           <div className="notebook-tabs">
-            <button className="button close-button" onClick={handleOpen}>
-              <svg
-                width="35"
-                height="35"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
+            {types.map((type, index) => (
+              <button
+                key={index}
+                className={`button ${selectedType === type ? "active" : ""}`}
+                onClick={() => handleTypeChange(type)}
               >
-                <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path>
-              </svg>
-            </button>
+                {type}
+              </button>
+            ))}
           </div>
           {/* @ts-ignore */}
           <HTMLFlipBook
@@ -86,7 +107,7 @@ const Notebook: React.FC<NotebookProps> = ({ isOpened, handleOpen }) => {
                 <h1>Medical Book</h1>
               </div>
             </div>
-            {diseases?.map((disease, index) => (
+            {filteredDiseases?.map((disease, index) => (
               <div className="page" key={index}>
                 <div className="notebook-header">
                   <h1>{disease.name}</h1>
