@@ -1,0 +1,18 @@
+// vite.config.ts
+import { defineConfig } from "file:///C:/Users/ait19/OneDrive/Bureau/Cote%20to%20give/RQMO-7-CTG-2024/frontend/node_modules/vite/dist/node/index.js";
+import react from "file:///C:/Users/ait19/OneDrive/Bureau/Cote%20to%20give/RQMO-7-CTG-2024/frontend/node_modules/@vitejs/plugin-react/dist/index.mjs";
+import tsconfigPaths from "file:///C:/Users/ait19/OneDrive/Bureau/Cote%20to%20give/RQMO-7-CTG-2024/frontend/node_modules/vite-tsconfig-paths/dist/index.mjs";
+var vite_config_default = defineConfig({
+  base: "/RQMO-7-CTG-2024/",
+  plugins: [react(), tsconfigPaths()],
+  server: {
+    watch: {
+      usePolling: true
+    }
+  },
+  assetsInclude: ["**/*.glb"]
+});
+export {
+  vite_config_default as default
+};
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsidml0ZS5jb25maWcudHMiXSwKICAic291cmNlc0NvbnRlbnQiOiBbImNvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9kaXJuYW1lID0gXCJDOlxcXFxVc2Vyc1xcXFxhaXQxOVxcXFxPbmVEcml2ZVxcXFxCdXJlYXVcXFxcQ290ZSB0byBnaXZlXFxcXFJRTU8tNy1DVEctMjAyNFxcXFxmcm9udGVuZFwiO2NvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9maWxlbmFtZSA9IFwiQzpcXFxcVXNlcnNcXFxcYWl0MTlcXFxcT25lRHJpdmVcXFxcQnVyZWF1XFxcXENvdGUgdG8gZ2l2ZVxcXFxSUU1PLTctQ1RHLTIwMjRcXFxcZnJvbnRlbmRcXFxcdml0ZS5jb25maWcudHNcIjtjb25zdCBfX3ZpdGVfaW5qZWN0ZWRfb3JpZ2luYWxfaW1wb3J0X21ldGFfdXJsID0gXCJmaWxlOi8vL0M6L1VzZXJzL2FpdDE5L09uZURyaXZlL0J1cmVhdS9Db3RlJTIwdG8lMjBnaXZlL1JRTU8tNy1DVEctMjAyNC9mcm9udGVuZC92aXRlLmNvbmZpZy50c1wiO2ltcG9ydCB7IGRlZmluZUNvbmZpZyB9IGZyb20gJ3ZpdGUnO1xyXG5pbXBvcnQgcmVhY3QgZnJvbSAnQHZpdGVqcy9wbHVnaW4tcmVhY3QnO1xyXG5pbXBvcnQgdHNjb25maWdQYXRocyBmcm9tICd2aXRlLXRzY29uZmlnLXBhdGhzJztcclxuXHJcbi8vIGh0dHBzOi8vdml0ZWpzLmRldi9jb25maWcvXHJcbmV4cG9ydCBkZWZhdWx0IGRlZmluZUNvbmZpZyh7XHJcblx0YmFzZTogJy9SUU1PLTctQ1RHLTIwMjQvJyxcclxuXHRwbHVnaW5zOiBbcmVhY3QoKSwgdHNjb25maWdQYXRocygpXSxcclxuXHRzZXJ2ZXI6IHtcclxuXHRcdHdhdGNoOiB7XHJcblx0XHRcdHVzZVBvbGxpbmc6IHRydWUsXHJcblx0XHR9LFxyXG5cdH0sXHJcbiAgICBhc3NldHNJbmNsdWRlOiBbXCIqKi8qLmdsYlwiXSxcclxufSk7XHJcbiJdLAogICJtYXBwaW5ncyI6ICI7QUFBa1osU0FBUyxvQkFBb0I7QUFDL2EsT0FBTyxXQUFXO0FBQ2xCLE9BQU8sbUJBQW1CO0FBRzFCLElBQU8sc0JBQVEsYUFBYTtBQUFBLEVBQzNCLE1BQU07QUFBQSxFQUNOLFNBQVMsQ0FBQyxNQUFNLEdBQUcsY0FBYyxDQUFDO0FBQUEsRUFDbEMsUUFBUTtBQUFBLElBQ1AsT0FBTztBQUFBLE1BQ04sWUFBWTtBQUFBLElBQ2I7QUFBQSxFQUNEO0FBQUEsRUFDRyxlQUFlLENBQUMsVUFBVTtBQUM5QixDQUFDOyIsCiAgIm5hbWVzIjogW10KfQo=
