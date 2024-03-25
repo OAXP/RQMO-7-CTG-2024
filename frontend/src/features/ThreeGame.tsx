@@ -1,131 +1,116 @@
-import React, { useRef, useState, useEffect } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import * as THREE from "three";
-import { Desk } from "@src/models/Desk";
-import { Notebook } from "@src/models/Notebook";
-import { Medic } from "@src/models/Medic";
-import { Person } from "@src/models/Person";
-import { Html, PerspectiveCamera, OrbitControls } from "@react-three/drei";
+import React, { useRef, useState, useEffect } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import * as THREE from 'three';
+import { Desk } from '@src/models/Desk';
+import { Notebook } from '@src/models/Notebook';
+import { Medic } from '@src/models/Medic';
+import { Person } from '@src/models/Person';
+import { Html, PerspectiveCamera, OrbitControls } from '@react-three/drei';
 
-import GameBody from "@components/ui/GameBody";
-import { colors } from "@src/Theme";
-import DiseaseManager from "@services/disease_manager";
-import { Box, Button, Flex, Input } from "@chakra-ui/react";
-import { Computer } from "@src/models/Computer";
-import GameButton from "@src/components/ui/GameButton";
-import Game from "@src/pages/Game";
-import { Disease } from "@src/interfaces/Disease";
-import BloodTestSlip from "@src/components/ui/BloodTestSlip";
+import GameBody from '@components/ui/GameBody';
+import { colors } from '@src/Theme';
+import DiseaseManager from '@services/disease_manager';
+import { Box, Button, Flex, Input } from '@chakra-ui/react';
+import { Computer } from '@src/models/Computer';
+import GameButton from '@src/components/ui/GameButton';
+import Game from '@src/pages/Game';
+import { Disease } from '@src/interfaces/Disease';
+import BloodTestSlip from '@src/components/ui/BloodTestSlip';
 
 enum CameraState {
-  DEFAULT,
-  INQUIRING,
-  COMPUTER,
-  MEDICAL,
-  NOTEBOOK,
+	DEFAULT,
+	INQUIRING,
+	COMPUTER,
+	MEDICAL,
+	NOTEBOOK,
 }
 
 const names = [
-  "Olivia Johnson",
-  "Liam Smith",
-  "Sophia Williams",
-  "Noah Brown",
-  "Isabella Jones",
-  "Ethan Garcia",
-  "Ava Martinez",
-  "Mason Davis",
-  "Emma Rodriguez",
-  "Logan Wilson",
+	'Olivia Johnson',
+	'Liam Smith',
+	'Sophia Williams',
+	'Noah Brown',
+	'Isabella Jones',
+	'Ethan Garcia',
+	'Ava Martinez',
+	'Mason Davis',
+	'Emma Rodriguez',
+	'Logan Wilson',
 ];
 
 // Utility function to smoothly transition numbers
-const approachValue = (
-  current: number,
-  target: number,
-  delta: number
-): number => {
-  const difference = target - current;
-  if (Math.abs(difference) < delta) return target;
-  return current + difference * delta;
+const approachValue = (current: number, target: number, delta: number): number => {
+	const difference = target - current;
+	if (Math.abs(difference) < delta) return target;
+	return current + difference * delta;
 };
 
 // Utility function to smoothly transition Vector3 values
-const approachVector3 = (
-  current: THREE.Vector3,
-  target: THREE.Vector3,
-  delta: number
-) => {
-  current.x = approachValue(current.x, target.x, delta);
-  current.y = approachValue(current.y, target.y, delta);
-  current.z = approachValue(current.z, target.z, delta);
+const approachVector3 = (current: THREE.Vector3, target: THREE.Vector3, delta: number) => {
+	current.x = approachValue(current.x, target.x, delta);
+	current.y = approachValue(current.y, target.y, delta);
+	current.z = approachValue(current.z, target.z, delta);
 };
 
 interface MyCameraProps {
-  cameraState: CameraState;
+	cameraState: CameraState;
 }
 
 const MyCamera: React.FC<MyCameraProps> = ({ cameraState }) => {
-  const ref = useRef<THREE.PerspectiveCamera>(null);
-  const [lookAtTarget, setLookAtTarget] = useState(new THREE.Vector3(0, 0, 0));
-  const interactPersonView = {
-    position: new THREE.Vector3(3, 3, 4),
-    lookAt: new THREE.Vector3(-8, 3, 0),
-  };
-  const defaultPosition = new THREE.Vector3(6.5, 3.5, 6.5);
-  const defaultLookAt = new THREE.Vector3(0, 0, 0);
+	const ref = useRef<THREE.PerspectiveCamera>(null);
+	const [lookAtTarget, setLookAtTarget] = useState(new THREE.Vector3(0, 0, 0));
+	const interactPersonView = {
+		position: new THREE.Vector3(3, 3, 4),
+		lookAt: new THREE.Vector3(-8, 3, 0),
+	};
+	const defaultPosition = new THREE.Vector3(6.5, 3.5, 6.5);
+	const defaultLookAt = new THREE.Vector3(0, 0, 0);
 
-  const computerView = {
-    position: new THREE.Vector3(4.8, 2.3, 3),
-    lookAt: new THREE.Vector3(4.5, 1, 0),
-  };
+	const computerView = {
+		position: new THREE.Vector3(4.8, 2.3, 3),
+		lookAt: new THREE.Vector3(4.5, 1, 0),
+	};
 
-  const medicalView = {
-    position: new THREE.Vector3(6, 3, 4),
-    lookAt: new THREE.Vector3(6, -4, 0),
-  };
+	const medicalView = {
+		position: new THREE.Vector3(6, 3, 4),
+		lookAt: new THREE.Vector3(6, -4, 0),
+	};
 
-  const notebookView = {
-    position: new THREE.Vector3(2.7, 3.9, 3),
-    lookAt: new THREE.Vector3(4, -4, 0),
-  };
+	const notebookView = {
+		position: new THREE.Vector3(2.7, 3.9, 3),
+		lookAt: new THREE.Vector3(4, -4, 0),
+	};
 
-  useFrame(() => {
-    if (!ref.current) return;
-    const camera = ref.current;
-    switch (cameraState) {
-      case CameraState.INQUIRING:
-        approachVector3(camera.position, interactPersonView.position, 0.03);
-        approachVector3(lookAtTarget, interactPersonView.lookAt, 0.05);
-        break;
-      case CameraState.COMPUTER:
-        approachVector3(camera.position, computerView.position, 0.03);
-        approachVector3(lookAtTarget, computerView.lookAt, 0.05);
-        break;
-      case CameraState.MEDICAL:
-        approachVector3(camera.position, medicalView.position, 0.03);
-        approachVector3(lookAtTarget, medicalView.lookAt, 0.05);
-        break;
-      case CameraState.NOTEBOOK:
-        approachVector3(camera.position, notebookView.position, 0.03);
-        approachVector3(lookAtTarget, notebookView.lookAt, 0.05);
-        break;
-      default:
-        approachVector3(camera.position, defaultPosition, 0.03);
-        approachVector3(lookAtTarget, defaultLookAt, 0.05);
-        break;
-    }
+	useFrame(() => {
+		if (!ref.current) return;
+		const camera = ref.current;
+		switch (cameraState) {
+			case CameraState.INQUIRING:
+				approachVector3(camera.position, interactPersonView.position, 0.03);
+				approachVector3(lookAtTarget, interactPersonView.lookAt, 0.05);
+				break;
+			case CameraState.COMPUTER:
+				approachVector3(camera.position, computerView.position, 0.03);
+				approachVector3(lookAtTarget, computerView.lookAt, 0.05);
+				break;
+			case CameraState.MEDICAL:
+				approachVector3(camera.position, medicalView.position, 0.03);
+				approachVector3(lookAtTarget, medicalView.lookAt, 0.05);
+				break;
+			case CameraState.NOTEBOOK:
+				approachVector3(camera.position, notebookView.position, 0.03);
+				approachVector3(lookAtTarget, notebookView.lookAt, 0.05);
+				break;
+			default:
+				approachVector3(camera.position, defaultPosition, 0.03);
+				approachVector3(lookAtTarget, defaultLookAt, 0.05);
+				break;
+		}
 
-    camera.lookAt(lookAtTarget);
-  });
+		camera.lookAt(lookAtTarget);
+	});
 
-  return (
-    <PerspectiveCamera
-      ref={ref}
-      makeDefault
-      position={defaultPosition.toArray()}
-      fov={60}
-    />
-  );
+	return <PerspectiveCamera ref={ref} makeDefault position={defaultPosition.toArray()} fov={60} />;
 };
 
 const ThreeGame: React.FC<ThreeGameProps>= ({handleOpen}) => {

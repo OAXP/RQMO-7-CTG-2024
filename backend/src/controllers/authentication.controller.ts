@@ -15,9 +15,17 @@ export class AuthenticationController {
 		this.router = Router();
 		/**
 		 * @swagger
-		 *   /api/authentication:
+		 * tags:
+		 *   name: Authentication
+		 *   description: Authentication endpoints
+		 */
+
+		/**
+		 * @swagger
+		 *   /api/auth:
 		 *     post:
 		 *       summary: Authenticate user
+		 *       tags: [Authentication]
 		 *       requestBody:
 		 *         required: true
 		 *         content:
@@ -33,7 +41,7 @@ export class AuthenticationController {
 		 *         '401':
 		 *           description: Invalid password. Please try again!
 		 *         '500':
-		 *           description: Internal server error
+		 *           description: Internal server error. Please try again later.
 		 */
 		this.router.post('/', (req: Request, res: Response) => {
 			try {
