@@ -28,9 +28,11 @@ function Search() {
 						title: 'No results found',
 						description: 'If you would like us to add a disease, please contact us.',
 						status: 'error',
-						duration: 8000,
+						duration: 4000,
 						isClosable: true,
 					});
+					setPatientDisease(null);
+					setDiseases([]);
 					return;
 				}
 				if (data.length === 1) {
@@ -129,15 +131,20 @@ function Search() {
 						<Text fontSize={'xxx-large'} as={'b'} color={'darkslategrey'} marginTop={'6vh'}>
 							Rare Disease from A to Z
 						</Text>
-						<Input
-							placeholder="Enter the name of the disease to search"
-							value={searchQuery}
-							onChange={handleInputChange}
-							w={'20vw'}
-							marginTop={'1vh'}
-							marginBottom={'2vh'}
-							backgroundColor={'white'}
-						/>
+						<Flex>
+							<Input
+								placeholder="Enter the name of the disease to search"
+								value={searchQuery}
+								onChange={handleInputChange}
+								w={'20vw'}
+								marginTop={'1vh'}
+								marginBottom={'2vh'}
+								backgroundColor={'white'}
+							/>
+							<Button type="submit" marginLeft="2" colorScheme="blue" marginTop={'1vh'}>
+								Search
+							</Button>
+						</Flex>
 					</Flex>
 				</form>
 
@@ -165,7 +172,7 @@ function Search() {
 								<Button
 									colorScheme="blue"
 									onClick={() => {
-										navigate('/RQMO-7-CTG-2024/services');
+										navigate('/RQMO-7-CTG-2024/services/pairing');
 									}}
 								>
 									Are you a person affected by this disease?
@@ -174,7 +181,7 @@ function Search() {
 									backgroundColor={colors.button_text}
 									textColor={'white'}
 									onClick={() => {
-										navigate('/RQMO-7-CTG-2024/services');
+										navigate('/RQMO-7-CTG-2024/services/pairing');
 									}}
 									_hover={{ backgroundColor: 'red' }}
 								>
