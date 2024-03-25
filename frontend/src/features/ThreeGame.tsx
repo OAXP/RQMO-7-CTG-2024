@@ -213,9 +213,6 @@ const ThreeGame = ({ handleOpen }: { handleOpen: () => void }) => {
 
 	return (
 		<>
-			<div>CURREN DISEASE: {currentDisease?.name}</div>
-			{/* <BloodTestSlip bloodType={currentDisease?.blood_types[0] ?? ""} /> */}
-
 			<Canvas>
 				<MyCamera cameraState={cameraState} />
 
