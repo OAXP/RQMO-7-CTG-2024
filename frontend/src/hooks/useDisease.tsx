@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import DiseaseManager from '../../services/disease_manager';
-import IDisease from '../../types/disease';
+import DiseaseManager from '@services/disease_manager';
+import IDisease from '@src/types/disease';
 
-const fetchDiseases = async () => {
+export const fetchDiseases = async () => {
 	try {
 		const diseaseManager = new DiseaseManager();
 		const diseases = await diseaseManager.getAllDiseases();

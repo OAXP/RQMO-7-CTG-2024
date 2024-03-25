@@ -16,6 +16,7 @@ import GameButton from '@src/components/ui/GameButton';
 import Game from '@src/pages/Game';
 import { Disease } from '@src/interfaces/Disease';
 import BloodTestSlip from '@src/components/ui/BloodTestSlip';
+import ThreeGameProps from '@src/types/threegame';
 
 enum CameraState {
 	DEFAULT,

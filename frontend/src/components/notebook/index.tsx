@@ -3,6 +3,7 @@ import HTMLFlipBook from "react-pageflip";
 import "./notebook.css";
 import useDiseases from "@src/hooks/useDisease";
 import IDisease from "@src/types/disease";
+import NotebookProps from "@src/types/notebook";
 
 const Notebook: React.FC<NotebookProps> = ({ isOpened, handleOpen }) => {
   const allDiseases = useDiseases();
@@ -79,7 +80,7 @@ const Notebook: React.FC<NotebookProps> = ({ isOpened, handleOpen }) => {
   };
 
   return (
-    isOpened && (
+    isOpened ? (
       <div className="modal-container" ref={mouseOverContainerRef} id="outside">
         <div className="content-container" ref={ex1LayerRef} id="tilting-layer">
           <div className="notebook-tabs">
@@ -125,7 +126,7 @@ const Notebook: React.FC<NotebookProps> = ({ isOpened, handleOpen }) => {
           </HTMLFlipBook>
         </div>
       </div>
-    )
+    ): null
   );
 };
 
