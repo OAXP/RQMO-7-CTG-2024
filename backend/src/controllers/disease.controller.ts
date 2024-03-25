@@ -133,7 +133,7 @@ export class DiseaseController {
 		 *         description: Internal server error
 		 */
 		this.router.post('/', async (req: Request, res: Response) => {
-			const disease = req.body.disease;
+			const disease = req.body;
 			try {
 				await this.diseaseService.add(disease);
 				res.status(StatusCodes.CREATED).json(disease);
