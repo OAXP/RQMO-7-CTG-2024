@@ -38,6 +38,10 @@ export class DiseaseService {
 		await this.collection.insertOne(disease);
 	}
 
+	async update(disease: Disease, name: string) {
+		await this.collection.updateOne({ name }, { $set: disease });
+	}
+
 	async delete(name: string) {
 		await this.collection.deleteOne({ name });
 	}

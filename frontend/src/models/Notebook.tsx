@@ -6,57 +6,41 @@ Source: https://sketchfab.com/3d-models/journal-oxblood-leather-bound-notebook-6
 Title: Journal - Oxblood Leather Bound Notebook
 */
 
-import React, { useRef } from "react";
-import { useGLTF } from "@react-three/drei";
-import notebookScene from "@assets/3d/notebook.glb";
-import * as THREE from "three";
+import React, { useRef } from 'react';
+import { useGLTF } from '@react-three/drei';
+import notebookScene from '@assets/3d/notebook.glb';
+import * as THREE from 'three';
 
 export function Notebook(props: any) {
-  const { nodes, materials } = useGLTF(notebookScene);
-  return (
-    <group {...props} dispose={null}>
-      <group rotation={[-Math.PI / 2, 0, 0]}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={(nodes.Object_2 as THREE.Mesh).geometry}
-          material={
-            materials[
-              "Notebook_-_Bookmark_material_aaec1194-aed2-438d-8e83-467bdea73316"
-            ]
-          }
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={(nodes.Object_3 as THREE.Mesh).geometry}
-          material={
-            materials[
-              "Notebook_-_Cover_material_eaac6572-c2e2-422b-a048-a5a0924be67e"
-            ]
-          }
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={(nodes.Object_4 as THREE.Mesh).geometry}
-          material={
-            materials[
-              "Notebook_-_Pages_material_c56d1ce9-2cb1-464f-a876-67ddc7e05499"
-            ]
-          }
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={(nodes.Object_5 as THREE.Mesh).geometry}
-          material={
-            materials[
-              "Notebook_-_Strap_material_40dd07b3-3b05-42fd-9b42-7692bd2efeab"
-            ]
-          }
-        />
-      </group>
-    </group>
-  );
+	const { nodes, materials } = useGLTF(notebookScene);
+	return (
+		<group {...props} dispose={null}>
+			<group rotation={[-Math.PI / 2, 0, 0]}>
+				<mesh
+					castShadow
+					receiveShadow
+					geometry={(nodes.Object_2 as THREE.Mesh).geometry}
+					material={materials['Notebook_-_Bookmark_material_aaec1194-aed2-438d-8e83-467bdea73316']}
+				/>
+				<mesh
+					castShadow
+					receiveShadow
+					geometry={(nodes.Object_3 as THREE.Mesh).geometry}
+					material={materials['Notebook_-_Cover_material_eaac6572-c2e2-422b-a048-a5a0924be67e']}
+				/>
+				<mesh
+					castShadow
+					receiveShadow
+					geometry={(nodes.Object_4 as THREE.Mesh).geometry}
+					material={materials['Notebook_-_Pages_material_c56d1ce9-2cb1-464f-a876-67ddc7e05499']}
+				/>
+				<mesh
+					castShadow
+					receiveShadow
+					geometry={(nodes.Object_5 as THREE.Mesh).geometry}
+					material={materials['Notebook_-_Strap_material_40dd07b3-3b05-42fd-9b42-7692bd2efeab']}
+				/>
+			</group>
+		</group>
+	);
 }

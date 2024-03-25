@@ -2,6 +2,9 @@ import { Disease } from '@src/interfaces/Disease';
 
 export const mockDiseases: Disease[] = [
 	{
+		type: 'rare',
+		gene_sequences: ['ACTG', 'GATC'],
+		blood_types: ['A+', 'O-'],
 		name: 'Foo Syndrome',
 		symptoms: [
 			{
@@ -15,16 +18,22 @@ export const mockDiseases: Disease[] = [
 		],
 	},
 	{
+		type: 'rare',
+		gene_sequences: ['ATTGGC', 'CAGTTA'],
+		blood_types: ['B-', 'O+'],
 		name: 'Bar Disease',
 		symptoms: [
 			{
-				part: 'arm',
+				part: 'arms',
 				description: 'numbness and tingling sensations in the fingers',
 			},
 			{ part: 'leg', description: 'swelling and redness in the calf area' },
 		],
 	},
 	{
+		type: 'common',
+		gene_sequences: ['AAATTC', 'GGAGT'],
+		blood_types: ['AB+', 'A-'],
 		name: 'Baz Disorder',
 		symptoms: [
 			{

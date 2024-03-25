@@ -3,8 +3,7 @@ import { HTTPInterface } from '@src/utils/http-common';
 
 export default class QuestionManager {
 	async getAllQuestions(): Promise<Question[]> {
-		const questions = (await HTTPInterface.GET('question')) as Question[];
-		return questions;
+		return (await HTTPInterface.GET('question')) as Question[];
 	}
 
 	async postQuestion(question: Question): Promise<Question> {

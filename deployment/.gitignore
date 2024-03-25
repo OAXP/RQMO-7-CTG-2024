@@ -1,0 +1,13 @@
+# Terraform
+*.tfvars
+.terraform 
+
+
+# Ansible variable values
+vars.yaml
+
+# Opensatck RC File 
+openrc.sh
+
+# OVH Config file 
+ovh.conf
