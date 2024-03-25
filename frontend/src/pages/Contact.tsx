@@ -120,7 +120,7 @@ export default function Contact() {
 											<Input
 												type="tel"
 												name="user_tel"
-												placeholder='Phone Number'
+												placeholder="Phone Number"
 												focusBorderColor={'button'}
 												textColor={'palette.black'}
 											/>
