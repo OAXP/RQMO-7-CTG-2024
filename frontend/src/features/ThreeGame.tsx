@@ -115,7 +115,7 @@ const MyCamera: React.FC<MyCameraProps> = ({ cameraState }) => {
 	return <PerspectiveCamera ref={ref} makeDefault position={defaultPosition.toArray()} fov={60} />;
 };
 
-const ThreeGame = () => {
+const ThreeGame = ({ handleOpen }: { handleOpen: () => void }) => {
 	const [userDiagnosis, setUserDiagnosis] = useState('');
 	const [cameraState, setCameraState] = useState<CameraState>(CameraState.DEFAULT);
 	const [personNumber, setPersonNumber] = useState(76);
@@ -187,15 +187,15 @@ const ThreeGame = () => {
 		}
 	};
 
-  const handleNotebookClick = () => {
-    if (cameraState === CameraState.NOTEBOOK) {
-      handleOpen();
-      setCameraState(CameraState.DEFAULT);
-    } else {
-      setCameraState(CameraState.NOTEBOOK);
-      handleOpen();
-    }
-  };
+	const handleNotebookClick = () => {
+		if (cameraState === CameraState.NOTEBOOK) {
+			handleOpen();
+			setCameraState(CameraState.DEFAULT);
+		} else {
+			setCameraState(CameraState.NOTEBOOK);
+			handleOpen();
+		}
+	};
 
 	const adjustDeskForScreenSize = () => {
 		let screenScale = null;
