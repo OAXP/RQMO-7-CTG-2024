@@ -16,6 +16,7 @@ import GameButton from '@src/components/ui/GameButton';
 import Game from '@src/pages/Game';
 import { Disease } from '@src/interfaces/Disease';
 import BloodTestSlip from '@src/components/ui/BloodTestSlip';
+import ThreeGameProps from '@src/types/threegame';
 import AutocompleteInput from '@components/form/AutocompleteInput';
 
 enum CameraState {
@@ -186,13 +187,15 @@ const ThreeGame = () => {
 		}
 	};
 
-	const handleNotebookClick = () => {
-		if (cameraState === CameraState.NOTEBOOK) {
-			setCameraState(CameraState.DEFAULT);
-		} else {
-			setCameraState(CameraState.NOTEBOOK);
-		}
-	};
+  const handleNotebookClick = () => {
+    if (cameraState === CameraState.NOTEBOOK) {
+      handleOpen();
+      setCameraState(CameraState.DEFAULT);
+    } else {
+      setCameraState(CameraState.NOTEBOOK);
+      handleOpen();
+    }
+  };
 
 	const adjustDeskForScreenSize = () => {
 		let screenScale = null;

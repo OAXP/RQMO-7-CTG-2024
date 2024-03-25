@@ -133,7 +133,7 @@ export class DiseaseController {
 		 *         description: Internal server error
 		 */
 		this.router.post('/', async (req: Request, res: Response) => {
-			const disease = req.body.disease;
+			const disease = req.body;
 			try {
 				await this.diseaseService.add(disease);
 				res.status(StatusCodes.CREATED).json(disease);
@@ -144,7 +144,7 @@ export class DiseaseController {
 
 		/**
 		 * @swagger
-		 * /api/disease:
+		 * /api/disease/:name:
 		 *   put:
 		 *     summary: Modify an existing disease
 		 *     tags: [Disease]
@@ -160,11 +160,10 @@ export class DiseaseController {
 		 *       500:
 		 *         description: Internal server error
 		 */
-		this.router.put('/', async (req: Request, res: Response) => {
-			const { disease, name } = req.body;
+		this.router.put('/:name', async (req: Request, res: Response) => {
 			try {
-				await this.diseaseService.update(disease, name);
-				res.status(StatusCodes.OK).json(disease);
+				await this.diseaseService.update(req.body, req.params.name);
+				res.status(StatusCodes.OK).json(req.body);
 			} catch (e) {
 				res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(e);
 			}

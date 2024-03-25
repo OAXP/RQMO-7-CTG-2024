@@ -118,8 +118,8 @@ export default function Contact() {
 										<InputGroup>
 											<InputLeftElement color={'palette.primary'} children={<BsTelephone />} />
 											<Input
-												type="email"
-												name="user_email"
+												type="tel"
+												name="user_tel"
 												placeholder="Phone Number"
 												focusBorderColor={'button'}
 												textColor={'palette.black'}

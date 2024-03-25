@@ -4,13 +4,6 @@ import { Box, Button, Flex, FormLabel, Input, Select, useToast } from '@chakra-u
 import DiseaseManager from '@services/disease_manager';
 import Navbar from '@src/layouts/navbar';
 
-const bodyParts = ['Head', 'Neck', 'Chest', 'Abdomen', 'Back', 'Arms', 'Leg', 'Belly'];
-
-const initialSymptomsArray = bodyParts.map((part) => ({
-	part: part.toLowerCase(),
-	description: '',
-}));
-
 interface Symptom {
 	part: string;
 	description: string;
@@ -25,6 +18,24 @@ interface Disease {
 }
 
 export default function DiseaseCreation() {
+	const bodyParts = [
+		'Head',
+		'Eyes',
+		'Mouth',
+		'Neck',
+		'Chest',
+		'Heart',
+		'Arms',
+		'Belly',
+		'Crotch',
+		'Legs',
+	];
+
+	const initialSymptomsArray = bodyParts.map((part) => ({
+		part: part.toLowerCase(),
+		description: '',
+	}));
+
 	const { name } = useParams<{ name: string }>();
 	const toast = useToast();
 	const navigate = useNavigate();
@@ -105,7 +116,7 @@ export default function DiseaseCreation() {
 		} else {
 			await diseaseManager.addDisease(updatedDisease);
 		}
-		navigate('/');
+		navigate('/RQMO-7-CTG-2024/');
 	};
 	const handleNameChange = (value: string) => {
 		if (!disease) return;

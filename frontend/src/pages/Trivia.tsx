@@ -20,14 +20,16 @@ export default function Trivia() {
 	const [showScore, setShowScore] = useState(false);
 	const [incorrectAnswers, setIncorrectAnswers] = useState<IncorrectAnswer[]>([]);
 	const [loading, setLoading] = useState(true);
-	const [startedTrivia, setStartedTrivia] = useState(false); // New state variable
+	const [startedTrivia, setStartedTrivia] = useState(false);
 	const navigate = useNavigate();
 	const questionManager = new QuestionManager();
 
 	useEffect(() => {
 		questionManager.getAllQuestions().then((questions: Question[]) => {
-			setQuestions(questions);
-			setLoading(false);
+			if (questions.length > 0) {
+				setQuestions(questions);
+				setLoading(false);
+			}
 		});
 	}, []);
 

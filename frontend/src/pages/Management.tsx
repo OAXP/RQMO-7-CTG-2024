@@ -28,7 +28,13 @@ export default function DiseasesList() {
 				<Flex p={4} direction={'column'} alignItems={'center'}>
 					<Heading mb={4}>List of Diseases</Heading>
 					<Flex w={'100%'} alignItems={'end'} direction={'column'}>
-						<Button as={Link} to="/disease-creation" mb={4} mr={'10px'} colorScheme="blue">
+						<Button
+							as={Link}
+							to="/RQMO-7-CTG-2024/disease-creation"
+							mb={4}
+							mr={'10px'}
+							colorScheme="blue"
+						>
 							Add a Disease
 						</Button>
 					</Flex>
@@ -45,7 +51,7 @@ export default function DiseasesList() {
 								<Flex alignItems="center" justifyContent="space-between">
 									<Text flex="1">{disease.name}</Text>
 									<Flex>
-										<Link to={`/disease-creation/${disease.name}`}>
+										<Link to={`/RQMO-7-CTG-2024/disease-creation/${disease.name}`}>
 											<Button size="sm" mr={2} colorScheme="blue">
 												Edit
 											</Button>
