@@ -26,8 +26,10 @@ export default function Trivia() {
 
 	useEffect(() => {
 		questionManager.getAllQuestions().then((questions: Question[]) => {
-			setQuestions(questions);
-			setLoading(false);
+			if (questions.length === 0) {
+				setQuestions(questions);
+				setLoading(false);
+			}
 		});
 	}, []);
 
