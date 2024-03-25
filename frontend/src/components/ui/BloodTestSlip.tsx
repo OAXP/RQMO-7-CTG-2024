@@ -1,7 +1,13 @@
 import React from "react";
 import { Box, Text, VStack } from "@chakra-ui/react";
 
-function BloodTestSlip({ bloodType }: { bloodType: string }) {
+function BloodTestSlip({
+  bloodType,
+  name,
+}: {
+  bloodType: string;
+  name: string;
+}) {
   return (
     <Box
       maxW="sm"
@@ -17,7 +23,7 @@ function BloodTestSlip({ bloodType }: { bloodType: string }) {
           Blood Test Report
         </Text>
         <Box>
-          <Text fontSize="md">Patient Name: John Doe</Text>
+          <Text fontSize="md">Patient Name: {name}</Text>
         </Box>
         <Box>
           <Text fontSize="md">Date: {new Date().toLocaleDateString()}</Text>

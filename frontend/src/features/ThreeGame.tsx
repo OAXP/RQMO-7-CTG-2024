@@ -25,6 +25,19 @@ enum CameraState {
   NOTEBOOK,
 }
 
+const names = [
+  "Olivia Johnson",
+  "Liam Smith",
+  "Sophia Williams",
+  "Noah Brown",
+  "Isabella Jones",
+  "Ethan Garcia",
+  "Ava Martinez",
+  "Mason Davis",
+  "Emma Rodriguez",
+  "Logan Wilson",
+];
+
 // Utility function to smoothly transition numbers
 const approachValue = (
   current: number,
@@ -313,11 +326,10 @@ const ThreeGame = () => {
               <BloodTestSlip
                 bloodType={
                   currentDisease?.blood_types[
-                    Math.floor(
-                      Math.random() * currentDisease.blood_types.length
-                    )
+                    personNumber % currentDisease.blood_types.length
                   ] ?? ""
                 }
+                name={names[personNumber % names.length]}
               />
             </Box>
           </Html>
@@ -352,7 +364,7 @@ const ThreeGame = () => {
               fontWeight={"bold"}
             >{`DNA sequence : ${
               currentDisease?.gene_sequences[
-                Math.floor(Math.random() * currentDisease.gene_sequences.length)
+                personNumber % currentDisease.gene_sequences.length
               ]
             }`}</Box>
           </Html>
