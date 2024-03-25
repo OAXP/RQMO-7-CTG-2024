@@ -1,0 +1,208 @@
+.modal-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+}
+
+.content-container{
+    position: relative;
+    width: 960px;
+    height: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.notebook-tabs{
+    position: absolute;
+    top: 20px;
+    right: -4px;
+    height: 600px;
+    width: 100px;
+    color: rgb(255, 255, 255);
+    background-color: transparent;
+    padding: 0 0 0 10px;
+    outline: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: start;
+    gap: 10px;
+}
+
+.button{
+    cursor: url(http://www.rw-designer.com/cursor-extern.php?id=23450), auto;
+    width: max-content;
+    font-size: 24px;
+    padding: 5px 10px 5px 10px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    outline: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+}
+
+.notebook-tabs .button.active {
+  background-color: #007bff;
+  color: white;
+  border: 1px solid #0056b3;
+}
+
+.button:hover{
+    filter: opacity(0.9);
+    transform: translate(5px, 0);
+}
+
+.notebook .page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    user-select: none;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid lightgray;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .notebook-cover{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #e3ebf3;
+    border: 1px solid lightgray;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .notebook .page h1 {
+    font-size: 35px;
+    font-weight: bold;
+  }
+
+  .page{
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 35px !important;
+  }
+
+  .page:has(.notebook-cover){
+    background-color: #000;
+  }
+
+  .notebook-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #e0ebf4;
+  }
+
+  .notebook-header h1 {
+    font-size: 24px;
+  }
+
+  .notebook .page p {
+    margin-bottom: 20px;
+  }
+
+  .notebook ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .notebook ul li {
+    padding: 10px;
+  }
+
+  .notebook ul li:hover{
+    background-color: #e3ebf39c !important;
+  }
+
+  .notebook ul li>span{
+    font-weight: bold;
+    border-bottom: 1px solid #95abc2;
+  }
+  
+  .notebook ul li:nth-child(odd) {
+    background-color: #ffffff; 
+  }
+  
+  .notebook ul li:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+
+  .notebook {
+    perspective: 1000px;
+    width: 300px;
+    height: 400px;
+    position: relative;
+    margin: 20px;
+    cursor: url(http://www.rw-designer.com/cursor-extern.php?id=23450), auto;
+    background-color: rgba(127, 255, 212, 0);
+  }
+  
+  .notebook-inner {
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .notebook-front, .notebook-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .notebook-back {
+    transform: rotateY(180deg);
+  }
+  
+  .flipped {
+    transform: rotateY(180deg);
+  }
+  
+
+  @media screen and (max-width: 839px){
+    .content-container{
+        width: 535px;
+    }
+
+    .notebook-tabs{
+        width: 82px;
+        z-index: 1;
+    }
+  }

@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "rootDir": "./",
-    "target": "ES6",
+    "target": "es6",
     "module": "commonjs",
     "outDir": "out",
     "types": ["node", "reflect-metadata"],
